@@ -4,7 +4,6 @@
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>WHBR Roanoke | Classic Rock</title>
@@ -25,29 +24,41 @@
 <img src="whbr-logo.png" alt="WHBR Roanoke">
 </div>
 
+
 <div class="tagline">
 ROANOKE'S CLASSIC ROCK STATION
 </div>
+
 
 <div class="live-badge">
 🔴 LIVE ON AIR
 </div>
 
+
 <div class="studio-sign">
+
 <span></span>
+
 ON AIR
+
 <span></span>
+
 </div>
+
 
 </header>
 
 
 
+
+
 <section class="hero">
+
 
 <h1>
 THE LEGENDS NEVER STOP
 </h1>
+
 
 <p>
 Classic Rock from the greatest artists of all time.
@@ -55,12 +66,12 @@ Classic Rock from the greatest artists of all time.
 
 
 
-<!-- FULL WIDTH PLAYER -->
-
-<section class="main-player card">
 
 
-<div class="player-top">
+<div class="card main-player">
+
+
+<div class="player-display">
 
 
 <img id="albumArt"
@@ -69,7 +80,7 @@ alt="Album Cover">
 
 
 
-<div class="song-area">
+<div class="song-info">
 
 
 <h2>
@@ -82,6 +93,7 @@ Loading...
 </div>
 
 
+
 <div class="music-bars" id="visualizer">
 
 <span></span>
@@ -90,8 +102,6 @@ Loading...
 <span></span>
 <span></span>
 <span></span>
-<span></span>
-<span></span>
 
 </div>
 
@@ -99,8 +109,8 @@ Loading...
 </div>
 
 
-
 </div>
+
 
 
 
@@ -109,16 +119,20 @@ Loading...
 
 
 <button id="playButton">
+
 ▶
+
 </button>
 
 
 
 <div class="player-info">
 
+
 <strong>
 WHBR ROANOKE
 </strong>
+
 
 <span>
 🔴 LIVE STREAM
@@ -129,42 +143,62 @@ WHBR ROANOKE
 
 
 
+
 <div class="volume">
+
 
 🔊
 
+
 <input
+
 id="volumeSlider"
+
 type="range"
+
 min="0"
+
 max="1"
+
 step="0.01"
+
 value="0.8"
+
 >
 
+
 </div>
 
 
 </div>
+
+
 
 
 
 <audio id="whbrAudio">
 
-<source 
+
+<source
+
 src="https://disciplinary-undo-static-piece.trycloudflare.com/stream"
+
 type="audio/mpeg">
+
 
 </audio>
 
 
-</section>
+</div>
 
 
 
 
 
-<section class="content-grid">
+
+
+
+<div class="content-grid">
 
 
 
@@ -176,16 +210,17 @@ type="audio/mpeg">
 </h2>
 
 
+
 <div id="recentSongs" class="recent-list">
 
-<div>
 Loading...
-</div>
 
 </div>
 
 
 </div>
+
+
 
 
 
@@ -203,42 +238,62 @@ Loading...
 
 
 <div>
+
 STATUS
 
 <strong id="streamStatus">
 Loading...
 </strong>
 
+
 </div>
 
 
+
+
 <div>
+
 LISTENERS
 
 <strong id="listeners">
 0
 </strong>
 
+
 </div>
 
 
+
+
+
 <div>
+
 QUALITY
 
 <strong id="quality">
 Loading...
 </strong>
 
+
 </div>
 
 
+
+
+
 <div>
+
 LOCATION
 
 <strong id="location">
 Loading...
 </strong>
 
+
+</div>
+
+
+
 </div>
 
 
@@ -248,7 +303,13 @@ Loading...
 </div>
 
 
-</section><section class="news-grid">
+
+
+
+
+
+
+<div class="news-grid">
 
 
 <div class="card">
@@ -265,10 +326,13 @@ Loading...
 Loading...
 </li>
 
+
 </ul>
 
 
 </div>
+
+
 
 
 
@@ -287,15 +351,14 @@ Loading...
 Loading...
 </li>
 
+
 </ul>
 
 
 </div>
 
 
-</section>
-
-
+</div>
 
 
 
@@ -384,6 +447,7 @@ From Roanoke, Virginia, WHBR connects listeners around the world with the legend
 
 
 
+
 <div class="mini-player">
 
 
@@ -395,7 +459,9 @@ From Roanoke, Virginia, WHBR connects listeners around the world with the legend
 WHBR ROANOKE
 </strong>
 
+
 </div>
+
 
 
 <div id="miniSong">
@@ -403,6 +469,7 @@ WHBR ROANOKE
 Now Playing
 
 </div>
+
 
 
 
@@ -420,12 +487,12 @@ Now Playing
 
 
 
-
 <footer>
 
 WHBR ROANOKE © 2026
 
 </footer>
+
 
 
 
@@ -458,21 +525,29 @@ audio.volume = 0.8;
 
 
 
+
 function togglePlay(){
 
 
 if(audio.paused){
 
 
-audio.play();
-
+audio.play()
+.then(()=>{
 
 playButton.innerHTML="⏸";
-
 miniPlayButton.innerHTML="⏸";
+
+})
+.catch(error=>{
+
+console.log(error);
+
+});
 
 
 }
+
 else{
 
 
@@ -480,7 +555,6 @@ audio.pause();
 
 
 playButton.innerHTML="▶";
-
 miniPlayButton.innerHTML="▶";
 
 
@@ -491,9 +565,12 @@ miniPlayButton.innerHTML="▶";
 
 
 
+
+
 playButton.onclick = togglePlay;
 
 miniPlayButton.onclick = togglePlay;
+
 
 
 
@@ -547,6 +624,7 @@ return Math.floor(minutes/60)+" hours ago";
 
 
 
+
 async function loadAlbumArt(song){
 
 
@@ -562,17 +640,11 @@ const stationMessages=[
 
 
 
-const upper=song.toUpperCase();
-
-
-
-if(stationMessages.some(x=>upper.includes(x))){
-
+if(stationMessages.some(x=>song.toUpperCase().includes(x))){
 
 albumArt.src="whbr-logo.png";
 
 return;
-
 
 }
 
@@ -581,37 +653,33 @@ return;
 try{
 
 
-const response=await fetch(
-
+const response =
+await fetch(
 "https://itunes.apple.com/search?term="+
 encodeURIComponent(song)+
 "&media=music&limit=1"
-
 );
 
 
 
-const data=await response.json();
+const data =
+await response.json();
 
 
 
 if(data.results.length){
 
-
-albumArt.src=
+albumArt.src =
 data.results[0].artworkUrl100.replace(
 "100x100",
 "600x600"
 );
 
-
 }
 
 else{
 
-
 albumArt.src="whbr-logo.png";
-
 
 }
 
@@ -620,14 +688,14 @@ albumArt.src="whbr-logo.png";
 
 catch{
 
-
 albumArt.src="whbr-logo.png";
 
-
 }
 
 
 }
+
+
 
 
 
@@ -672,6 +740,7 @@ loadAlbumArt(song);
 const list =
 document.getElementById("recentSongs");
 
+
 list.innerHTML="";
 
 
@@ -679,18 +748,15 @@ list.innerHTML="";
 (data.recentlyPlayed||[]).forEach(song=>{
 
 
-let item=document.createElement("div");
+let div=document.createElement("div");
 
 
-item.className="recent-song";
+div.className="recent-song";
 
 
+div.innerHTML=`
 
-item.innerHTML=`
-
-<img src="default-cover.png"
-class="recent-cover">
-
+<img src="default-cover.png" class="recent-cover">
 
 <div>
 
@@ -702,36 +768,30 @@ class="recent-cover">
 Played ${timeAgo(song.time)}
 </small>
 
-
 </div>
-
 
 `;
 
 
-
-list.appendChild(item);
-
+list.appendChild(div);
 
 
 });
 
 
-
 }
 
 
-catch{
+catch(error){
 
-
-document.getElementById("nowPlaying").innerText=
-"WHBR Radio";
-
+console.log(error);
 
 }
 
 
 }
+
+
 
 
 
@@ -775,12 +835,13 @@ data.location || "Roanoke, VA";
 
 }
 
-
-catch(e){}
+catch(error){}
 
 
 
 }
+
+
 
 
 
@@ -806,10 +867,7 @@ await response.json();
 
 
 
-const news=document.getElementById("newsList");
-
-
-news.innerHTML="";
+newsList.innerHTML="";
 
 
 
@@ -830,8 +888,7 @@ ${story.title}
 `;
 
 
-news.appendChild(li);
-
+newsList.appendChild(li);
 
 
 });
@@ -845,11 +902,12 @@ catch{
 newsList.innerHTML=
 "<li>News unavailable</li>";
 
-
 }
 
 
 }
+
+
 
 
 
@@ -865,7 +923,9 @@ try{
 
 const response =
 await fetch(
+
 "https://api.rss2json.com/v1/api.json?rss_url=https://feeds.npr.org/1001/rss.xml"
+
 );
 
 
@@ -875,11 +935,7 @@ await response.json();
 
 
 
-const box =
-document.getElementById("nationalNews");
-
-
-box.innerHTML="";
+nationalNews.innerHTML="";
 
 
 
@@ -900,9 +956,7 @@ ${item.title}
 `;
 
 
-
-box.appendChild(li);
-
+nationalNews.appendChild(li);
 
 
 });
@@ -930,6 +984,67 @@ nationalNews.innerHTML=
 
 
 
+// SAFE MUSIC VISUALIZER
+
+const bars =
+document.querySelectorAll("#visualizer span");
+
+
+let animation;
+
+
+
+audio.addEventListener("play",()=>{
+
+
+clearInterval(animation);
+
+
+
+animation=setInterval(()=>{
+
+
+bars.forEach(bar=>{
+
+
+bar.style.height =
+(Math.random()*70+20)+"px";
+
+
+});
+
+
+},120);
+
+
+});
+
+
+
+
+
+audio.addEventListener("pause",()=>{
+
+
+clearInterval(animation);
+
+
+
+bars.forEach(bar=>{
+
+bar.style.height="30px";
+
+});
+
+
+});
+
+
+
+
+
+
+
 loadStation();
 
 loadStatus();
@@ -937,6 +1052,7 @@ loadStatus();
 loadNews();
 
 loadNationalNews();
+
 
 
 
@@ -950,69 +1066,9 @@ setInterval(loadNationalNews,300000);
 
 
 
-
-
-let audioContext;
-let analyser;
-let source;
-
-audio.addEventListener("play", async ()=>{
-
-if(audioContext){
-return;
-}
-
-audioContext = new AudioContext();
-
-try{
-
-await audioContext.resume();
-
-analyser = audioContext.createAnalyser();
-
-source = audioContext.createMediaElementSource(audio);
-
-source.connect(analyser);
-analyser.connect(audioContext.destination);
-
-analyser.fftSize = 64;
-
-const bars = document.querySelectorAll("#visualizer span");
-
-function animate(){
-
-requestAnimationFrame(animate);
-
-let data = new Uint8Array(analyser.frequencyBinCount);
-
-analyser.getByteFrequencyData(data);
-
-bars.forEach((bar,i)=>{
-
-bar.style.height = (data[i]/2 + 15) + "px";
-
-});
-
-}
-
-animate();
-
-}
-
-catch(error){
-
-console.log("Visualizer error:", error);
-
-}
-
-});
-
-
-
 </script>
 
 
 </body>
 
-  
 </html>
