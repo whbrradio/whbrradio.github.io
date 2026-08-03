@@ -952,93 +952,58 @@ setInterval(loadNationalNews,300000);
 
 
 
-// AUDIO REACTIVE VISUALIZER
-
-
 let audioContext;
-
 let analyser;
-
 let source;
 
+audio.addEventListener("play", async ()=>{
 
-
-audio.addEventListener("play",()=>{
-
-
-if(audioContext)
+if(audioContext){
 return;
+}
 
+audioContext = new AudioContext();
 
+try{
 
-audioContext =
-new AudioContext();
+await audioContext.resume();
 
+analyser = audioContext.createAnalyser();
 
-
-analyser =
-audioContext.createAnalyser();
-
-
-source =
-audioContext.createMediaElementSource(audio);
-
+source = audioContext.createMediaElementSource(audio);
 
 source.connect(analyser);
-
-
 analyser.connect(audioContext.destination);
 
+analyser.fftSize = 64;
 
-
-analyser.fftSize=64;
-
-
-
-const bars =
-document.querySelectorAll(
-"#visualizer span"
-);
-
-
+const bars = document.querySelectorAll("#visualizer span");
 
 function animate(){
 
-
 requestAnimationFrame(animate);
 
-
-let data =
-new Uint8Array(
-analyser.frequencyBinCount
-);
-
-
+let data = new Uint8Array(analyser.frequencyBinCount);
 
 analyser.getByteFrequencyData(data);
 
-
-
 bars.forEach((bar,i)=>{
 
-
-let value =
-data[i]/3+10;
-
-
-bar.style.height=value+"px";
-
+bar.style.height = (data[i]/2 + 15) + "px";
 
 });
 
-
 }
-
-
 
 animate();
 
+}
 
+catch(error){
+
+console.log("Visualizer error:", error);
+
+}
 
 });
 
