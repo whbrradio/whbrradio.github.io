@@ -318,39 +318,13 @@ Loading...
 
 
 
-
-
-<div class="news-grid">
-
-
-<div class="card popup-news">
+<div class="card news-card">
 
 
 <h2>
-📰 WHBR NEWS
+📰 NATIONAL NEWS
 </h2>
 
-
-<div id="newsList">
-
-Loading...
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-<div class="card popup-news">
-
-
-<h2>
-🌎 NATIONAL NEWS
-</h2>
 
 
 <div id="nationalNews">
@@ -360,10 +334,9 @@ Loading...
 </div>
 
 
-</div>
-
 
 </div>
+
 
 
 
@@ -380,9 +353,11 @@ Loading...
 </h2>
 
 
+
 <p>
 Take WHBR Roanoke with you anywhere with our mobile app.
 </p>
+
 
 
 <a class="download" href="WHBR-Radio.apk" download>
@@ -392,7 +367,10 @@ DOWNLOAD WHBR RADIO APP
 </a>
 
 
+
 </div>
+
+
 
 
 
@@ -407,7 +385,10 @@ DOWNLOAD WHBR RADIO APP
 
 
 
+
+
 <section class="about">
+
 
 
 <div class="card">
@@ -418,11 +399,13 @@ DOWNLOAD WHBR RADIO APP
 </h2>
 
 
+
 <p>
 
 WHBR Roanoke brings you the greatest Classic Rock songs ever recorded. Legendary artists, unforgettable riffs, and timeless music 24 hours a day.
 
 </p>
+
 
 
 </div>
@@ -440,6 +423,7 @@ WHBR Roanoke brings you the greatest Classic Rock songs ever recorded. Legendary
 </h2>
 
 
+
 <p>
 
 From Roanoke, Virginia, WHBR connects listeners around the world with the legendary sounds of Classic Rock. Featuring the artists, albums, and songs that shaped generations, WHBR keeps the spirit of rock alive anytime, anywhere.
@@ -447,7 +431,9 @@ From Roanoke, Virginia, WHBR connects listeners around the world with the legend
 </p>
 
 
+
 </div>
+
 
 
 </section>
@@ -458,7 +444,10 @@ From Roanoke, Virginia, WHBR connects listeners around the world with the legend
 
 
 
+
+
 <div class="mini-player">
+
 
 
 <div>
@@ -469,7 +458,9 @@ From Roanoke, Virginia, WHBR connects listeners around the world with the legend
 WHBR ROANOKE
 </strong>
 
+
 </div>
+
 
 
 
@@ -482,6 +473,7 @@ Now Playing
 
 
 
+
 <button id="miniPlayButton">
 
 ▶
@@ -489,7 +481,11 @@ Now Playing
 </button>
 
 
+
 </div>
+
+
+
 
 
 
@@ -500,27 +496,42 @@ Now Playing
 
 WHBR ROANOKE © 2026
 
-</footer><script>
+</footer>
 
-const audio = document.getElementById("whbrAudio");
 
-const playButton = document.getElementById("playButton");
-const miniPlayButton = document.getElementById("miniPlayButton");
 
-const volumeSlider = document.getElementById("volumeSlider");
+
+
+
+<script>
+
+
+const audio =
+document.getElementById("whbrAudio");
+
+const playButton =
+document.getElementById("playButton");
+
+
+const miniPlayButton =
+document.getElementById("miniPlayButton");
+
+
 
 const WORKER =
 "https://broken-morning-5083.braedenbrown460.workers.dev/";
 
 
 
-audio.volume = 0.8;
+
 
 
 
 function togglePlay(){
 
+
 if(audio.paused){
+
 
 audio.play()
 .then(()=>{
@@ -528,39 +539,40 @@ audio.play()
 playButton.innerHTML="⏸";
 miniPlayButton.innerHTML="⏸";
 
-})
-.catch(error=>{
-
-console.log(error);
-
 });
+
 
 }
 
+
 else{
 
+
 audio.pause();
+
 
 playButton.innerHTML="▶";
 miniPlayButton.innerHTML="▶";
 
-}
 
 }
 
 
-
-playButton.onclick = togglePlay;
-
-miniPlayButton.onclick = togglePlay;
+}
 
 
 
-volumeSlider.oninput=function(){
 
-audio.volume = volumeSlider.value;
 
-};
+playButton.onclick =
+togglePlay;
+
+
+miniPlayButton.onclick =
+togglePlay;
+
+
+
 
 
 
@@ -568,6 +580,7 @@ audio.volume = volumeSlider.value;
 
 
 function timeAgo(date){
+
 
 const seconds =
 Math.floor((new Date()-new Date(date))/1000);
@@ -587,7 +600,10 @@ return minutes+" minutes ago";
 
 return Math.floor(minutes/60)+" hours ago";
 
+
 }
+
+
 
 
 
@@ -598,39 +614,18 @@ return Math.floor(minutes/60)+" hours ago";
 async function loadAlbumArt(song){
 
 
-const ignoreWords=[
-
-"WHBR",
-"LIVE!",
-"LIVE",
-"ALL OF YOUR FAVORITES",
-"ALWAYS AD FREE",
-"ALWAYS FREE"
-
-];
-
-
-
-if(ignoreWords.some(word =>
-song.toUpperCase().includes(word))){
-
-albumArt.src="whbr-logo.png";
-
-return;
-
-}
-
-
-
 try{
 
 
 const response =
 await fetch(
+
 "https://itunes.apple.com/search?term="+
 encodeURIComponent(song)+
 "&media=music&limit=1"
+
 );
+
 
 
 const data =
@@ -640,26 +635,33 @@ await response.json();
 
 if(data.results.length){
 
+
 albumArt.src =
 data.results[0].artworkUrl100.replace(
 "100x100",
 "600x600"
 );
 
+
 }
 
 else{
 
+
 albumArt.src="whbr-logo.png";
 
+
 }
 
 
 }
+
 
 catch{
 
+
 albumArt.src="whbr-logo.png";
+
 
 }
 
@@ -684,7 +686,6 @@ const response =
 await fetch(WORKER);
 
 
-
 const data =
 await response.json();
 
@@ -700,15 +701,16 @@ song.split(" - ");
 
 
 
+
 if(parts.length >= 2){
 
 
-document.getElementById("songArtist").innerText =
-parts[0];
-
-
-document.getElementById("songTitle").innerText =
+songTitle.innerText =
 parts.slice(1).join(" - ");
+
+
+songArtist.innerText =
+parts[0];
 
 
 }
@@ -716,11 +718,11 @@ parts.slice(1).join(" - ");
 else{
 
 
-document.getElementById("songTitle").innerText =
+songTitle.innerText =
 song;
 
 
-document.getElementById("songArtist").innerText =
+songArtist.innerText =
 "WHBR ROANOKE";
 
 
@@ -729,7 +731,7 @@ document.getElementById("songArtist").innerText =
 
 
 
-document.getElementById("miniSong").innerText =
+miniSong.innerText =
 song;
 
 
@@ -741,16 +743,11 @@ loadAlbumArt(song);
 
 
 
-
-const list =
-document.getElementById("recentSongs");
-
-
-list.innerHTML="";
+recentSongs.innerHTML="";
 
 
 
-(data.recentlyPlayed || []).forEach(song=>{
+(data.recentlyPlayed || []).forEach(item=>{
 
 
 let div =
@@ -761,18 +758,18 @@ div.className="recent-song";
 
 
 
-div.innerHTML = `
+div.innerHTML=`
 
-<img src="whbr-logo.png" class="recent-cover">
+<img class="recent-cover" src="whbr-logo.png">
 
 <div>
 
-<strong>${song.title}</strong>
+<strong>${item.title}</strong>
 
 <br>
 
 <small>
-Played ${timeAgo(song.time)}
+Played ${timeAgo(item.time)}
 </small>
 
 </div>
@@ -781,7 +778,7 @@ Played ${timeAgo(song.time)}
 
 
 
-list.appendChild(div);
+recentSongs.appendChild(div);
 
 
 });
@@ -790,11 +787,13 @@ list.appendChild(div);
 
 }
 
+
 catch(error){
 
 console.log(error);
 
 }
+
 
 
 }
@@ -817,113 +816,35 @@ const response =
 await fetch(WORKER);
 
 
-
 const data =
 await response.json();
 
 
 
-document.getElementById("streamStatus").innerText =
+streamStatus.innerText =
 data.online ? "LIVE" : "OFFLINE";
 
 
-document.getElementById("listeners").innerText =
+listeners.innerText =
 data.listeners || 0;
 
 
-document.getElementById("quality").innerText =
-(data.bitrate || "")+" kbps MP3";
+quality.innerText =
+(data.bitrate || "")+" kbps";
 
 
-document.getElementById("location").innerText =
-data.location || "Roanoke, VA";
-
-
-}
-
-catch(error){
-
-console.log(error);
-
-}
+location.innerText =
+data.location || "Online";
 
 
 }
 
 
-
-
-
-
-
-
-
-async function loadNews(){
-
-
-try{
-
-
-const response =
-await fetch(WORKER);
-
-
-const data =
-await response.json();
-
-
-
-const box =
-document.getElementById("newsList");
-
-
-
-box.innerHTML="";
-
-
-
-(data.stories || []).slice(0,5).forEach(story=>{
-
-
-let item =
-document.createElement("div");
-
-
-item.className="news-item";
-
-
-item.innerHTML=`
-
-<a href="${story.link}" target="_blank">
-
-${story.title}
-
-</a>
-
-`;
-
-
-
-box.appendChild(item);
-
-
-});
+catch(error){}
 
 
 
 }
-
-catch{
-
-
-document.getElementById("newsList").innerHTML =
-"News unavailable";
-
-}
-
-
-}
-
 
 
 
@@ -952,21 +873,15 @@ await response.json();
 
 
 
-const box =
-document.getElementById("nationalNews");
+nationalNews.innerHTML="";
 
 
 
-box.innerHTML="";
-
-
-
-data.items.slice(0,5).forEach(item=>{
+data.items.slice(0,8).forEach(item=>{
 
 
 let div =
 document.createElement("div");
-
 
 
 div.className="news-item";
@@ -985,25 +900,27 @@ ${item.title}
 
 
 
-box.appendChild(div);
+nationalNews.appendChild(div);
 
 
 });
 
 
+
 }
+
 
 catch{
 
 
-document.getElementById("nationalNews").innerHTML =
+nationalNews.innerHTML =
 "News unavailable";
 
-}
-
 
 }
 
+
+}
 
 
 
@@ -1023,18 +940,15 @@ let animation;
 audio.addEventListener("play",()=>{
 
 
-clearInterval(animation);
-
-
-
-animation=setInterval(()=>{
+animation =
+setInterval(()=>{
 
 
 bars.forEach(bar=>{
 
 
 bar.style.height =
-(Math.random()*70+20)+"px";
+(Math.random()*60+20)+"px";
 
 
 });
@@ -1048,24 +962,13 @@ bar.style.height =
 
 
 
-
-
 audio.addEventListener("pause",()=>{
 
 
 clearInterval(animation);
 
 
-
-bars.forEach(bar=>{
-
-bar.style.height="30px";
-
 });
-
-
-});
-
 
 
 
@@ -1077,11 +980,7 @@ loadStation();
 
 loadStatus();
 
-loadNews();
-
 loadNationalNews();
-
-
 
 
 
@@ -1089,13 +988,15 @@ setInterval(loadStation,10000);
 
 setInterval(loadStatus,10000);
 
-setInterval(loadNews,300000);
-
 setInterval(loadNationalNews,300000);
 
 
 
 </script>
+
+
+
+
 
 
 </body>
