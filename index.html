@@ -532,7 +532,18 @@ const audio = document.getElementById("whbrAudio");
 
 const playButton = document.getElementById("playButton");
 const miniPlayButton = document.getElementById("miniPlayButton");
+const volumeSlider =
+document.getElementById("volumeSlider");
 
+
+audio.volume = 0.8;
+
+
+volumeSlider.oninput = function(){
+
+audio.volume = this.value;
+
+};
 const WORKER =
 "https://broken-morning-5083.braedenbrown460.workers.dev/";
 
