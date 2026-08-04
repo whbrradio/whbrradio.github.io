@@ -18,6 +18,7 @@
 <body>
 
 
+
 <header>
 
 <div class="logo">
@@ -45,7 +46,11 @@ ON AIR
 
 </div>
 
+
 </header>
+
+
+
 
 
 
@@ -60,8 +65,11 @@ THE LEGENDS NEVER STOP
 
 
 <p>
-Classic rock from the 70s, 80s, 90s, and early 2000s.
+Classic Rock from the 70s, 80s, 90s, and early 2000s.
 </p>
+
+
+
 
 
 
@@ -70,7 +78,9 @@ Classic rock from the 70s, 80s, 90s, and early 2000s.
 <div class="card main-player">
 
 
+
 <div class="modern-player">
+
 
 
 <div class="album-container">
@@ -80,6 +90,8 @@ src="whbr-logo.png"
 alt="Album Cover">
 
 </div>
+
+
 
 
 
@@ -98,6 +110,8 @@ WHBR ROANOKE
 </div>
 
 
+
+
 <div class="music-bars" id="visualizer">
 
 <span></span>
@@ -110,55 +124,44 @@ WHBR ROANOKE
 </div>
 
 
+
 </div>
 
 
 
 
 
-<div class="player-controls">
+
+
+<div class="player-right">
 
 
 <div class="live-label">
+
 LIVE
+
 </div>
+
 
 
 
 <button id="playButton">
+
 ▶
+
 </button>
 
 
 
-
-<div class="volume">
-
-🔊
-
-<input
-
-id="volumeSlider"
-
-type="range"
-
-min="0"
-
-max="1"
-
-step="0.01"
-
-value="0.8"
-
->
-
 </div>
+
+
+
+
 
 
 </div>
 
-
-</div>
 
 
 
@@ -166,16 +169,25 @@ value="0.8"
 
 <audio id="whbrAudio">
 
+
 <source
 
 src="https://survivor-customs-advertisement-events.trycloudflare.com/stream"
 
 type="audio/mpeg">
 
+
 </audio>
 
 
+
+
+
 </div>
+
+
+
+
 
 
 
@@ -188,12 +200,16 @@ type="audio/mpeg">
 
 
 
+
+
+
 <div class="card">
 
 
 <h2>
 ⏮ RECENTLY PLAYED
 </h2>
+
 
 
 <div id="recentSongs" class="recent-list">
@@ -210,20 +226,26 @@ Loading...
 
 
 
-<div class="card">
+
+
+
+<div class="card status-card">
 
 
 <h2>
-📡 WHBR STATION STATUS
+📡 WHBR STATUS
 </h2>
 
 
 
-<div class="status-grid">
+
+<div class="status-bar">
+
 
 
 <div>
-STATUS
+
+<span>STATUS</span>
 
 <strong id="streamStatus">
 Loading...
@@ -233,8 +255,11 @@ Loading...
 
 
 
+
+
 <div>
-LISTENERS
+
+<span>LISTENERS</span>
 
 <strong id="listeners">
 0
@@ -244,8 +269,12 @@ LISTENERS
 
 
 
+
+
+
 <div>
-QUALITY
+
+<span>QUALITY</span>
 
 <strong id="quality">
 Loading...
@@ -255,8 +284,12 @@ Loading...
 
 
 
+
+
+
 <div>
-LOCATION
+
+<span>LOCATION</span>
 
 <strong id="location">
 Loading...
@@ -265,10 +298,17 @@ Loading...
 </div>
 
 
-</div>
 
 
 </div>
+
+
+
+</div>
+
+
+
+
 
 
 </div>
