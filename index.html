@@ -920,19 +920,7 @@ ${item.title}
 
 article.onclick=()=>{
 
-
-document.getElementById("newsOverlay")
-.style.display="flex";
-
-
-document.getElementById("popupTitle")
-.innerText=item.title;
-
-
-
-document.getElementById("popupFrame")
-.src=item.link;
-
+window.open(item.link, "_blank");
 
 };
 
