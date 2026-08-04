@@ -945,3 +945,184 @@ grid-template-columns:1fr;
 }
 
 }
+/* ===== WHBR FINAL POLISH ===== */
+
+
+/* Smooth album transition */
+
+#albumArt{
+
+opacity:1;
+
+transition:
+opacity .5s ease,
+transform .5s ease;
+
+}
+
+
+#albumArt.changing{
+
+opacity:0;
+
+transform:scale(.92);
+
+}
+
+
+
+/* Now Playing glow */
+
+.player-card.playing{
+
+animation:nowGlow 3s infinite;
+
+}
+
+
+@keyframes nowGlow{
+
+0%{
+
+box-shadow:
+0 25px 80px black,
+0 0 0 red;
+
+}
+
+
+50%{
+
+box-shadow:
+0 25px 80px black,
+0 0 45px rgba(255,0,0,.5);
+
+}
+
+
+100%{
+
+box-shadow:
+0 25px 80px black,
+0 0 0 red;
+
+}
+
+
+}
+
+
+
+/* LIVE broadcast light */
+
+
+.live-status span{
+
+animation:livePulse 1.2s infinite;
+
+}
+
+
+@keyframes livePulse{
+
+
+0%{
+
+transform:scale(1);
+
+opacity:1;
+
+}
+
+
+50%{
+
+transform:scale(1.6);
+
+opacity:.4;
+
+}
+
+
+100%{
+
+transform:scale(1);
+
+opacity:1;
+
+}
+
+
+}
+
+
+
+
+
+/* Custom scrollbar */
+
+
+::-webkit-scrollbar{
+
+width:10px;
+
+}
+
+
+::-webkit-scrollbar-track{
+
+background:#080808;
+
+}
+
+
+::-webkit-scrollbar-thumb{
+
+background:red;
+
+border-radius:20px;
+
+}
+
+
+::-webkit-scrollbar-thumb:hover{
+
+background:#ff4444;
+
+}
+
+
+
+
+/* Recent songs animation */
+
+
+.recent-song{
+
+animation:slideIn .4s ease;
+
+}
+
+
+@keyframes slideIn{
+
+
+from{
+
+opacity:0;
+
+transform:translateX(-20px);
+
+}
+
+
+to{
+
+opacity:1;
+
+transform:translateX(0);
+
+}
+
+
+}
