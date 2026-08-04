@@ -9,16 +9,23 @@
 
 <title>WHBR Roanoke | Classic Rock</title>
 
+
 <link rel="stylesheet" href="style.css">
+
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
 
+
 <link rel="icon" type="image/png" href="whbr-logo.png">
+
 
 </head>
 
 
 <body>
+
+
+
 
 
 <header>
@@ -35,20 +42,26 @@
 
 
 
+
 <div class="station-info">
 
 
 <h1>
+
 WHBR ROANOKE
+
 </h1>
 
 
 <p>
+
 THE LEGENDS NEVER STOP
+
 </p>
 
 
 </div>
+
 
 
 
@@ -75,7 +88,10 @@ LIVE
 
 
 
+
+
 <section class="hero">
+
 
 
 <div class="hero-title">
@@ -111,6 +127,7 @@ CLASSIC ROCK
 
 
 
+
 <div class="player-card">
 
 
@@ -119,7 +136,11 @@ CLASSIC ROCK
 
 
 
+
+
 <div class="player-inner">
+
+
 
 
 
@@ -128,6 +149,7 @@ CLASSIC ROCK
 src="default-cover.png"
 
 alt="Album Cover">
+
 
 
 
@@ -161,6 +183,8 @@ WHBR ROANOKE
 
 
 
+
+
 <div class="station-line">
 
 WHBR ROANOKE • CLASSIC ROCK 24/7
@@ -171,17 +195,27 @@ WHBR ROANOKE • CLASSIC ROCK 24/7
 
 
 
+
+
 <div class="music-bars" id="visualizer">
 
+
 <span></span>
+
 <span></span>
+
 <span></span>
+
 <span></span>
+
 <span></span>
+
 <span></span>
 
 
 </div>
+
+
 
 
 
@@ -197,11 +231,13 @@ WHBR ROANOKE • CLASSIC ROCK 24/7
 <div class="player-controls">
 
 
+
 <div class="live-pill">
 
 LIVE
 
 </div>
+
 
 
 
@@ -213,7 +249,11 @@ LIVE
 
 
 
+
+
+
 <div class="volume-control">
+
 
 🔊
 
@@ -238,13 +278,21 @@ value="0.8"
 </div>
 
 
+
+
+</div>
+
+
+
+
+
+
 </div>
 
 
 
 
 
-</div>
 
 
 
@@ -262,6 +310,8 @@ type="audio/mpeg">
 
 
 
+
+
 </div>
 
 
@@ -270,8 +320,8 @@ type="audio/mpeg">
 
 
 
-
 <div class="feature-row">
+
 
 
 <div>
@@ -285,6 +335,7 @@ The greatest songs ever recorded.
 </p>
 
 </div>
+
 
 
 
@@ -304,6 +355,7 @@ Listen anywhere, anytime.
 
 
 
+
 <div>
 
 <h3>
@@ -316,6 +368,16 @@ More music. Less interruptions.
 
 </div>
 
+
+
+
+</div>
+
+
+
+
+
+</section>
 
 
 
@@ -351,12 +413,14 @@ Loading...
 
 
 
+
 <div class="card">
 
 
 <h2>
 📡 WHBR LIVE STATUS
 </h2>
+
 
 
 
@@ -443,8 +507,8 @@ Roanoke, VA
 
 
 
-</div>
 
+</div>
 
 
 
@@ -467,11 +531,13 @@ Roanoke, VA
 
 
 
+
 <div id="nationalNews">
 
 Loading...
 
 </div>
+
 
 
 
@@ -491,6 +557,7 @@ Loading...
 <h2>
 🎸 ABOUT WHBR
 </h2>
+
 
 
 
@@ -541,7 +608,6 @@ WHBR ROANOKE
 
 </strong>
 
-
 </div>
 
 
@@ -567,6 +633,7 @@ Now Playing
 
 
 
+
 </div>
 
 
@@ -578,29 +645,20 @@ Now Playing
 
 <footer>
 
+
 WHBR ROANOKE © 2026
 
-</footer>
+
+</footer><script>
 
 
-</div><script>
+const audio = document.getElementById("whbrAudio");
 
+const playButton = document.getElementById("playButton");
 
-const audio =
-document.getElementById("whbrAudio");
+const miniPlayButton = document.getElementById("miniPlayButton");
 
-
-const playButton =
-document.getElementById("playButton");
-
-
-const miniPlayButton =
-document.getElementById("miniPlayButton");
-
-
-const volumeSlider =
-document.getElementById("volumeSlider");
-
+const volumeSlider = document.getElementById("volumeSlider");
 
 
 const WORKER =
@@ -612,11 +670,15 @@ audio.volume = 0.8;
 
 
 
-volumeSlider.oninput=function(){
 
-audio.volume=this.value;
+
+
+volumeSlider.oninput = () => {
+
+audio.volume = volumeSlider.value;
 
 };
+
 
 
 
@@ -640,7 +702,7 @@ miniPlayButton.innerHTML="⏸";
 
 
 })
-.catch(error=>console.log(error));
+.catch(err=>console.log(err));
 
 
 }
@@ -664,9 +726,10 @@ miniPlayButton.innerHTML="▶";
 
 
 
-playButton.onclick=togglePlay;
+playButton.onclick = togglePlay;
 
-miniPlayButton.onclick=togglePlay;
+miniPlayButton.onclick = togglePlay;
+
 
 
 
@@ -679,7 +742,7 @@ miniPlayButton.onclick=togglePlay;
 function timeAgo(date){
 
 
-const seconds =
+let seconds =
 Math.floor((new Date()-new Date(date))/1000);
 
 
@@ -688,13 +751,15 @@ if(seconds < 60)
 return "just now";
 
 
-const minutes =
+
+let minutes =
 Math.floor(seconds/60);
 
 
 
 if(minutes < 60)
 return minutes+" minutes ago";
+
 
 
 return Math.floor(minutes/60)+" hours ago";
@@ -716,7 +781,7 @@ async function getArtwork(song){
 try{
 
 
-const response =
+let response =
 await fetch(
 
 "https://itunes.apple.com/search?term="+
@@ -727,8 +792,9 @@ encodeURIComponent(song)+
 
 
 
-const data =
+let data =
 await response.json();
+
 
 
 
@@ -749,9 +815,9 @@ return data.results[0]
 }
 
 
-catch(error){
+catch(e){
 
-console.log(error);
+console.log(e);
 
 }
 
@@ -776,20 +842,24 @@ async function loadStation(){
 try{
 
 
-const response =
+let response =
 await fetch(
 WORKER+"?time="+Date.now()
 );
 
 
 
-const data =
+let data =
 await response.json();
+
+
 
 
 
 let song =
 data.nowPlaying || "WHBR ROANOKE";
+
+
 
 
 
@@ -804,12 +874,15 @@ song.split(" - ");
 if(parts.length >= 2){
 
 
-document.getElementById("songArtist").innerText =
-parts[0];
-
 
 document.getElementById("songTitle").innerText =
 parts.slice(1).join(" - ");
+
+
+
+document.getElementById("songArtist").innerText =
+parts[0];
+
 
 
 }
@@ -821,11 +894,13 @@ document.getElementById("songTitle").innerText =
 song;
 
 
+
 document.getElementById("songArtist").innerText =
 "WHBR ROANOKE";
 
 
 }
+
 
 
 
@@ -840,8 +915,11 @@ song;
 
 
 
+
 let cover =
 await getArtwork(song);
+
+
 
 
 
@@ -858,7 +936,9 @@ document.getElementById("albumBackground").style.backgroundImage =
 
 
 
-const recent =
+
+
+let recent =
 document.getElementById("recentSongs");
 
 
@@ -871,9 +951,13 @@ recent.innerHTML="";
 
 
 
+
 (data.recentlyPlayed || [])
 
 .filter(item => item.title.trim() !== "-")
+
+
+.slice(0,10)
 
 
 .forEach(async item=>{
@@ -882,6 +966,7 @@ recent.innerHTML="";
 
 let div =
 document.createElement("div");
+
 
 
 div.className="recent-song";
@@ -893,14 +978,15 @@ await getArtwork(item.title);
 
 
 
-div.innerHTML =
 
-`
+div.innerHTML = `
+
 
 <img class="recent-cover" src="${image}">
 
 
 <div>
+
 
 <strong>
 
@@ -921,6 +1007,8 @@ Played ${timeAgo(item.time)}
 
 </div>
 
+
+
 `;
 
 
@@ -934,13 +1022,13 @@ recent.appendChild(div);
 
 
 
-
 }
 
 
 catch(error){
 
 console.log(error);
+
 
 }
 
@@ -962,15 +1050,16 @@ async function loadStatus(){
 try{
 
 
-const response =
+let response =
 await fetch(
 WORKER+"?time="+Date.now()
 );
 
 
 
-const data =
+let data =
 await response.json();
+
 
 
 
@@ -995,7 +1084,9 @@ data.location || "Roanoke, VA";
 
 
 
+
 }
+
 
 
 catch(error){
@@ -1022,7 +1113,7 @@ async function loadNews(){
 try{
 
 
-const response =
+let response =
 await fetch(
 
 "https://api.rss2json.com/v1/api.json?rss_url=https://feeds.npr.org/1001/rss.xml"
@@ -1031,18 +1122,18 @@ await fetch(
 
 
 
-const data =
+let data =
 await response.json();
 
 
 
 
-const news =
+let box =
 document.getElementById("nationalNews");
 
 
 
-news.innerHTML="";
+box.innerHTML="";
 
 
 
@@ -1060,9 +1151,8 @@ div.className="news-item";
 
 
 
-div.innerHTML=
+div.innerHTML = `
 
-`
 
 <a href="${item.link}" target="_blank">
 
@@ -1070,11 +1160,12 @@ ${item.title}
 
 </a>
 
+
 `;
 
 
 
-news.appendChild(div);
+box.appendChild(div);
 
 
 
@@ -1086,7 +1177,7 @@ news.appendChild(div);
 
 
 
-catch(error){
+catch{
 
 
 nationalNews.innerHTML =
@@ -1115,6 +1206,8 @@ let animation;
 
 
 
+
+
 audio.addEventListener("play",()=>{
 
 
@@ -1138,7 +1231,9 @@ bar.style.height =
 },120);
 
 
+
 });
+
 
 
 
@@ -1180,6 +1275,7 @@ loadNews();
 
 
 
+
 setInterval(loadStation,10000);
 
 setInterval(loadStatus,10000);
@@ -1189,3 +1285,8 @@ setInterval(loadNews,300000);
 
 
 </script>
+
+
+</body>
+
+</html>
