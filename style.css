@@ -810,4 +810,41 @@ cursor:pointer;
 
 box-shadow:0 0 20px red;
 
+}/* VOLUME CONTROL */
+
+.volume-control{
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
+
+background:#050505;
+
+padding:10px 15px;
+
+border-radius:30px;
+
+box-shadow:0 0 15px rgba(255,0,0,.4);
+
+}
+
+
+.volume-control span{
+
+font-size:20px;
+
+}
+
+
+
+#volumeSlider{
+
+width:130px;
+
+accent-color:red;
+
+cursor:pointer;
+
 }
