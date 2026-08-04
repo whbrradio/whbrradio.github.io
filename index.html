@@ -18,7 +18,6 @@
 <body>
 
 
-
 <header>
 
 <div class="logo">
@@ -46,9 +45,7 @@ ON AIR
 
 </div>
 
-
 </header>
-
 
 
 
@@ -78,7 +75,6 @@ Classic Rock from the 70s, 80s, 90s, and early 2000s.
 <div class="card main-player">
 
 
-
 <div class="modern-player">
 
 
@@ -95,8 +91,6 @@ alt="Album Cover">
 
 
 
-
-
 <div class="song-info">
 
 
@@ -108,6 +102,7 @@ Loading...
 <div id="songArtist">
 WHBR ROANOKE
 </div>
+
 
 
 
@@ -133,34 +128,27 @@ WHBR ROANOKE
 
 
 
+
 <div class="player-right">
 
 
 <div class="live-label">
-
 LIVE
-
 </div>
-
 
 
 
 <button id="playButton">
-
 ▶
-
 </button>
 
 
-
 </div>
 
 
 
-
-
-
 </div>
+
 
 
 
@@ -181,12 +169,7 @@ type="audio/mpeg">
 
 
 
-
-
 </div>
-
-
-
 
 
 
@@ -200,16 +183,12 @@ type="audio/mpeg">
 
 
 
-
-
-
 <div class="card">
 
 
 <h2>
 ⏮ RECENTLY PLAYED
 </h2>
-
 
 
 <div id="recentSongs" class="recent-list">
@@ -219,8 +198,8 @@ Loading...
 </div>
 
 
-</div>
 
+</div>
 
 
 
@@ -238,14 +217,15 @@ Loading...
 
 
 
-
 <div class="status-bar">
 
 
 
 <div>
 
-<span>STATUS</span>
+<span>
+STATUS
+</span>
 
 <strong id="streamStatus">
 Loading...
@@ -259,7 +239,9 @@ Loading...
 
 <div>
 
-<span>LISTENERS</span>
+<span>
+LISTENERS
+</span>
 
 <strong id="listeners">
 0
@@ -274,7 +256,9 @@ Loading...
 
 <div>
 
-<span>QUALITY</span>
+<span>
+QUALITY
+</span>
 
 <strong id="quality">
 Loading...
@@ -289,7 +273,9 @@ Loading...
 
 <div>
 
-<span>LOCATION</span>
+<span>
+LOCATION
+</span>
 
 <strong id="location">
 Loading...
@@ -300,19 +286,15 @@ Loading...
 
 
 
+
+</div>
+
+
 </div>
 
 
 
 </div>
-
-
-
-
-
-
-</div>
-
 
 
 
@@ -344,6 +326,46 @@ Loading...
 
 
 
+<!-- NEWS OVERLAY -->
+
+<div id="newsOverlay" class="news-overlay">
+
+
+<div class="news-popup">
+
+
+<button id="closeNews">
+
+✕
+
+</button>
+
+
+
+<h2 id="popupTitle">
+
+</h2>
+
+
+
+<iframe id="popupFrame">
+
+</iframe>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
 
 <div class="card">
 
@@ -353,11 +375,9 @@ Loading...
 </h2>
 
 
-
 <p>
 Take WHBR Roanoke with you anywhere with our mobile app.
 </p>
-
 
 
 <a class="download" href="WHBR-Radio.apk" download>
@@ -365,7 +385,6 @@ Take WHBR Roanoke with you anywhere with our mobile app.
 DOWNLOAD WHBR RADIO APP
 
 </a>
-
 
 
 </div>
@@ -399,7 +418,6 @@ DOWNLOAD WHBR RADIO APP
 </h2>
 
 
-
 <p>
 
 WHBR Roanoke brings you the greatest Classic Rock songs ever recorded. Legendary artists, unforgettable riffs, and timeless music 24 hours a day.
@@ -407,8 +425,8 @@ WHBR Roanoke brings you the greatest Classic Rock songs ever recorded. Legendary
 </p>
 
 
-
 </div>
+
 
 
 
@@ -423,7 +441,6 @@ WHBR Roanoke brings you the greatest Classic Rock songs ever recorded. Legendary
 </h2>
 
 
-
 <p>
 
 From Roanoke, Virginia, WHBR connects listeners around the world with the legendary sounds of Classic Rock. Featuring the artists, albums, and songs that shaped generations, WHBR keeps the spirit of rock alive anytime, anywhere.
@@ -431,13 +448,11 @@ From Roanoke, Virginia, WHBR connects listeners around the world with the legend
 </p>
 
 
-
 </div>
 
 
 
 </section>
-
 
 
 
@@ -464,11 +479,13 @@ WHBR ROANOKE
 
 
 
+
 <div id="miniSong">
 
 Now Playing
 
 </div>
+
 
 
 
@@ -496,42 +513,21 @@ Now Playing
 
 WHBR ROANOKE © 2026
 
-</footer>
+</footer><script>
 
+const audio = document.getElementById("whbrAudio");
 
-
-
-
-
-<script>
-
-
-const audio =
-document.getElementById("whbrAudio");
-
-const playButton =
-document.getElementById("playButton");
-
-
-const miniPlayButton =
-document.getElementById("miniPlayButton");
-
-
+const playButton = document.getElementById("playButton");
+const miniPlayButton = document.getElementById("miniPlayButton");
 
 const WORKER =
 "https://broken-morning-5083.braedenbrown460.workers.dev/";
 
 
 
-
-
-
-
 function togglePlay(){
 
-
 if(audio.paused){
-
 
 audio.play()
 .then(()=>{
@@ -539,17 +535,16 @@ audio.play()
 playButton.innerHTML="⏸";
 miniPlayButton.innerHTML="⏸";
 
-});
+})
+.catch(err=>console.log(err));
 
 
 }
-
 
 else{
 
 
 audio.pause();
-
 
 playButton.innerHTML="▶";
 miniPlayButton.innerHTML="▶";
@@ -557,21 +552,12 @@ miniPlayButton.innerHTML="▶";
 
 }
 
-
 }
 
 
 
-
-
-playButton.onclick =
-togglePlay;
-
-
-miniPlayButton.onclick =
-togglePlay;
-
-
+playButton.onclick = togglePlay;
+miniPlayButton.onclick = togglePlay;
 
 
 
@@ -610,45 +596,31 @@ return Math.floor(minutes/60)+" hours ago";
 
 
 
-
-async function loadAlbumArt(song){
+async function getArtwork(song){
 
 
 try{
 
 
-const response =
+const result =
 await fetch(
-
 "https://itunes.apple.com/search?term="+
 encodeURIComponent(song)+
 "&media=music&limit=1"
-
 );
 
 
-
 const data =
-await response.json();
+await result.json();
 
 
 
 if(data.results.length){
 
 
-albumArt.src =
-data.results[0].artworkUrl100.replace(
-"100x100",
-"600x600"
-);
-
-
-}
-
-else{
-
-
-albumArt.src="whbr-logo.png";
+return data.results[0]
+.artworkUrl100
+.replace("100x100","600x600");
 
 
 }
@@ -657,13 +629,15 @@ albumArt.src="whbr-logo.png";
 }
 
 
-catch{
+catch(error){
 
-
-albumArt.src="whbr-logo.png";
-
+console.log(error);
 
 }
+
+
+
+return "whbr-logo.png";
 
 
 }
@@ -683,11 +657,15 @@ try{
 
 
 const response =
-await fetch(WORKER);
+await fetch(
+WORKER+"?time="+Date.now()
+);
+
 
 
 const data =
 await response.json();
+
 
 
 
@@ -702,15 +680,17 @@ song.split(" - ");
 
 
 
+
 if(parts.length >= 2){
 
 
-songTitle.innerText =
+document.getElementById("songArtist").innerText =
+parts[0];
+
+
+document.getElementById("songTitle").innerText =
 parts.slice(1).join(" - ");
 
-
-songArtist.innerText =
-parts[0];
 
 
 }
@@ -718,11 +698,11 @@ parts[0];
 else{
 
 
-songTitle.innerText =
+document.getElementById("songTitle").innerText =
 song;
 
 
-songArtist.innerText =
+document.getElementById("songArtist").innerText =
 "WHBR ROANOKE";
 
 
@@ -731,23 +711,33 @@ songArtist.innerText =
 
 
 
-miniSong.innerText =
+
+document.getElementById("miniSong").innerText =
 song;
 
 
 
-loadAlbumArt(song);
+
+document.getElementById("albumArt").src =
+await getArtwork(song);
 
 
 
 
 
 
-recentSongs.innerHTML="";
+
+const recent =
+document.getElementById("recentSongs");
+
+
+recent.innerHTML="";
 
 
 
-(data.recentlyPlayed || []).forEach(item=>{
+
+
+(data.recentlyPlayed || []).forEach(async item=>{
 
 
 let div =
@@ -758,13 +748,23 @@ div.className="recent-song";
 
 
 
-div.innerHTML=`
+let cover =
+await getArtwork(item.title);
 
-<img class="recent-cover" src="whbr-logo.png">
+
+
+div.innerHTML=
+
+`
+
+<img class="recent-cover" src="${cover}">
+
 
 <div>
 
-<strong>${item.title}</strong>
+<strong>
+${item.title}
+</strong>
 
 <br>
 
@@ -772,13 +772,14 @@ div.innerHTML=`
 Played ${timeAgo(item.time)}
 </small>
 
+
 </div>
 
 `;
 
 
 
-recentSongs.appendChild(div);
+recent.appendChild(div);
 
 
 });
@@ -790,7 +791,8 @@ recentSongs.appendChild(div);
 
 catch(error){
 
-console.log(error);
+console.log("Station error:",error);
+
 
 }
 
@@ -813,7 +815,10 @@ try{
 
 
 const response =
-await fetch(WORKER);
+await fetch(
+WORKER+"?time="+Date.now()
+);
+
 
 
 const data =
@@ -821,30 +826,36 @@ await response.json();
 
 
 
-streamStatus.innerText =
-data.online ? "LIVE" : "OFFLINE";
+document.getElementById("streamStatus").innerText =
+data.online ? "LIVE":"OFFLINE";
 
 
-listeners.innerText =
+document.getElementById("listeners").innerText =
 data.listeners || 0;
 
 
-quality.innerText =
-(data.bitrate || "")+" kbps";
+document.getElementById("quality").innerText =
+(data.bitrate || "")+" kbps MP3";
 
 
-location.innerText =
+document.getElementById("location").innerText =
 data.location || "Online";
 
 
+
+}
+
+
+catch(error){
+
+console.log(error);
+
 }
 
 
-catch(error){}
-
-
 
 }
+
 
 
 
@@ -873,24 +884,31 @@ await response.json();
 
 
 
-nationalNews.innerHTML="";
+const box =
+document.getElementById("nationalNews");
+
+
+
+box.innerHTML="";
+
 
 
 
 data.items.slice(0,8).forEach(item=>{
 
 
-let div =
+let article =
 document.createElement("div");
 
 
-div.className="news-item";
+article.className="news-item";
 
 
+article.innerHTML=
 
-div.innerHTML=`
+`
 
-<a href="${item.link}" target="_blank">
+<a href="#">
 
 ${item.title}
 
@@ -900,7 +918,29 @@ ${item.title}
 
 
 
-nationalNews.appendChild(div);
+article.onclick=()=>{
+
+
+document.getElementById("newsOverlay")
+.style.display="flex";
+
+
+document.getElementById("popupTitle")
+.innerText=item.title;
+
+
+
+document.getElementById("popupFrame")
+.src=item.link;
+
+
+};
+
+
+
+
+box.appendChild(article);
+
 
 
 });
@@ -910,7 +950,7 @@ nationalNews.appendChild(div);
 }
 
 
-catch{
+catch(error){
 
 
 nationalNews.innerHTML =
@@ -920,7 +960,28 @@ nationalNews.innerHTML =
 }
 
 
+
 }
+
+
+
+
+
+
+
+document.getElementById("closeNews").onclick=function(){
+
+
+document.getElementById("newsOverlay")
+.style.display="none";
+
+
+document.getElementById("popupFrame")
+.src="";
+
+
+};
+
 
 
 
@@ -940,8 +1001,11 @@ let animation;
 audio.addEventListener("play",()=>{
 
 
-animation =
-setInterval(()=>{
+clearInterval(animation);
+
+
+
+animation=setInterval(()=>{
 
 
 bars.forEach(bar=>{
@@ -962,13 +1026,24 @@ bar.style.height =
 
 
 
+
 audio.addEventListener("pause",()=>{
 
 
 clearInterval(animation);
 
 
+
+bars.forEach(bar=>{
+
+bar.style.height="30px";
+
 });
+
+
+});
+
+
 
 
 
@@ -984,6 +1059,7 @@ loadNationalNews();
 
 
 
+
 setInterval(loadStation,10000);
 
 setInterval(loadStatus,10000);
@@ -993,9 +1069,6 @@ setInterval(loadNationalNews,300000);
 
 
 </script>
-
-
-
 
 
 
