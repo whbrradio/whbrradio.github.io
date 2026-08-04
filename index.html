@@ -31,7 +31,7 @@ ROANOKE'S AD FREE CLASSIC ROCK STATION
 
 
 <div class="live-badge">
-🔴 LIVE
+LIVE
 </div>
 
 
@@ -44,7 +44,6 @@ ON AIR
 <span></span>
 
 </div>
-
 
 </header>
 
@@ -71,22 +70,32 @@ Classic rock from the 70s, 80s, 90s, and early 2000s.
 <div class="card main-player">
 
 
-<div class="player-display">
+<div class="modern-player">
 
+
+<div class="album-container">
 
 <img id="albumArt"
-src="default-cover.png"
+src="whbr-logo.png"
 alt="Album Cover">
+
+</div>
+
+
 
 
 
 <div class="song-info">
 
 
-<div id="nowPlaying">
+<div id="songTitle">
 Loading...
 </div>
 
+
+<div id="songArtist">
+WHBR ROANOKE
+</div>
 
 
 <div class="music-bars" id="visualizer">
@@ -104,46 +113,28 @@ Loading...
 </div>
 
 
+
+
+
+<div class="player-controls">
+
+
+<div class="live-label">
+LIVE
 </div>
 
-
-
-
-
-<div class="custom-player">
 
 
 <button id="playButton">
-
 ▶
-
 </button>
-
-
-
-<div class="player-info">
-
-
-<strong>
-WHBR ROANOKE
-</strong>
-
-
-<span>
-🔴 LIVE STREAM
-</span>
-
-
-</div>
 
 
 
 
 <div class="volume">
 
-
 🔊
-
 
 <input
 
@@ -161,6 +152,8 @@ value="0.8"
 
 >
 
+</div>
+
 
 </div>
 
@@ -173,13 +166,11 @@ value="0.8"
 
 <audio id="whbrAudio">
 
-
 <source
 
-src=" https://survivor-customs-advertisement-events.trycloudflare.com/stream"
+src="https://survivor-customs-advertisement-events.trycloudflare.com/stream"
 
 type="audio/mpeg">
-
 
 </audio>
 
@@ -203,7 +194,6 @@ type="audio/mpeg">
 <h2>
 ⏮ RECENTLY PLAYED
 </h2>
-
 
 
 <div id="recentSongs" class="recent-list">
@@ -233,57 +223,53 @@ Loading...
 
 
 <div>
-
 STATUS
 
 <strong id="streamStatus">
 Loading...
 </strong>
 
-
 </div>
 
 
 
-
 <div>
-
 LISTENERS
 
 <strong id="listeners">
 0
 </strong>
 
-
 </div>
 
 
 
-
-
 <div>
-
 QUALITY
 
 <strong id="quality">
 Loading...
 </strong>
 
-
 </div>
 
 
 
-
-  
-  <div>
-
+<div>
 LOCATION
 
 <strong id="location">
 Loading...
 </strong>
 
+</div>
+
+
+</div>
+
+
+</div>
+
 
 </div>
 
@@ -291,25 +277,25 @@ Loading...
 
 
 
-  <div class="news-grid">
 
 
-<div class="card">
+
+<div class="news-grid">
+
+
+<div class="card popup-news">
 
 
 <h2>
-News
+📰 WHBR NEWS
 </h2>
 
 
-<ul id="newsList">
+<div id="newsList">
 
-<li>
 Loading...
-</li>
 
-
-</ul>
+</div>
 
 
 </div>
@@ -319,28 +305,29 @@ Loading...
 
 
 
-<div class="card">
+<div class="card popup-news">
 
 
 <h2>
-News
+🌎 NATIONAL NEWS
 </h2>
 
 
-<ul id="nationalNews">
+<div id="nationalNews">
 
-<li>
 Loading...
-</li>
-
-
-</ul>
-
 
 </div>
 
 
 </div>
+
+
+</div>
+
+
+
+
 
 
 
@@ -366,6 +353,7 @@ DOWNLOAD WHBR RADIO APP
 
 
 </div>
+
 
 
 
@@ -403,6 +391,7 @@ WHBR Roanoke brings you the greatest Classic Rock songs ever recorded. Legendary
 
 
 
+
 <div class="card">
 
 
@@ -429,7 +418,6 @@ From Roanoke, Virginia, WHBR connects listeners around the world with the legend
 
 
 
-
 <div class="mini-player">
 
 
@@ -440,7 +428,6 @@ From Roanoke, Virginia, WHBR connects listeners around the world with the legend
 <strong>
 WHBR ROANOKE
 </strong>
-
 
 </div>
 
@@ -473,32 +460,17 @@ Now Playing
 
 WHBR ROANOKE © 2026
 
-</footer>
+</footer><script>
 
+const audio = document.getElementById("whbrAudio");
 
+const playButton = document.getElementById("playButton");
+const miniPlayButton = document.getElementById("miniPlayButton");
 
+const volumeSlider = document.getElementById("volumeSlider");
 
-
-
-
-
-<script>
-
-
-const audio =
-document.getElementById("whbrAudio");
-
-
-const playButton =
-document.getElementById("playButton");
-
-
-const miniPlayButton =
-document.getElementById("miniPlayButton");
-
-
-const volumeSlider =
-document.getElementById("volumeSlider");
+const WORKER =
+"https://broken-morning-5083.braedenbrown460.workers.dev/";
 
 
 
@@ -506,13 +478,9 @@ audio.volume = 0.8;
 
 
 
-
-
 function togglePlay(){
 
-
 if(audio.paused){
-
 
 audio.play()
 .then(()=>{
@@ -527,25 +495,18 @@ console.log(error);
 
 });
 
-
 }
 
 else{
 
-
 audio.pause();
-
 
 playButton.innerHTML="▶";
 miniPlayButton.innerHTML="▶";
 
-
 }
 
-
 }
-
-
 
 
 
@@ -555,14 +516,9 @@ miniPlayButton.onclick = togglePlay;
 
 
 
-
-
 volumeSlider.oninput=function(){
 
-
-audio.volume =
-volumeSlider.value;
-
+audio.volume = volumeSlider.value;
 
 };
 
@@ -571,35 +527,27 @@ volumeSlider.value;
 
 
 
-
 function timeAgo(date){
-
 
 const seconds =
 Math.floor((new Date()-new Date(date))/1000);
-
 
 
 if(seconds < 60)
 return "just now";
 
 
-
 const minutes =
 Math.floor(seconds/60);
-
 
 
 if(minutes < 60)
 return minutes+" minutes ago";
 
 
-
 return Math.floor(minutes/60)+" hours ago";
 
-
 }
-
 
 
 
@@ -610,10 +558,11 @@ return Math.floor(minutes/60)+" hours ago";
 async function loadAlbumArt(song){
 
 
-const stationMessages=[
+const ignoreWords=[
 
-"WHBR RADIO",
+"WHBR",
 "LIVE!",
+"LIVE",
 "ALL OF YOUR FAVORITES",
 "ALWAYS AD FREE",
 "ALWAYS FREE"
@@ -622,7 +571,8 @@ const stationMessages=[
 
 
 
-if(stationMessages.some(x=>song.toUpperCase().includes(x))){
+if(ignoreWords.some(word =>
+song.toUpperCase().includes(word))){
 
 albumArt.src="whbr-logo.png";
 
@@ -641,7 +591,6 @@ await fetch(
 encodeURIComponent(song)+
 "&media=music&limit=1"
 );
-
 
 
 const data =
@@ -692,9 +641,7 @@ try{
 
 
 const response =
-await fetch(
-"https://broken-morning-5083.braedenbrown460.workers.dev/"
-);
+await fetch(WORKER);
 
 
 
@@ -704,17 +651,53 @@ await response.json();
 
 
 let song =
-data.nowPlaying || "WHBR Radio";
+data.nowPlaying || "WHBR ROANOKE";
 
 
 
-document.getElementById("nowPlaying").innerText=song;
+let parts =
+song.split(" - ");
 
-document.getElementById("miniSong").innerText=song;
+
+
+if(parts.length >= 2){
+
+
+document.getElementById("songArtist").innerText =
+parts[0];
+
+
+document.getElementById("songTitle").innerText =
+parts.slice(1).join(" - ");
+
+
+}
+
+else{
+
+
+document.getElementById("songTitle").innerText =
+song;
+
+
+document.getElementById("songArtist").innerText =
+"WHBR ROANOKE";
+
+
+}
+
+
+
+
+document.getElementById("miniSong").innerText =
+song;
 
 
 
 loadAlbumArt(song);
+
+
+
 
 
 
@@ -727,18 +710,20 @@ list.innerHTML="";
 
 
 
-(data.recentlyPlayed||[]).forEach(song=>{
+(data.recentlyPlayed || []).forEach(song=>{
 
 
-let div=document.createElement("div");
+let div =
+document.createElement("div");
 
 
 div.className="recent-song";
 
 
-div.innerHTML=`
 
-<img ="default-cover.png" class="recent-cover">
+div.innerHTML = `
+
+<img src="whbr-logo.png" class="recent-cover">
 
 <div>
 
@@ -755,14 +740,15 @@ Played ${timeAgo(song.time)}
 `;
 
 
+
 list.appendChild(div);
 
 
 });
 
 
-}
 
+}
 
 catch(error){
 
@@ -788,9 +774,7 @@ try{
 
 
 const response =
-await fetch(
-"https://broken-morning-5083.braedenbrown460.workers.dev/"
-);
+await fetch(WORKER);
 
 
 
@@ -799,26 +783,29 @@ await response.json();
 
 
 
-streamStatus.innerText =
-data.online ? "LIVE":"OFFLINE";
+document.getElementById("streamStatus").innerText =
+data.online ? "LIVE" : "OFFLINE";
 
 
-listeners.innerText =
+document.getElementById("listeners").innerText =
 data.listeners || 0;
 
 
-quality.innerText =
-(data.bitrate||"")+" kbps MP3";
+document.getElementById("quality").innerText =
+(data.bitrate || "")+" kbps MP3";
 
 
-location.innerText =
+document.getElementById("location").innerText =
 data.location || "Roanoke, VA";
 
 
 }
 
-catch(error){}
+catch(error){
 
+console.log(error);
+
+}
 
 
 }
@@ -838,10 +825,7 @@ try{
 
 
 const response =
-await fetch(
-"https://broken-morning-5083.braedenbrown460.workers.dev/"
-);
-
+await fetch(WORKER);
 
 
 const data =
@@ -849,17 +833,26 @@ await response.json();
 
 
 
-newsList.innerHTML="";
+const box =
+document.getElementById("newsList");
 
 
 
-(data.stories||[]).forEach(story=>{
+box.innerHTML="";
 
 
-let li=document.createElement("li");
+
+(data.stories || []).slice(0,5).forEach(story=>{
 
 
-li.innerHTML=`
+let item =
+document.createElement("div");
+
+
+item.className="news-item";
+
+
+item.innerHTML=`
 
 <a href="${story.link}" target="_blank">
 
@@ -870,10 +863,12 @@ ${story.title}
 `;
 
 
-newsList.appendChild(li);
+
+box.appendChild(item);
 
 
 });
+
 
 
 }
@@ -881,8 +876,8 @@ newsList.appendChild(li);
 catch{
 
 
-newsList.innerHTML=
-"<li>News unavailable</li>";
+document.getElementById("newsList").innerHTML =
+"News unavailable";
 
 }
 
@@ -917,17 +912,28 @@ await response.json();
 
 
 
-nationalNews.innerHTML="";
+const box =
+document.getElementById("nationalNews");
+
+
+
+box.innerHTML="";
 
 
 
 data.items.slice(0,5).forEach(item=>{
 
 
-let li=document.createElement("li");
+let div =
+document.createElement("div");
 
 
-li.innerHTML=`
+
+div.className="news-item";
+
+
+
+div.innerHTML=`
 
 <a href="${item.link}" target="_blank">
 
@@ -938,7 +944,8 @@ ${item.title}
 `;
 
 
-nationalNews.appendChild(li);
+
+box.appendChild(div);
 
 
 });
@@ -946,27 +953,24 @@ nationalNews.appendChild(li);
 
 }
 
-
 catch{
 
 
-nationalNews.innerHTML=
-"<li>News unavailable</li>";
+document.getElementById("nationalNews").innerHTML =
+"News unavailable";
+
+}
 
 
 }
 
 
-}
 
 
 
 
 
 
-
-
-// SAFE MUSIC VISUALIZER
 
 const bars =
 document.querySelectorAll("#visualizer span");
@@ -1005,6 +1009,7 @@ bar.style.height =
 
 
 
+
 audio.addEventListener("pause",()=>{
 
 
@@ -1027,6 +1032,7 @@ bar.style.height="30px";
 
 
 
+
 loadStation();
 
 loadStatus();
@@ -1034,6 +1040,7 @@ loadStatus();
 loadNews();
 
 loadNationalNews();
+
 
 
 
