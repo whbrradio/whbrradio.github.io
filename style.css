@@ -8,25 +8,26 @@ font-family:'Inter',Arial,sans-serif;
 
 body{
 
+min-height:100vh;
+
+color:white;
+
 background:
 linear-gradient(
 120deg,
-rgba(0,0,0,.9),
-rgba(35,0,0,.85),
+rgba(0,0,0,.92),
+rgba(45,0,0,.85),
 rgba(0,0,0,.95)
 ),
 url("studio-background.jpg");
 
 background-size:cover;
+
 background-position:center;
+
 background-attachment:fixed;
 
-color:white;
-
-min-height:100vh;
-
 }
-
 
 
 
@@ -42,13 +43,13 @@ backdrop-filter:blur(20px);
 
 padding:25px 5%;
 
-border-bottom:1px solid rgba(255,0,0,.4);
+border-bottom:1px solid rgba(255,0,0,.35);
 
 position:sticky;
 
 top:0;
 
-z-index:100;
+z-index:1000;
 
 }
 
@@ -70,7 +71,7 @@ gap:30px;
 
 .logo img{
 
-width:190px;
+width:200px;
 
 background:white;
 
@@ -78,7 +79,7 @@ padding:12px;
 
 border-radius:20px;
 
-box-shadow:0 0 40px red;
+box-shadow:0 0 45px red;
 
 }
 
@@ -92,21 +93,19 @@ text-align:center;
 
 
 
-.station-name{
+.station-info h1{
 
 font-family:'Orbitron',sans-serif;
 
-font-size:32px;
-
-font-weight:900;
+font-size:35px;
 
 }
 
 
 
-.tagline{
+.station-info p{
 
-color:#bbb;
+color:#aaa;
 
 letter-spacing:4px;
 
@@ -118,7 +117,7 @@ margin-top:10px;
 
 .live-status{
 
-background:red;
+background:#e00000;
 
 padding:15px 30px;
 
@@ -132,14 +131,13 @@ box-shadow:0 0 30px red;
 
 
 
-
 .live-status span{
 
 display:inline-block;
 
-width:10px;
-
 height:10px;
+
+width:10px;
 
 background:white;
 
@@ -148,8 +146,6 @@ border-radius:50%;
 margin-right:8px;
 
 }
-
-
 
 
 
@@ -166,7 +162,7 @@ padding:60px 5%;
 
 
 
-.hero-text{
+.hero-title{
 
 text-align:center;
 
@@ -188,26 +184,25 @@ font-size:20px;
 
 
 
-.hero h1{
+.hero-title h2{
 
 font-family:'Orbitron',sans-serif;
 
 font-size:70px;
 
-margin-top:15px;
+margin:15px 0;
 
 }
 
 
 
-.hero p{
-
-color:#bbb;
+.hero-title p{
 
 font-size:22px;
 
-}
+color:#aaa;
 
+}
 
 
 
@@ -222,47 +217,47 @@ position:relative;
 
 overflow:hidden;
 
-background:rgba(255,255,255,.06);
-
-backdrop-filter:blur(25px);
-
 border-radius:35px;
 
-padding:40px;
+background:rgba(255,255,255,.08);
+
+border:1px solid rgba(255,255,255,.15);
 
 box-shadow:
 
-0 25px 70px black;
+0 25px 80px black;
 
-border:1px solid rgba(255,255,255,.12);
+padding:45px;
 
 }
 
 
 
-
-
-.player-background{
+#albumBackground{
 
 position:absolute;
 
-inset:0;
+inset:-60px;
 
-background:
+background-size:cover;
 
-linear-gradient(
-90deg,
-rgba(255,0,0,.25),
-transparent
-);
+background-position:center;
+
+filter:blur(35px);
+
+opacity:.35;
+
+transform:scale(1.1);
 
 z-index:0;
+
+transition:1s;
 
 }
 
 
 
-.player-content{
+.player-inner{
 
 position:relative;
 
@@ -292,13 +287,38 @@ box-shadow:
 
 0 0 60px red;
 
+transition:.5s;
+
 }
+
+
+
+
+#albumArt:hover{
+
+transform:scale(1.05);
+
+}
+
+
 
 
 
 .song-details{
 
 flex:1;
+
+}
+
+
+
+.song-label{
+
+color:#ff3333;
+
+font-weight:900;
+
+letter-spacing:3px;
 
 }
 
@@ -314,6 +334,8 @@ font-weight:900;
 
 line-height:1.1;
 
+margin-top:10px;
+
 }
 
 
@@ -322,11 +344,11 @@ line-height:1.1;
 
 font-size:35px;
 
+font-weight:bold;
+
 color:#ddd;
 
 margin-top:15px;
-
-font-weight:bold;
 
 }
 
@@ -334,9 +356,9 @@ font-weight:bold;
 
 .station-line{
 
-margin-top:15px;
+color:#aaa;
 
-color:#999;
+margin-top:15px;
 
 letter-spacing:2px;
 
@@ -345,16 +367,15 @@ letter-spacing:2px;
 
 
 
-
 .music-bars{
-
-height:80px;
 
 display:flex;
 
 align-items:center;
 
 gap:8px;
+
+height:80px;
 
 margin-top:25px;
 
@@ -374,10 +395,7 @@ border-radius:10px;
 
 box-shadow:0 0 20px red;
 
-transition:.1s;
-
 }
-
 
 
 
@@ -434,9 +452,7 @@ font-size:45px;
 
 cursor:pointer;
 
-box-shadow:
-
-0 0 50px red;
+box-shadow:0 0 50px red;
 
 transition:.3s;
 
@@ -455,17 +471,17 @@ transform:scale(1.1);
 
 .volume-control{
 
-background:#050505;
-
-padding:12px 20px;
-
-border-radius:50px;
-
 display:flex;
 
 align-items:center;
 
 gap:10px;
+
+background:#050505;
+
+padding:12px 20px;
+
+border-radius:50px;
 
 }
 
@@ -484,10 +500,11 @@ width:130px;
 
 
 
-/* LISTENER SECTION */
+
+/* FEATURES */
 
 
-.listener-section{
+.feature-row{
 
 display:grid;
 
@@ -501,9 +518,11 @@ margin-top:40px;
 
 
 
-.listener-section div{
+.feature-row div{
 
 background:rgba(255,255,255,.06);
+
+backdrop-filter:blur(15px);
 
 padding:30px;
 
@@ -515,13 +534,24 @@ border:1px solid rgba(255,255,255,.1);
 
 
 
-.listener-section h2{
+.feature-row h3{
 
 color:#ff3333;
 
-margin-bottom:15px;
+font-size:25px;
+
+margin-bottom:10px;
 
 }
+
+
+
+.feature-row p{
+
+color:#bbb;
+
+}
+
 
 
 
@@ -530,11 +560,12 @@ margin-bottom:15px;
 /* CONTENT */
 
 
-.content-area{
+.main-content{
 
 padding:0 5%;
 
 }
+
 
 
 
@@ -544,11 +575,11 @@ background:rgba(255,255,255,.06);
 
 backdrop-filter:blur(20px);
 
-border-radius:30px;
-
 padding:35px;
 
 margin:30px 0;
+
+border-radius:30px;
 
 border:1px solid rgba(255,255,255,.1);
 
@@ -595,7 +626,7 @@ align-items:center;
 
 gap:20px;
 
-background:rgba(0,0,0,.5);
+background:rgba(0,0,0,.45);
 
 padding:15px;
 
@@ -632,13 +663,10 @@ object-fit:cover;
 
 
 
-
-
-
 /* STATUS */
 
 
-.status-bar{
+.status-grid{
 
 display:grid;
 
@@ -650,7 +678,7 @@ gap:20px;
 
 
 
-.status-bar div{
+.status-grid div{
 
 background:#080808;
 
@@ -664,7 +692,7 @@ text-align:center;
 
 
 
-.status-bar span{
+.status-grid span{
 
 color:#888;
 
@@ -672,7 +700,7 @@ color:#888;
 
 
 
-.status-bar strong{
+.status-grid strong{
 
 display:block;
 
@@ -686,6 +714,8 @@ margin-top:10px;
 
 
 
+
+
 /* NEWS */
 
 
@@ -693,7 +723,7 @@ margin-top:10px;
 
 padding:18px;
 
-background:rgba(0,0,0,.4);
+background:rgba(0,0,0,.45);
 
 border-radius:15px;
 
@@ -707,9 +737,9 @@ a{
 
 color:#ff5555;
 
-text-decoration:none;
-
 font-weight:bold;
+
+text-decoration:none;
 
 }
 
@@ -752,13 +782,13 @@ border-radius:50px;
 
 display:flex;
 
-justify-content:space-between;
-
 align-items:center;
 
-z-index:999;
+justify-content:space-between;
 
 box-shadow:0 0 40px red;
+
+z-index:9999;
 
 }
 
@@ -772,16 +802,15 @@ height:60px;
 
 border-radius:50%;
 
-border:none;
-
 background:red;
+
+border:none;
 
 color:white;
 
 font-size:25px;
 
 }
-
 
 
 
@@ -801,6 +830,8 @@ color:#777;
 
 
 
+/* MOBILE */
+
 
 @media(max-width:900px){
 
@@ -813,19 +844,11 @@ flex-direction:column;
 
 
 
-.player-content{
+.player-inner{
 
 flex-direction:column;
 
 text-align:center;
-
-}
-
-
-
-.player-controls{
-
-position:static;
 
 }
 
@@ -847,7 +870,7 @@ font-size:25px;
 
 
 
-.listener-section{
+.feature-row{
 
 grid-template-columns:1fr;
 
@@ -855,7 +878,7 @@ grid-template-columns:1fr;
 
 
 
-.status-bar{
+.status-grid{
 
 grid-template-columns:repeat(2,1fr);
 
@@ -863,7 +886,7 @@ grid-template-columns:repeat(2,1fr);
 
 
 
-.hero h1{
+.hero-title h2{
 
 font-size:40px;
 
