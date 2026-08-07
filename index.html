@@ -348,45 +348,6 @@ Broadcasting from Roanoke, Virginia, WHBR connects listeners everywhere with the
 
 
 
-<section class="listen-section">
-
-
-<div class="listen-box">
-
-
-<h2>
-
-WHBR LIVE
-
-</h2>
-
-
-
-<p>
-
-Turn it up and listen anywhere, anytime.
-
-</p>
-
-
-
-<button id="listen-button">
-
-LISTEN NOW
-
-</button>
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
 
 <footer>
 
@@ -417,7 +378,6 @@ WHBR ROANOKE © 2026
 
 
 </footer>
-
 
 
 
@@ -470,7 +430,13 @@ playButton.innerHTML="▶";
 
 playButton.onclick = togglePlay;
 
+
+if(listenButton){
+
 listenButton.onclick = togglePlay;
+
+}
+
 
 
 
@@ -534,6 +500,7 @@ return hours + " hours ago";
 
 
 
+
 async function getArtwork(song){
 
 try{
@@ -576,6 +543,7 @@ console.log(error);
 return "whbr-logo.png";
 
 }
+
 
 
 
@@ -632,10 +600,12 @@ document.getElementById("top-artist").innerText = artist;
 
 
 
+
 let cover = await getArtwork(song);
 
 
 document.getElementById("album-cover").src = cover;
+
 
 
 
@@ -808,6 +778,7 @@ musicBox.appendChild(card);
 
 
 
+
 // =========================
 // IMPORTANT U.S. NEWS
 // =========================
@@ -846,8 +817,18 @@ let card=document.createElement("div");
 card.className="news-card";
 
 
+let image = item.thumbnail || "whbr-logo.png";
+
+
 
 card.innerHTML = `
+
+<div class="news-image">
+
+<img src="${image}">
+
+</div>
+
 
 <div class="news-content">
 
