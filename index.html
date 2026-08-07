@@ -13,6 +13,8 @@
 
 <link rel="stylesheet" href="style.css">
 
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+
 </head>
 
 
@@ -21,41 +23,56 @@
 
 <header class="top-bar">
 
-    <div class="logo-area">
-        <img src="whbr-logo.png" class="top-logo">
-    </div>
+
+<div class="logo-area">
+
+<img 
+src="whbr-logo.png"
+class="top-logo"
+>
+
+</div>
 
 
-    <div class="top-now-playing">
 
-        <div class="top-live">
-            <span class="live-dot"></span>
-            LIVE
-        </div>
+<div class="top-now-playing">
 
 
-        <div class="top-song">
+<div class="top-live">
 
-            <div id="top-title">
-                Loading...
-            </div>
+<span class="live-dot"></span>
 
-            <div id="top-artist">
-                WHBR
-            </div>
+LIVE
 
-        </div>
+</div>
 
-    </div>
+
+
+<div class="top-song">
+
+<div id="top-title">
+
+Loading...
+
+</div>
+
+
+<div id="top-artist">
+
+WHBR ROANOKE
+
+</div>
+
+</div>
+
+
+</div>
 
 
 </header>
 
 
 
-
-
-<main>
 
 
 <section class="player-section">
@@ -67,9 +84,20 @@
 
 <div class="album-container">
 
-<img id="album-cover" src="whbr-logo.png">
+
+<img
+
+id="album-cover"
+
+src="whbr-logo.png"
+
+alt="Album Cover"
+
+>
+
 
 </div>
+
 
 
 
@@ -78,14 +106,39 @@
 
 
 <h1 id="song-title">
-Loading Song...
+
+Loading...
+
 </h1>
 
 
+
 <h2 id="song-artist">
-WHBR Radio
+
+WHBR ROANOKE
+
 </h2>
 
+
+
+<div class="station-status">
+
+
+<span class="live-label">
+
+LIVE
+
+</span>
+
+
+<span>
+
+Classic Rock 24/7
+
+</span>
+
+
+</div>
 
 
 </div>
@@ -102,41 +155,48 @@ WHBR Radio
 
 
 
-
 </div>
 
 
 
-<audio id="radio-stream">
 
-<source 
+
+<audio id="whbrAudio">
+
+
+<source
+
 src="https://wrap-rico-take-album.trycloudflare.com/stream"
-type="audio/mpeg">
+
+type="audio/mpeg"
+
+>
+
 
 </audio>
 
 
+
 </section>
-
-<!-- =========================
-     RECENTLY PLAYED
-========================= -->
-
 
 <section class="content-section">
 
 
 <h2 class="section-title">
-Recently Played
+
+RECENTLY PLAYED
+
 </h2>
 
 
 
-<div id="recent-list">
+<div id="recentSongs" class="recent-grid">
 
 
 <div class="recent-placeholder">
-Waiting for songs...
+
+Loading...
+
 </div>
 
 
@@ -151,31 +211,43 @@ Waiting for songs...
 
 
 
-<!-- =========================
-     NEWS
-========================= -->
-
-
 <section class="content-section">
 
 
 <h2 class="section-title">
-WHBR News
+
+NATIONAL NEWS
+
 </h2>
 
+
+
+<div id="nationalNews" class="news-grid">
 
 
 <div class="news-card">
 
 
+<div class="news-content">
+
 <h3>
-WHBR Rock News
+
+Loading...
+
 </h3>
 
 
 <p>
-The latest rock music updates and station news.
+
+Getting the latest news...
+
 </p>
+
+
+</div>
+
+
+</div>
 
 
 
@@ -190,33 +262,36 @@ The latest rock music updates and station news.
 
 
 
-<!-- =========================
-     ABOUT
-========================= -->
-
-
 <section class="about-section">
 
 
+<div class="about-box">
+
+
 <h2>
-About WHBR
+
+ABOUT WHBR
+
 </h2>
 
 
+
 <p>
 
-WHBR is your home for classic rock,
-bringing you the greatest rock songs
-24/7.
+WHBR Roanoke brings you the greatest Classic Rock songs ever recorded. Legendary artists, unforgettable riffs, and timeless music 24 hours a day.
 
 </p>
 
 
+
 <p>
 
-Turn it up and enjoy the music.
+Broadcasting from Roanoke, Virginia, WHBR connects listeners everywhere with the music that shaped generations.
 
 </p>
+
+
+</div>
 
 
 </section>
@@ -225,9 +300,77 @@ Turn it up and enjoy the music.
 
 
 
-</main>
 
 
+<section class="listen-section">
+
+
+<div class="listen-box">
+
+
+<h2>
+
+WHBR LIVE
+
+</h2>
+
+
+
+<p>
+
+Turn it up and listen anywhere, anytime.
+
+</p>
+
+
+
+<button id="listen-button">
+
+LISTEN NOW
+
+</button>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<footer>
+
+
+<div class="footer-logo">
+
+
+<img src="whbr-logo.png">
+
+
+</div>
+
+
+
+<div class="footer-text">
+
+WHBR ROANOKE
+
+</div>
+
+
+
+<div class="copyright">
+
+WHBR ROANOKE © 2026
+
+</div>
+
+
+</footer>
 
 
 
@@ -236,72 +379,57 @@ Turn it up and enjoy the music.
 <script>
 
 
-// ============================
-// WHBR SETTINGS
-// ============================
+const audio = document.getElementById("whbrAudio");
 
 
-// YOUR NOW PLAYING FILE
-
-const songURL = "https://resolution-warren-fly-conf.trycloudflare.com/nowplaying.txt";
+const playButton = document.getElementById("playButton") || document.getElementById("play-button");
 
 
-
-// STREAM
-
-const stream = document.getElementById("radio-stream");
+const listenButton = document.getElementById("listen-button");
 
 
 
-const playButton = document.getElementById("play-button");
+const WORKER =
+
+"https://broken-morning-5083.braedenbrown460.workers.dev/";
 
 
 
-const title = document.getElementById("song-title");
-
-const artist = document.getElementById("song-artist");
-
-
-
-const topTitle = document.getElementById("top-title");
-
-const topArtist = document.getElementById("top-artist");
-
-
-
-const album = document.getElementById("album-cover");
-
-
-
-let lastSong = "";
-
-let recentSongs = [];
+audio.volume = 0.8;
 
 
 
 
 
 
-// ============================
-// PLAY BUTTON
-// ============================
+function togglePlay(){
 
 
-playButton.onclick = function(){
+if(audio.paused){
 
 
-if(stream.paused){
+audio.play()
 
-stream.play();
+.then(()=>{
 
-playButton.innerHTML="❚❚";
+
+playButton.innerHTML="⏸";
+
+
+})
+
+
+.catch(err=>console.log(err));
 
 
 }
 
+
 else{
 
-stream.pause();
+
+audio.pause();
+
 
 playButton.innerHTML="▶";
 
@@ -309,163 +437,89 @@ playButton.innerHTML="▶";
 }
 
 
-};
+}
+
+
+
+
+playButton.onclick = togglePlay;
+
+
+listenButton.onclick = togglePlay;
 
 
 
 
 
 
-// ============================
-// NOW PLAYING
-// ============================
+audio.addEventListener("play",()=>{
 
 
-async function updateSong(){
+document.querySelector(".player-card").classList.add("playing");
+
+
+});
+
+
+
+audio.addEventListener("pause",()=>{
+
+
+document.querySelector(".player-card").classList.remove("playing");
+
+
+});
+
+async function getArtwork(song){
 
 
 try{
 
 
-let response = await fetch(
-songURL + "?t=" + Date.now()
-);
+const response = await fetch(
 
-
-
-let data = await response.text();
-
-
-
-data=data.trim();
-
-
-
-if(!data || data===lastSong)
-return;
-
-
-
-lastSong=data;
-
-
-
-
-let split=data.split(" - ");
-
-
-
-let song=split.slice(1).join(" - ");
-
-let band=split[0];
-
-
-
-
-
-if(!song){
-
-song=data;
-
-band="WHBR";
-
-}
-
-
-
-
-
-title.innerHTML=song;
-
-artist.innerHTML=band;
-
-
-
-topTitle.innerHTML=song;
-
-topArtist.innerHTML=band;
-
-
-
-addRecent(band+" - "+song);
-
-
-
-}
-
-
-catch(err){
-
-console.log(err);
-
-}
-
-
-
-}
-
-// ============================
-// ALBUM ART
-// ============================
-
-
-async function getAlbumArt(song, band){
-
-
-try{
-
-
-let query = encodeURIComponent(
-band + " " + song
-);
-
-
-
-let result = await fetch(
 "https://itunes.apple.com/search?term="
-+ query +
-"&media=music&limit=1"
+
++ encodeURIComponent(song)
+
++ "&media=music&limit=1"
+
 );
 
 
 
-let json = await result.json();
+const data = await response.json();
 
 
 
-if(json.results.length){
+if(data.results.length){
 
 
-album.src =
-json.results[0].artworkUrl100.replace(
+return data.results[0].artworkUrl100.replace(
+
 "100x100",
+
 "600x600"
+
 );
 
 
 }
 
 
-else{
+}
+
+catch(error){
 
 
-album.src="whbr-logo.png";
+console.log(error);
 
 
 }
 
 
 
-}
-
-catch{
-
-
-album.src="whbr-logo.png";
-
-
-}
-
+return "whbr-logo.png";
 
 
 }
@@ -477,42 +531,91 @@ album.src="whbr-logo.png";
 
 
 
-// ============================
-// RECENT SONGS
-// ============================
+async function loadStation(){
 
 
-function addRecent(song){
+try{
 
 
+const response = await fetch(
 
-if(recentSongs.includes(song))
-return;
+WORKER + "?time=" + Date.now()
 
-
-
-recentSongs.unshift(song);
+);
 
 
 
-if(recentSongs.length > 5){
+const data = await response.json();
 
-recentSongs.pop();
+
+
+let song = data.nowPlaying || "WHBR ROANOKE";
+
+
+
+let parts = song.split(" - ");
+
+
+
+let artist = parts[0];
+
+
+let title = parts.slice(1).join(" - ");
+
+
+
+if(!title){
+
+
+title=song;
+
+
+artist="WHBR ROANOKE";
+
 
 }
 
 
 
-let box =
-document.getElementById("recent-list");
+
+document.getElementById("song-title").innerText = title;
+
+
+document.getElementById("song-artist").innerText = artist;
 
 
 
-box.innerHTML="";
+document.getElementById("top-title").innerText = title;
+
+
+document.getElementById("top-artist").innerText = artist;
 
 
 
-recentSongs.forEach(item=>{
+
+
+let cover = await getArtwork(song);
+
+
+
+document.getElementById("album-cover").src = cover;
+
+
+
+
+
+const recent = document.getElementById("recentSongs");
+
+
+recent.innerHTML="";
+
+
+
+(data.recentlyPlayed || [])
+
+.slice(0,10)
+
+.forEach(async item=>{
 
 
 
@@ -522,13 +625,23 @@ let div=document.createElement("div");
 div.className="recent-song";
 
 
+
+let itemCover = await getArtwork(item.title);
+
+
+
 div.innerHTML=`
+
+<img src="${itemCover}">
+
 
 <div>
 
-<h3>${item}</h3>
+<h3>${item.title}</h3>
+
 
 <p>Recently Played</p>
+
 
 </div>
 
@@ -536,7 +649,7 @@ div.innerHTML=`
 
 
 
-box.appendChild(div);
+recent.appendChild(div);
 
 
 
@@ -548,29 +661,176 @@ box.appendChild(div);
 
 
 
+catch(error){
+
+
+console.log(error);
+
+
+}
+
+
+
+}
 
 
 
 
 
-// START UPDATES
 
 
-updateSong();
 
 
-setInterval(updateSong,10000);
 
+async function loadStatus(){
+
+
+try{
+
+
+const response = await fetch(
+
+WORKER + "?time=" + Date.now()
+
+);
+
+
+
+const data = await response.json();
+
+
+
+console.log(data);
+
+
+
+}
+
+
+
+catch(error){
+
+
+console.log(error);
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+async function loadNews(){
+
+
+try{
+
+
+const response = await fetch(
+
+"https://api.rss2json.com/v1/api.json?rss_url=https://feeds.npr.org/1001/rss.xml"
+
+);
+
+
+
+const data = await response.json();
+
+
+
+const box=document.getElementById("nationalNews");
+
+
+
+box.innerHTML="";
+
+
+
+data.items.slice(0,6).forEach(item=>{
+
+
+let card=document.createElement("div");
+
+
+card.className="news-card";
+
+
+
+card.innerHTML=`
+
+<div class="news-content">
+
+<h3>${item.title}</h3>
+
+<p>Click for the latest news.</p>
+
+</div>
+
+`;
+
+
+
+box.appendChild(card);
+
+
+
+});
+
+
+
+}
+
+catch{
+
+
+document.getElementById("nationalNews").innerHTML=
+
+"News unavailable";
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+loadStation();
+
+
+loadStatus();
+
+
+loadNews();
+
+
+
+setInterval(loadStation,10000);
+
+
+setInterval(loadStatus,10000);
+
+
+setInterval(loadNews,300000);
 
 
 
 </script>
 
 
-
-
-
-
 </body>
+
 
 </html>
