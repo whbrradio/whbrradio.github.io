@@ -715,11 +715,14 @@ async function loadNews(){
 try{
 
 
+// =========================
 // MUSIC NEWS
+// =========================
+
 
 const musicResponse = await fetch(
 
-"https://api.rss2json.com/v1/api.json?rss_url=https://consequence.net/feed/"
+"https://api.rss2json.com/v1/api.json?rss_url=https://www.rollingstone.com/music/feed/"
 
 );
 
@@ -728,10 +731,10 @@ const musicData = await musicResponse.json();
 
 
 
-const box=document.getElementById("nationalNews");
+const musicBox = document.getElementById("nationalNews");
 
 
-box.innerHTML="";
+musicBox.innerHTML="";
 
 
 
@@ -749,7 +752,7 @@ let image = item.thumbnail || "whbr-logo.png";
 
 
 
-card.innerHTML=`
+card.innerHTML = `
 
 <div class="news-image">
 
@@ -794,7 +797,7 @@ window.open(item.link,"_blank");
 
 
 
-box.appendChild(card);
+musicBox.appendChild(card);
 
 
 
@@ -804,12 +807,15 @@ box.appendChild(card);
 
 
 
-// IMPORTANT US NEWS
+
+// =========================
+// IMPORTANT U.S. NEWS
+// =========================
 
 
 const usResponse = await fetch(
 
-"https://moxie.foxnews.com/google-publisher/politics.xml#&_intcmp=fnc_story_article_main-content_article-body_6_3"
+"https://api.rss2json.com/v1/api.json?rss_url=https://feeds.npr.org/1001/rss.xml"
 
 );
 
@@ -820,6 +826,7 @@ const usData = await usResponse.json();
 
 
 const usBox=document.getElementById("usNews");
+
 
 
 if(usBox){
@@ -840,7 +847,7 @@ card.className="news-card";
 
 
 
-card.innerHTML=`
+card.innerHTML = `
 
 <div class="news-content">
 
@@ -870,7 +877,7 @@ READ ARTICLE
 
 
 
-card.querySelector(".news-button").onclick=()=>{
+card.querySelector(".news-button").onclick = () => {
 
 window.open(item.link,"_blank");
 
@@ -888,15 +895,16 @@ usBox.appendChild(card);
 }
 
 
-
 catch(error){
 
-console.log(error);
+
+console.log("News Error:", error);
 
 
-document.getElementById("nationalNews").innerHTML=
 
-"Music news unavailable";
+document.getElementById("nationalNews").innerHTML =
+
+"News unavailable";
 
 
 }
