@@ -669,15 +669,16 @@ async function loadNews(){
 try{
 
 
-const response = await fetch(
+// MUSIC NEWS
 
-"https://api.rss2json.com/v1/api.json?rss_url=https://www.billboard.com/feed/"
+const musicResponse = await fetch(
+
+"https://api.rss2json.com/v1/api.json?rss_url=https://consequence.net/feed/"
 
 );
 
 
-
-const data = await response.json();
+const musicData = await musicResponse.json();
 
 
 
@@ -688,7 +689,7 @@ box.innerHTML="";
 
 
 
-data.items.slice(0,3).forEach(item=>{
+musicData.items.slice(0,3).forEach(item=>{
 
 
 let card=document.createElement("div");
@@ -721,8 +722,7 @@ card.innerHTML=`
 
 ${item.description
 .replace(/<[^>]*>/g,'')
-.substring(0,120)
-}...
+.substring(0,120)}...
 
 </p>
 
@@ -755,11 +755,95 @@ box.appendChild(card);
 });
 
 
+
+
+
+// IMPORTANT US NEWS
+
+
+const usResponse = await fetch(
+
+"https://api.rss2json.com/v1/api.json?rss_url=https://feeds.npr.org/1001/rss.xml"
+
+);
+
+
+
+const usData = await usResponse.json();
+
+
+
+const usBox=document.getElementById("usNews");
+
+
+if(usBox){
+
+
+usBox.innerHTML="";
+
+
+
+let item=usData.items[0];
+
+
+
+let card=document.createElement("div");
+
+
+card.className="news-card";
+
+
+
+card.innerHTML=`
+
+<div class="news-content">
+
+
+<h3>${item.title}</h3>
+
+
+<p>
+
+${item.description
+.replace(/<[^>]*>/g,'')
+.substring(0,200)}...
+
+</p>
+
+
+<button class="news-button">
+
+READ ARTICLE
+
+</button>
+
+
+</div>
+
+`;
+
+
+
+card.querySelector(".news-button").onclick=()=>{
+
+window.open(item.link,"_blank");
+
+};
+
+
+
+usBox.appendChild(card);
+
+
 }
 
 
-catch(error){
 
+}
+
+
+
+catch(error){
 
 console.log(error);
 
