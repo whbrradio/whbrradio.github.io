@@ -7,18 +7,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
 <title>WHBR Radio</title>
-
 
 <link rel="icon" href="whbr-logo.png">
 
-
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-
-
 <link rel="stylesheet" href="style.css">
-
 
 </head>
 
@@ -26,63 +19,34 @@
 <body>
 
 
-
-<!-- =========================
-     STICKY HEADER
-========================= -->
-
-
 <header class="top-bar">
 
-
-<div class="logo-area">
-
-<img src="whbr-logo.png" class="top-logo">
-
-</div>
+    <div class="logo-area">
+        <img src="whbr-logo.png" class="top-logo">
+    </div>
 
 
+    <div class="top-now-playing">
 
-<div class="top-now-playing">
-
-
-
-<div class="top-live">
-
-<span class="live-dot"></span>
-
-LIVE
-
-</div>
+        <div class="top-live">
+            <span class="live-dot"></span>
+            LIVE
+        </div>
 
 
+        <div class="top-song">
 
+            <div id="top-title">
+                Loading...
+            </div>
 
-<div class="top-song">
+            <div id="top-artist">
+                WHBR
+            </div>
 
+        </div>
 
-<div id="top-title">
-
-Loading...
-
-</div>
-
-
-
-<div id="top-artist">
-
-WHBR Radio
-
-</div>
-
-
-
-</div>
-
-
-
-</div>
-
+    </div>
 
 
 </header>
@@ -91,16 +55,7 @@ WHBR Radio
 
 
 
-
-
-<!-- =========================
-     MAIN PLAYER
-========================= -->
-
-
 <main>
-
-
 
 
 <section class="player-section">
@@ -112,22 +67,9 @@ WHBR Radio
 
 <div class="album-container">
 
-
-<img
-
-id="album-cover"
-
-src="whbr-logo.png"
-
-alt="Album Cover"
-
-
->
-
+<img id="album-cover" src="whbr-logo.png">
 
 </div>
-
-
 
 
 
@@ -135,50 +77,18 @@ alt="Album Cover"
 <div class="song-info">
 
 
-
 <h1 id="song-title">
-
 Loading Song...
-
 </h1>
 
 
-
 <h2 id="song-artist">
-
-WHBR
-
+WHBR Radio
 </h2>
 
 
 
-
-
-<div class="station-status">
-
-
-<span class="live-label">
-
-LIVE
-
-</span>
-
-
-<span>
-
-WHBR ROCK RADIO
-
-</span>
-
-
-
 </div>
-
-
-
-</div>
-
-
 
 
 
@@ -186,16 +96,7 @@ WHBR ROCK RADIO
 
 <button id="play-button">
 
-
-<svg viewBox="0 0 24 24">
-
-
-<path d="M8 5v14l11-7z"/>
-
-
-</svg>
-
-
+▶
 
 </button>
 
@@ -206,38 +107,16 @@ WHBR ROCK RADIO
 
 
 
-
-
-
-<!-- CHANGE ONLY THIS URL -->
-
 <audio id="radio-stream">
 
-
-<source
-
-id="stream-source"
-
+<source 
 src="https://wrap-rico-take-album.trycloudflare.com/stream"
-
-type="audio/mpeg"
-
-
->
-
+type="audio/mpeg">
 
 </audio>
 
 
-
-
 </section>
-
-
-
-
-
-
 
 <!-- =========================
      RECENTLY PLAYED
@@ -248,199 +127,59 @@ type="audio/mpeg"
 
 
 <h2 class="section-title">
-
 Recently Played
-
 </h2>
 
 
 
-
-<div
-
-id="recent-list"
-
-class="recent-grid"
-
-
-
->
+<div id="recent-list">
 
 
 <div class="recent-placeholder">
-
-
 Waiting for songs...
-
-
 </div>
 
 
-
 </div>
-
 
 
 </section>
 
 
 
+
+
+
+
 <!-- =========================
-     NEWS SECTION
+     NEWS
 ========================= -->
 
 
-<section class="content-section news-section">
+<section class="content-section">
 
 
 <h2 class="section-title">
-
 WHBR News
-
 </h2>
 
 
 
-
-
-<div class="news-grid">
-
-
-
-
-
-<article class="news-card">
-
-
-
-<div class="news-image">
-
-
-<img
-
-src="whbr-logo.png"
-
-alt="WHBR News"
-
-
->
-
-
-</div>
-
-
-
-
-
-<div class="news-content">
+<div class="news-card">
 
 
 <h3>
-
-Latest Rock News
-
+WHBR Rock News
 </h3>
 
 
-
-
 <p>
-
-Stay updated with the latest rock music news,
-artists, and stories from around the world.
-
+The latest rock music updates and station news.
 </p>
 
 
 
-
-<button class="news-button">
-
-Read More
-
-</button>
-
-
-
 </div>
-
-
-
-</article>
-
-
-
-
-
-
-
-
-
-<article class="news-card">
-
-
-
-<div class="news-image">
-
-
-<img
-
-src="whbr-logo.png"
-
-alt="WHBR Updates"
-
-
->
-
-
-</div>
-
-
-
-
-
-<div class="news-content">
-
-
-<h3>
-
-WHBR Updates
-
-</h3>
-
-
-
-
-<p>
-
-Station updates, new features,
-and everything happening at WHBR.
-
-</p>
-
-
-
-
-<button class="news-button">
-
-Read More
-
-</button>
-
-
-
-</div>
-
-
-
-</article>
-
-
-
-
-
-</div>
-
 
 
 </section>
@@ -451,59 +190,33 @@ Read More
 
 
 
-
-
 <!-- =========================
-     ABOUT WHBR
+     ABOUT
 ========================= -->
-
 
 
 <section class="about-section">
 
 
-
-<div class="about-box">
-
-
-
 <h2>
-
 About WHBR
-
 </h2>
-
-
-
 
 
 <p>
 
 WHBR is your home for classic rock,
-bringing you legendary songs, powerful
-guitars, and the biggest rock artists
-from every generation.
+bringing you the greatest rock songs
+24/7.
 
 </p>
-
-
-
 
 
 <p>
 
-Broadcasting nonstop with music,
-updates, and a true rock radio experience,
-WHBR keeps the spirit of rock alive.
+Turn it up and enjoy the music.
 
 </p>
-
-
-
-
-
-</div>
-
 
 
 </section>
@@ -512,185 +225,42 @@ WHBR keeps the spirit of rock alive.
 
 
 
+</main>
 
 
 
 
-<!-- =========================
-     LISTEN SECTION
-========================= -->
-
-
-<section class="listen-section">
-
-
-
-<div class="listen-box">
-
-
-
-<h2>
-
-TURN IT UP
-
-</h2>
-
-
-
-
-<p>
-
-Listen live anywhere, anytime.
-
-</p>
-
-
-
-
-
-<button id="listen-button">
-
-START LISTENING
-
-</button>
-
-
-
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- =========================
-     FOOTER
-========================= -->
-
-
-<footer>
-
-
-
-
-<div class="footer-logo">
-
-
-<img
-
-src="whbr-logo.png"
-
-alt="WHBR"
-
-
->
-
-
-</div>
-
-
-
-
-
-
-
-<div class="footer-text">
-
-
-<p>
-
-WHBR Radio
-
-</p>
-
-
-
-<p>
-
-Classic Rock • Live 24/7
-
-</p>
-
-
-
-</div>
-
-
-
-
-
-
-
-<div class="copyright">
-
-
-© 2026 WHBR Radio
-
-
-</div>
-
-
-
-
-</footer>
-
-
-
-
-
-
-
-<!-- =========================
-     PLAYER SCRIPT
-     COMES IN PART 3
-========================= -->
 
 
 
 <script>
 
 
-// ===================================
-// WHBR RADIO PLAYER SYSTEM
-// ===================================
+// ============================
+// WHBR SETTINGS
+// ============================
 
 
-// Get stream URL automatically
-
-const streamSource = document.getElementById("stream-source");
-
-
-const streamURL = streamSource.src;
-
-
-// Automatically create now playing URL
+// YOUR NOW PLAYING FILE
 
 const songURL = "https://resolution-warren-fly-conf.trycloudflare.com/nowplaying.txt";
-    "/nowplaying.txt",
-    streamURL
-).href;
 
 
 
-
+// STREAM
 
 const stream = document.getElementById("radio-stream");
+
 
 
 const playButton = document.getElementById("play-button");
 
 
-const songTitle = document.getElementById("song-title");
 
-const songArtist = document.getElementById("song-artist");
+const title = document.getElementById("song-title");
+
+const artist = document.getElementById("song-artist");
+
 
 
 const topTitle = document.getElementById("top-title");
@@ -698,357 +268,188 @@ const topTitle = document.getElementById("top-title");
 const topArtist = document.getElementById("top-artist");
 
 
-const albumCover = document.getElementById("album-cover");
 
-
-const recentList = document.getElementById("recent-list");
+const album = document.getElementById("album-cover");
 
 
 
 let lastSong = "";
 
-let recentlyPlayed = [];
+let recentSongs = [];
 
 
 
 
 
 
-
-
-// ===================================
+// ============================
 // PLAY BUTTON
-// ===================================
+// ============================
 
 
-playButton.addEventListener("click",()=>{
+playButton.onclick = function(){
 
 
 if(stream.paused){
 
-
 stream.play();
 
-
-playButton.classList.add("playing");
+playButton.innerHTML="❚❚";
 
 
 }
 
 else{
 
-
 stream.pause();
 
-
-playButton.classList.remove("playing");
-
-
-}
-
-
-});
-
-
-
-
-
-
-
-
-
-// ===================================
-// FILTER STATION MESSAGES
-// ===================================
-
-
-function cleanMetadata(text){
-
-
-const blocked = [
-
-
-"LIVE!",
-
-"LIVE",
-
-"WHBR",
-
-"RADIO",
-
-"STREAMING",
-
-"LISTEN NOW"
-
-
-];
-
-
-
-let lower = text.toLowerCase();
-
-
-
-for(let item of blocked){
-
-
-if(lower.includes(item.toLowerCase())){
-
-
-return "";
+playButton.innerHTML="▶";
 
 
 }
 
 
-}
-
-
-
-return text.trim();
-
-
-}
+};
 
 
 
 
 
 
-
-
-
-// ===================================
-// UPDATE SONG
-// ===================================
+// ============================
+// NOW PLAYING
+// ============================
 
 
 async function updateSong(){
 
 
-
 try{
-
-
-
-const response = await fetch(
-
-songURL + "?time=" + Date.now()
-
-);
-
-
-
-const data = await response.text();
-
-
-
-let currentSong = data.trim();
-
-
-
-if(!currentSong || currentSong === lastSong){
-
-
-return;
-
-
-}
-
-
-
-lastSong = currentSong;
-
-
-
-
-
-let split = currentSong.split(" - ");
-
-
-
-
-let artist = split[0] || "WHBR";
-
-
-let title = split.slice(1).join(" - ") || currentSong;
-
-
-
-
-
-artist = cleanMetadata(artist);
-
-
-title = cleanMetadata(title);
-
-
-
-
-
-if(!title){
-
-
-return;
-
-
-}
-
-
-
-
-
-// Player update
-
-
-songTitle.textContent = title;
-
-
-songArtist.textContent = artist;
-
-
-
-
-
-
-// Top bar update
-
-
-topTitle.textContent = title;
-
-
-topArtist.textContent = artist;
-
-
-
-
-
-
-
-// Album lookup
-
-
-getAlbum(title,artist);
-
-
-
-
-
-// Recently played
-
-
-addRecent(title,artist);
-
-
-
-
-
-}
-
-
-
-catch(error){
-
-
-console.log(
-
-"WHBR Metadata Error:",
-
-error
-
-);
-
-
-}
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-// ===================================
-// ALBUM COVER LOOKUP
-// ===================================
-
-
-async function getAlbum(title,artist){
-
-
-
-try{
-
-
-
-let search = encodeURIComponent(
-
-artist + " " + title
-
-);
-
-
-
 
 
 let response = await fetch(
+songURL + "?t=" + Date.now()
+);
 
+
+
+let data = await response.text();
+
+
+
+data=data.trim();
+
+
+
+if(!data || data===lastSong)
+return;
+
+
+
+lastSong=data;
+
+
+
+
+let split=data.split(" - ");
+
+
+
+let song=split.slice(1).join(" - ");
+
+let band=split[0];
+
+
+
+
+
+if(!song){
+
+song=data;
+
+band="WHBR";
+
+}
+
+
+
+
+
+title.innerHTML=song;
+
+artist.innerHTML=band;
+
+
+
+topTitle.innerHTML=song;
+
+topArtist.innerHTML=band;
+
+
+
+addRecent(band+" - "+song);
+
+
+
+}
+
+
+catch(err){
+
+console.log(err);
+
+}
+
+
+
+}
+
+// ============================
+// ALBUM ART
+// ============================
+
+
+async function getAlbumArt(song, band){
+
+
+try{
+
+
+let query = encodeURIComponent(
+band + " " + song
+);
+
+
+
+let result = await fetch(
 "https://itunes.apple.com/search?term="
-
-+ search +
-
++ query +
 "&media=music&limit=1"
-
 );
 
 
 
-
-
-let data = await response.json();
-
+let json = await result.json();
 
 
 
-
-if(data.results.length){
-
+if(json.results.length){
 
 
-let image = data.results[0].artworkUrl100.replace(
-
+album.src =
+json.results[0].artworkUrl100.replace(
 "100x100",
-
 "600x600"
-
 );
 
 
+}
 
 
-
-albumCover.style.opacity="0";
-
+else{
 
 
-
-setTimeout(()=>{
-
-
-albumCover.src=image;
-
-
-albumCover.style.opacity="1";
-
-
-},300);
-
+album.src="whbr-logo.png";
 
 
 }
@@ -1056,13 +457,11 @@ albumCover.style.opacity="1";
 
 
 }
-
-
 
 catch{
 
 
-albumCover.src="whbr-logo.png";
+album.src="whbr-logo.png";
 
 
 }
@@ -1078,93 +477,66 @@ albumCover.src="whbr-logo.png";
 
 
 
-
-// ===================================
-// RECENTLY PLAYED
-// ===================================
-
-
-function addRecent(title,artist){
+// ============================
+// RECENT SONGS
+// ============================
 
 
-
-let song = artist + " - " + title;
+function addRecent(song){
 
 
 
-
-if(recentlyPlayed.includes(song)){
-
-
+if(recentSongs.includes(song))
 return;
 
 
-}
+
+recentSongs.unshift(song);
 
 
 
+if(recentSongs.length > 5){
 
-recentlyPlayed.unshift(song);
-
-
-
-
-if(recentlyPlayed.length > 6){
-
-
-recentlyPlayed.pop();
-
+recentSongs.pop();
 
 }
 
 
 
-
-
-recentList.innerHTML="";
-
-
+let box =
+document.getElementById("recent-list");
 
 
 
-
-recentlyPlayed.forEach(item=>{
-
-
-
-let card = document.createElement("div");
+box.innerHTML="";
 
 
 
-card.className="recent-song";
+recentSongs.forEach(item=>{
 
 
 
-card.innerHTML = `
+let div=document.createElement("div");
 
 
-<img src="whbr-logo.png">
+div.className="recent-song";
 
+
+div.innerHTML=`
 
 <div>
 
-
 <h3>${item}</h3>
-
 
 <p>Recently Played</p>
 
-
 </div>
-
 
 `;
 
 
 
-
-recentList.appendChild(card);
-
+box.appendChild(div);
 
 
 
@@ -1172,7 +544,6 @@ recentList.appendChild(card);
 
 
 
-
 }
 
 
@@ -1182,10 +553,7 @@ recentList.appendChild(card);
 
 
 
-
-// ===================================
-// START
-// ===================================
+// START UPDATES
 
 
 updateSong();
@@ -1196,8 +564,10 @@ setInterval(updateSong,10000);
 
 
 
-
 </script>
+
+
+
 
 
 
