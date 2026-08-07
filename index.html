@@ -378,103 +378,119 @@ WHBR ROANOKE © 2026
 
 <script>
 
-
 const audio = document.getElementById("whbrAudio");
 
-
 const playButton = document.getElementById("playButton") || document.getElementById("play-button");
-
 
 const listenButton = document.getElementById("listen-button");
 
 
-
 const WORKER =
-
 "https://broken-morning-5083.braedenbrown460.workers.dev/";
-
 
 
 audio.volume = 0.8;
 
 
 
-
-
-
 function togglePlay(){
 
-
 if(audio.paused){
-
 
 audio.play()
 
 .then(()=>{
 
-
 playButton.innerHTML="⏸";
 
-
 })
-
 
 .catch(err=>console.log(err));
 
 
 }
 
-
 else{
-
 
 audio.pause();
 
-
 playButton.innerHTML="▶";
 
-
 }
 
-
 }
-
 
 
 
 playButton.onclick = togglePlay;
 
-
 listenButton.onclick = togglePlay;
-
-
-
 
 
 
 audio.addEventListener("play",()=>{
 
-
 document.querySelector(".player-card").classList.add("playing");
 
-
 });
-
 
 
 audio.addEventListener("pause",()=>{
 
-
 document.querySelector(".player-card").classList.remove("playing");
-
 
 });
 
+
+
+
+
+function timeAgo(date){
+
+if(!date){
+
+return "Recently Played";
+
+}
+
+
+const seconds = Math.floor(
+(new Date() - new Date(date)) / 1000
+);
+
+
+if(seconds < 60){
+
+return "Just now";
+
+}
+
+
+const minutes = Math.floor(seconds / 60);
+
+
+if(minutes < 60){
+
+return minutes + " minutes ago";
+
+}
+
+
+const hours = Math.floor(minutes / 60);
+
+
+return hours + " hours ago";
+
+}
+
+
+
+
+
+
 async function getArtwork(song){
 
-
 try{
-
 
 const response = await fetch(
 
@@ -487,13 +503,10 @@ const response = await fetch(
 );
 
 
-
 const data = await response.json();
 
 
-
 if(data.results.length){
-
 
 return data.results[0].artworkUrl100.replace(
 
@@ -503,27 +516,20 @@ return data.results[0].artworkUrl100.replace(
 
 );
 
-
 }
-
 
 }
 
 catch(error){
 
-
 console.log(error);
 
-
 }
-
 
 
 return "whbr-logo.png";
 
-
 }
-
 
 
 
@@ -532,7 +538,6 @@ return "whbr-logo.png";
 
 
 async function loadStation(){
-
 
 try{
 
@@ -544,7 +549,6 @@ WORKER + "?time=" + Date.now()
 );
 
 
-
 const data = await response.json();
 
 
@@ -552,13 +556,10 @@ const data = await response.json();
 let song = data.nowPlaying || "WHBR ROANOKE";
 
 
-
 let parts = song.split(" - ");
 
 
-
 let artist = parts[0];
-
 
 let title = parts.slice(1).join(" - ");
 
@@ -566,40 +567,29 @@ let title = parts.slice(1).join(" - ");
 
 if(!title){
 
-
 title=song;
 
-
 artist="WHBR ROANOKE";
-
 
 }
 
 
 
-
 document.getElementById("song-title").innerText = title;
-
 
 document.getElementById("song-artist").innerText = artist;
 
 
-
 document.getElementById("top-title").innerText = title;
 
-
 document.getElementById("top-artist").innerText = artist;
-
-
 
 
 
 let cover = await getArtwork(song);
 
 
-
 document.getElementById("album-cover").src = cover;
-
 
 
 
@@ -618,12 +608,10 @@ recent.innerHTML="";
 .forEach(async item=>{
 
 
-
 let div=document.createElement("div");
 
 
 div.className="recent-song";
-
 
 
 let itemCover = await getArtwork(item.title);
@@ -639,8 +627,7 @@ div.innerHTML=`
 
 <h3>${item.title}</h3>
 
-
-<p>Recently Played</p>
+<p>${timeAgo(item.time)}</p>
 
 
 </div>
@@ -656,69 +643,19 @@ recent.appendChild(div);
 });
 
 
-
 }
 
 
 
 catch(error){
 
-
 console.log(error);
 
-
 }
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-async function loadStatus(){
-
-
-try{
-
-
-const response = await fetch(
-
-WORKER + "?time=" + Date.now()
-
-);
-
-
-
-const data = await response.json();
-
-
-
-console.log(data);
-
 
 
 }
 
-
-
-catch(error){
-
-
-console.log(error);
-
-
-}
-
-
-
-}
 
 
 
@@ -748,7 +685,6 @@ const data = await response.json();
 const box=document.getElementById("nationalNews");
 
 
-
 box.innerHTML="";
 
 
@@ -769,11 +705,19 @@ card.innerHTML=`
 
 <h3>${item.title}</h3>
 
-<p>Click for the latest news.</p>
+<p>Click to read full article</p>
 
 </div>
 
 `;
+
+
+
+card.onclick = () => {
+
+window.open(item.link,"_blank");
+
+};
 
 
 
@@ -784,8 +728,8 @@ box.appendChild(card);
 });
 
 
-
 }
+
 
 catch{
 
@@ -806,21 +750,12 @@ document.getElementById("nationalNews").innerHTML=
 
 
 
-
 loadStation();
-
-
-loadStatus();
-
 
 loadNews();
 
 
-
 setInterval(loadStation,10000);
-
-
-setInterval(loadStatus,10000);
 
 
 setInterval(loadNews,300000);
@@ -828,9 +763,3 @@ setInterval(loadNews,300000);
 
 
 </script>
-
-
-</body>
-
-
-</html>
