@@ -666,13 +666,12 @@ console.log(error);
 
 async function loadNews(){
 
-
 try{
 
 
 const response = await fetch(
 
-"https://api.rss2json.com/v1/api.json?rss_url=https://feeds.npr.org/1001/rss.xml"
+"https://api.rss2json.com/v1/api.json?rss_url=https://www.billboard.com/feed/"
 
 );
 
@@ -689,7 +688,7 @@ box.innerHTML="";
 
 
 
-data.items.slice(0,6).forEach(item=>{
+data.items.slice(0,3).forEach(item=>{
 
 
 let card=document.createElement("div");
@@ -699,13 +698,41 @@ card.className="news-card";
 
 
 
+let image = item.thumbnail || "whbr-logo.png";
+
+
+
 card.innerHTML=`
+
+<div class="news-image">
+
+<img src="${image}">
+
+</div>
+
 
 <div class="news-content">
 
+
 <h3>${item.title}</h3>
 
-<p>Click to read full article</p>
+
+<p>
+
+${item.description
+.replace(/<[^>]*>/g,'')
+.substring(0,120)
+}...
+
+</p>
+
+
+<button class="news-button">
+
+READ ARTICLE
+
+</button>
+
 
 </div>
 
@@ -713,7 +740,7 @@ card.innerHTML=`
 
 
 
-card.onclick = () => {
+card.querySelector(".news-button").onclick = () => {
 
 window.open(item.link,"_blank");
 
@@ -731,19 +758,21 @@ box.appendChild(card);
 }
 
 
-catch{
+catch(error){
+
+
+console.log(error);
 
 
 document.getElementById("nationalNews").innerHTML=
 
-"News unavailable";
+"Music news unavailable";
 
 
 }
 
 
 }
-
 
 
 
