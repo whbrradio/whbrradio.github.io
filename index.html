@@ -208,6 +208,27 @@
       line-height: 1.5;
     }
 
+    .on-air-line {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 10px;
+      color: #ff6970;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .25px;
+      line-height: 1.4;
+    }
+
+    .on-air-indicator {
+      width: 7px;
+      height: 7px;
+      flex: 0 0 7px;
+      border-radius: 50%;
+      background: var(--red);
+      box-shadow: 0 0 10px rgba(227,34,43,.45);
+    }
+
     .play-button {
       width: 74px;
       height: 74px;
@@ -338,14 +359,43 @@
     }
 
     .schedule-icon {
-      width: 53px;
-      height: 53px;
-      flex: 0 0 53px;
-      display: grid;
-      place-items: center;
-      background: var(--red);
-      border-radius: 3px;
+      width: 76px;
+      min-height: 64px;
+      flex: 0 0 76px;
+      padding: 8px 5px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      background: linear-gradient(145deg, #f02b35, #a30d16);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 4px;
+      text-align: center;
     }
+
+    .schedule-icon .time-main {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 2px;
+      font-family: "Barlow Condensed", Impact, sans-serif;
+      font-size: 25px;
+      font-weight: 900;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .schedule-icon .time-period {
+      font-family: Arial, sans-serif;
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: 0;
+      line-height: 1;
+      margin-left: 1px;
+    }
+
+    .schedule-icon .time-dash { margin: 0 1px; }
 
     .schedule-icon svg {
       width: 25px;
@@ -513,7 +563,8 @@
       .schedule-section { padding: 23px 15px; }
       .schedule-grid { grid-template-columns: 1fr; gap: 11px; margin-top: 20px; }
       .schedule-card { padding: 16px; gap: 13px; }
-      .schedule-icon { width: 46px; height: 46px; flex-basis: 46px; }
+      .schedule-icon { width: 68px; min-height: 58px; flex-basis: 68px; }
+      .schedule-icon .time-main { font-size: 22px; }
       .schedule-card h3 { font-size: 25px; }
       .about-section { grid-template-columns: 1fr; gap: 17px; padding-top: 45px; }
       .about-section h2 { font-size: 40px; }
@@ -570,8 +621,12 @@
             <span class="station-label">WHBR RADIO</span>
           </div>
 
-          <h1 class="track-title" id="track-title">WHBR ROANOKE</h1>
-          <p class="track-artist" id="track-artist">Always AD Free</p>
+          <h1 class="track-title" id="track-title">WHBR RADIO</h1>
+          <p class="track-artist" id="track-artist">AD FREE MUSIC 24/7</p>
+          <div class="on-air-line">
+            <span class="on-air-indicator" aria-hidden="true"></span>
+            <span id="on-air-show">ON AIR: The Classic Rock Rotation</span>
+          </div>
         </div>
 
         <button
@@ -607,35 +662,40 @@
         <h2 class="section-heading" id="schedule-heading">On The Air</h2>
         <div class="heading-rule"></div>
         <p class="section-description">
-          Dedicated decades. Four hours of rock. Always ad free.
+          Tune in to these events to make your day rock!
         </p>
 
         <div class="schedule-grid">
           <article class="schedule-card">
-            <div class="schedule-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="9"></circle>
-                <path d="M12 7v5l3.5 2"></path>
-              </svg>
+            <div class="schedule-icon" aria-label="9 AM to 1 PM">
+              <span class="time-main"><span>9<span class="time-period">AM</span></span><span class="time-dash">–</span><span>1<span class="time-period">PM</span></span></span>
             </div>
             <div>
-              <div class="schedule-time">9 AM – 1 PM</div>
+              <div class="schedule-time">9:00 AM – 1:00 PM</div>
               <h3>All ’90s Rock</h3>
               <p>Four hours of 90s rock favorites.</p>
             </div>
           </article>
 
           <article class="schedule-card">
-            <div class="schedule-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="9"></circle>
-                <path d="M12 7v5l3.5 2"></path>
-              </svg>
+            <div class="schedule-icon" aria-label="8 PM to midnight">
+              <span class="time-main"><span>8<span class="time-period">PM</span></span><span class="time-dash">–</span><span>12<span class="time-period">AM</span></span></span>
             </div>
             <div>
-              <div class="schedule-time">8 PM – Midnight</div>
+              <div class="schedule-time">8:00 PM – Midnight</div>
               <h3>All ’80s Rock</h3>
               <p>Four hours of unforgettable 80s rock.</p>
+            </div>
+          </article>
+
+          <article class="schedule-card">
+            <div class="schedule-icon" aria-label="5 PM to 6 PM">
+              <span class="time-main"><span>5<span class="time-period">PM</span></span><span class="time-dash">–</span><span>6<span class="time-period">PM</span></span></span>
+            </div>
+            <div>
+              <div class="schedule-time">5:00 PM – 6:00 PM</div>
+              <h3>Hard Rock for the Road</h3>
+              <p>Big riffs and hard-rock favorites for the drive home.</p>
             </div>
           </article>
         </div>
@@ -650,13 +710,11 @@
         </div>
         <div class="about-copy">
           <p>
-            WHBR Roanoke brings you the greatest classic rock songs ever recorded.
-            Legendary artists, unforgettable riffs, and timeless music 24 hours a day.
+            WHBR Roanoke brings you the greatest rock songs ever recorded. Legendary artists, and timeless music 24 hours a day.
           </p>
           <p>
             Broadcasting from Roanoke, Virginia, WHBR connects listeners with
-            the music that shaped generations. From the 70s and 80s to 90s rock
-            and beyond, we're here for one reason: the music.
+            the music that shaped generations. From the 70s and 80s guitar riffs to the 90s Rock Anthems, WHBR plays non-stop music, That's right. No ADS
           </p>
         </div>
       </section>
@@ -800,8 +858,43 @@
       }
     }
 
+    /* ON AIR SHOW: Eastern Time, including daylight-saving changes.
+       Times are interpreted as recurring daily schedule blocks.
+       Outside these listed shows, the player displays The Classic Rock Rotation. */
+    const onAirShowElement = document.getElementById("on-air-show");
+
+    function getEasternMinutesNow() {
+      const parts = new Intl.DateTimeFormat("en-US", {
+        timeZone: "America/New_York",
+        hour: "2-digit",
+        minute: "2-digit",
+        hourCycle: "h23"
+      }).formatToParts(new Date());
+
+      const hour = Number(parts.find(part => part.type === "hour").value);
+      const minute = Number(parts.find(part => part.type === "minute").value);
+      return hour * 60 + minute;
+    }
+
+    function updateOnAirShow() {
+      const minutes = getEasternMinutesNow();
+      let show = "The Classic Rock Rotation";
+
+      if (minutes >= 9 * 60 && minutes < 13 * 60) {
+        show = "All ’90s Rock";
+      } else if (minutes >= 17 * 60 && minutes < 18 * 60) {
+        show = "Hard Rock for the Road";
+      } else if (minutes >= 20 * 60 || minutes < 0) {
+        show = "All ’80s Rock";
+      }
+
+      onAirShowElement.textContent = "ON AIR: " + show;
+    }
+
     updateNowPlaying();
     setInterval(updateNowPlaying, 10000);
+    updateOnAirShow();
+    setInterval(updateOnAirShow, 30000);
   </script>
 </body>
 </html>
