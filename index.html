@@ -1,279 +1,462 @@
-
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WHBR Radio</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090909">
+  <title>WHBR Roanoke | Real Rock Without the Ads</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-<link rel="icon" href="whbr-logo.png">
-<link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red: #e51d2a;
+      --black: #080808;
+      --panel: rgba(15,15,15,.86);
+      --line: rgba(255,255,255,.09);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      min-height: 100vh;
+      background: var(--black);
+      color: #fff;
+      font-family: Inter, Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Album-art background */
+    .backdrop {
+      position: fixed;
+      inset: -35px;
+      z-index: -2;
+      background: #101010 center/cover no-repeat;
+      filter: blur(35px) brightness(.3) saturate(1.3);
+      transform: scale(1.08);
+      transition: background-image .5s ease, opacity .7s ease;
+    }
+    .backdrop::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.88) 65%,#080808);
+    }
+    .page-glow {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background: radial-gradient(ellipse at 50% 15%,transparent 0%,rgba(0,0,0,.25) 55%,#080808 100%);
+    }
+
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      min-height: 92px;
+      padding: 14px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,.78);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+    }
+    .logo { width: 175px; max-height: 65px; object-fit: contain; }
+    .top-now {
+      position: absolute;
+      right: 5%;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      max-width: 34%;
+      color: #ddd;
+      font-size: 12px;
+    }
+    .live-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--red);
+      box-shadow: 0 0 12px var(--red);
+      animation: pulse 1.7s infinite;
+    }
+    .live-label { color: #fff; font-weight: 800; letter-spacing: 1px; }
+    #top-title { font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    #top-artist { color: #aaa; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+    main { width: min(1100px, 90%); margin: auto; }
+    .hero { padding: 54px 0 35px; }
+    .eyebrow {
+      color: #ff505a;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+    .hero h1 {
+      font-family: Anton, Impact, sans-serif;
+      font-size: clamp(38px, 6vw, 68px);
+      line-height: 1.02;
+      text-transform: uppercase;
+      letter-spacing: .4px;
+    }
+    .hero h1 span { color: var(--red); }
+    .hero p { margin-top: 13px; color: #bbb; line-height: 1.7; }
+
+    .player-card {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      min-height: 280px;
+      padding: 32px 105px 32px 32px;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 25px;
+      background: linear-gradient(120deg,rgba(20,20,20,.93),rgba(8,8,8,.78));
+      box-shadow: 0 24px 80px rgba(0,0,0,.4);
+      backdrop-filter: blur(18px);
+    }
+    #album-cover {
+      width: 205px;
+      height: 205px;
+      flex-shrink: 0;
+      object-fit: cover;
+      border-radius: 17px;
+      background: #181818;
+      box-shadow: 0 12px 35px rgba(0,0,0,.45);
+      transition: opacity .35s ease, transform .35s ease;
+    }
+    .player-info { min-width: 0; flex: 1; }
+    .station-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 15px;
+      color: #ff626b;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    #song-title {
+      font-family: Anton, Impact, sans-serif;
+      font-size: clamp(27px, 4vw, 47px);
+      line-height: 1.1;
+      overflow-wrap: anywhere;
+    }
+    #song-artist { margin-top: 10px; color: #bdbdbd; font-size: 19px; }
+    #audio-status { margin-top: 18px; color: #888; font-size: 12px; }
+    #play-button {
+      position: absolute;
+      right: -27px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 78px;
+      height: 78px;
+      display: grid;
+      place-items: center;
+      border: 5px solid rgba(255,255,255,.13);
+      border-radius: 50%;
+      color: white;
+      background: var(--red);
+      font-size: 25px;
+      cursor: pointer;
+      box-shadow: 0 0 35px rgba(229,29,42,.32);
+      transition: transform .2s, box-shadow .2s, background .2s;
+    }
+    #play-button:hover { transform: translateY(-50%) scale(1.07); box-shadow: 0 0 45px rgba(229,29,42,.55); }
+    #play-button:focus-visible { outline: 3px solid white; outline-offset: 4px; }
+
+    .section { padding: 55px 0 10px; }
+    .section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+    .section-heading h2 {
+      padding-left: 14px;
+      border-left: 4px solid var(--red);
+      font-family: Anton, Impact, sans-serif;
+      font-size: 29px;
+      font-weight: 400;
+      text-transform: uppercase;
+    }
+    .section-heading p { color: #999; font-size: 12px; }
+
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(2,minmax(0,1fr));
+      gap: 18px;
+    }
+    .news-card {
+      display: flex;
+      min-height: 150px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(15,15,15,.84);
+      transition: transform .2s, border-color .2s, background .2s;
+    }
+    .news-card:hover { transform: translateY(-3px); border-color: rgba(229,29,42,.6); background: rgba(25,25,25,.94); }
+    .news-image { width: 145px; min-height: 150px; flex-shrink: 0; object-fit: cover; background: #222; }
+    .news-content { padding: 17px; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+    .news-content h3 { font-size: 15px; line-height: 1.45; }
+    .news-content p { color: #aaa; font-size: 12px; line-height: 1.6; }
+    .news-button {
+      margin-top: auto;
+      color: #ff5a63;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .6px;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .news-button:hover { color: #fff; }
+    .loading { color: #999; padding: 20px 0; font-size: 13px; }
+
+    .about-panel {
+      margin: 50px 0 45px;
+      padding: 32px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: rgba(15,15,15,.82);
+    }
+    .about-panel h2 {
+      margin-bottom: 15px;
+      font-family: Anton, Impact, sans-serif;
+      font-size: 28px;
+      font-weight: 400;
+      text-transform: uppercase;
+    }
+    .about-panel p { color: #bbb; line-height: 1.85; margin-top: 10px; }
+    .about-panel strong { color: white; }
+    footer {
+      padding: 28px 5%;
+      border-top: 1px solid var(--line);
+      background: rgba(0,0,0,.7);
+      color: #777;
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+    footer strong { color: #eee; }
+
+    @keyframes pulse { 50% { opacity: .45; } }
+
+    @media (max-width: 700px) {
+      .top-bar { min-height: 76px; justify-content: flex-start; }
+      .logo { width: 125px; }
+      .top-now { right: 4%; max-width: 52%; gap: 7px; font-size: 10px; }
+      .hero { padding-top: 36px; }
+      .player-card { flex-direction: column; align-items: flex-start; gap: 22px; padding: 22px 22px 30px; }
+      #album-cover { width: min(100%,250px); height: auto; aspect-ratio: 1; align-self: center; }
+      .player-info { width: 100%; }
+      #play-button { width: 65px; height: 65px; right: 16px; top: auto; bottom: 16px; transform: none; }
+      #play-button:hover { transform: scale(1.06); }
+      .news-grid { grid-template-columns: 1fr; }
+      .news-image { width: 120px; }
+      .news-content { padding: 13px; }
+      .about-panel { padding: 23px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
+    }
+  </style>
 </head>
 
 <body>
+  <div class="backdrop" id="album-backdrop"></div>
+  <div class="page-glow"></div>
 
-<header class="top-bar">
-  <div class="logo-area">
-    <img src="whbr-logo.png" class="top-logo" alt="WHBR Radio">
-  </div>
-
-  <div class="top-now-playing">
-    <div class="top-live">
+  <header class="top-bar">
+    <img class="logo" src="whbr-logo.png" alt="WHBR Radio">
+    <div class="top-now">
       <span class="live-dot"></span>
-      LIVE
-    </div>
-
-    <div class="top-song">
-      <div id="top-title">WHBR RADIO</div>
-      <div id="top-artist">REAL ROCK WITHOUT THE ADS</div>
-    </div>
-  </div>
-</header>
-
-<section class="player-section">
-  <div class="player-card">
-    <div class="album-container">
-      <img id="album-cover" src="whbr-logo.png" alt="Album Cover">
-    </div>
-
-    <div class="song-info">
-      <h1 id="song-title">WHBR RADIO</h1>
-      <h2 id="song-artist">Real Rock Without the Ads</h2>
-
-      <div class="station-status">
-        <span class="live-label">LIVE</span>
-        <span>All Rock 24/7</span>
+      <div>
+        <div class="live-label">LIVE NOW</div>
+        <div id="top-title">WHBR Radio</div>
+        <div id="top-artist">Real Rock Without the Ads</div>
       </div>
     </div>
+  </header>
 
-    <button id="play-button" type="button" aria-label="Play WHBR">▶</button>
-  </div>
+  <main>
+    <section class="hero">
+      <div class="eyebrow">Roanoke, Virginia · Broadcasting 24/7</div>
+      <h1>Real Rock.<br><span>Without the Ads.</span></h1>
+      <p>Classic rock and punk rock favorites, all day and all night.</p>
+    </section>
 
-  <audio id="whbrAudio" preload="none" playsinline>
-    <source src="https://uk2freenew.listen2myradio.com/live.mp3?typeportmount=s1_12331_stream_165976521" type="audio/mpeg">
-    Your browser does not support audio playback.
-  </audio>
-
-  <p id="audio-status" role="status" aria-live="polite" hidden></p>
-</section>
-
-
-<section class="content-section">
-  <h2 class="section-title">MUSIC NEWS</h2>
-  <div id="nationalNews" class="news-grid">
-    <div class="news-card">
-      <div class="news-content">
-        <h3>Loading...</h3>
-        <p>Getting music news...</p>
+    <section class="player-card" aria-label="WHBR live radio player">
+      <img id="album-cover" src="whbr-logo.png" alt="Now playing album artwork">
+      <div class="player-info">
+        <div class="station-status"><span class="live-dot"></span> WHBR Live Stream</div>
+        <h2 id="song-title">WHBR Roanoke</h2>
+        <p id="song-artist">Real Rock Without the Ads</p>
+        <p id="audio-status" role="status">Ready to play</p>
       </div>
-    </div>
-  </div>
-</section>
+      <button id="play-button" aria-label="Play radio" title="Play radio">▶</button>
+    </section>
 
-<section class="content-section">
-  <h2 class="section-title">U.S. NEWS</h2>
-  <div id="usNews" class="news-grid">
-    <div class="news-card">
-      <div class="news-content">
-        <h3>Loading...</h3>
-        <p>Getting news...</p>
+    <audio id="whbrAudio" preload="none">
+      <source src="https://uk2freenew.listen2myradio.com/live.mp3?typeportmount=s1_12331_stream_165976521" type="audio/mpeg">
+    </audio>
+
+    <section class="section">
+      <div class="section-heading">
+        <h2>Music News</h2>
+        <p>What's happening in rock</p>
       </div>
-    </div>
-  </div>
-</section>
+      <div id="nationalNews" class="news-grid">
+        <p class="loading">Loading music news...</p>
+      </div>
+    </section>
 
-<section class="about-section">
-  <div class="about-box">
-    <h2>ABOUT WHBR</h2>
-    <p>WHBR Roanoke brings you the unforgettable guitar riffs of '70s and '80s classic rock, along with the best punk rock hits from the '90s and early 2000s. From legendary rock anthems to high-energy punk favorites, we play the music you love.</p>
-    <p>Broadcasting from Roanoke, Virginia, WHBR brings great rock music to listeners everywhere, 24 hours a day, completely ad-free. No commercials, no interruptions - just real rock, without the ads!</p>
-  </div>
-</section>
+    <section class="section">
+      <div class="section-heading">
+        <h2>U.S. News</h2>
+        <p>Headlines from across the country</p>
+      </div>
+      <div id="usNews" class="news-grid">
+        <p class="loading">Loading U.S. news...</p>
+      </div>
+    </section>
 
-<footer>
-  <div class="footer-logo">
-    <img src="whbr-logo.png" alt="WHBR logo">
-  </div>
-  <div class="footer-text">WHBR ROANOKE</div>
-  <div class="copyright">WHBR © 2026</div>
-</footer>
+    <section class="about-panel">
+      <h2>About WHBR Roanoke</h2>
+      <p>WHBR Roanoke brings you the unforgettable guitar riffs of '70s and '80s classic rock, along with the best punk rock hits from the '90s and early 2000s. From legendary rock anthems to high-energy punk favorites, we play the music you love.</p>
+      <p>Broadcasting from Roanoke, Virginia, WHBR brings great rock music to listeners everywhere, 24 hours a day, completely ad-free. <strong>No commercials, no interruptions — just real rock, without the ads!</strong></p>
+    </section>
+  </main>
 
-<script>
-const audio = document.getElementById("whbrAudio");
-const playButton = document.getElementById("play-button");
-const audioStatus = document.getElementById("audio-status");
+  <footer>
+    <strong>WHBR ROANOKE</strong><br>
+    Real Rock Without the Ads · Broadcasting 24/7 from Roanoke, Virginia
+  </footer>
 
-audio.volume = 0.8;
+  <script>
+    const audio = document.getElementById("whbrAudio");
+    const playButton = document.getElementById("play-button");
+    const audioStatus = document.getElementById("audio-status");
+    const albumCover = document.getElementById("album-cover");
+    const backdrop = document.getElementById("album-backdrop");
 
-function showAudioStatus(message) {
-  audioStatus.textContent = message;
-  audioStatus.hidden = !message;
-}
-
-async function togglePlay() {
-  if (audio.paused) {
-    showAudioStatus("Connecting to WHBR...");
-
-    try {
-      await audio.play();
-      playButton.textContent = "⏸";
-      playButton.setAttribute("aria-label", "Pause WHBR");
-      showAudioStatus("");
-    } catch (error) {
-      console.error("WHBR playback error:", error);
-      playButton.textContent = "▶";
-      playButton.setAttribute("aria-label", "Play WHBR");
-      showAudioStatus("Unable to play the stream. Try opening the WHBR station page.");
+    function setPlaying(playing) {
+      playButton.textContent = playing ? "Ⅱ" : "▶";
+      playButton.setAttribute("aria-label", playing ? "Pause radio" : "Play radio");
+      playButton.title = playing ? "Pause radio" : "Play radio";
     }
-  } else {
-    audio.pause();
-    playButton.textContent = "▶";
-    playButton.setAttribute("aria-label", "Play WHBR");
-    showAudioStatus("");
-  }
-}
 
-playButton.addEventListener("click", togglePlay);
-
-audio.addEventListener("playing", () => {
-  document.querySelector(".player-card").classList.add("playing");
-  showAudioStatus("");
-});
-
-audio.addEventListener("pause", () => {
-  document.querySelector(".player-card").classList.remove("playing");
-  playButton.textContent = "▶";
-  playButton.setAttribute("aria-label", "Play WHBR");
-});
-
-audio.addEventListener("waiting", () => {
-  showAudioStatus("Buffering WHBR...");
-});
-
-audio.addEventListener("error", () => {
-  document.querySelector(".player-card").classList.remove("playing");
-  playButton.textContent = "▶";
-  showAudioStatus("The stream could not be reached. Try the WHBR station page.");
-});
-
-// MUSIC NEWS
-async function loadNews() {
-  const musicBox = document.getElementById("nationalNews");
-  const usBox = document.getElementById("usNews");
-
-  try {
-    const url = "https://api.rss2json.com/v1/api.json?rss_url=" +
-      encodeURIComponent("https://www.rollingstone.com/music/feed/");
-
-    const response = await fetch(url);
-    if (!response.ok) throw new Error("Music news request failed");
-
-    const data = await response.json();
-    musicBox.innerHTML = "";
-
-    (data.items || []).slice(0, 3).forEach(item => {
-      const card = document.createElement("div");
-      card.className = "news-card";
-
-      const image = document.createElement("div");
-      image.className = "news-image";
-
-      const img = document.createElement("img");
-      img.src = item.thumbnail || "whbr-logo.png";
-      img.alt = "";
-      image.appendChild(img);
-
-      const content = document.createElement("div");
-      content.className = "news-content";
-
-      const title = document.createElement("h3");
-      title.textContent = item.title || "Music News";
-
-      const description = document.createElement("p");
-      description.textContent =
-        (item.description || "").replace(/<[^>]*>/g, "").slice(0, 120) + "...";
-
-      const button = document.createElement("button");
-      button.className = "news-button";
-      button.type = "button";
-      button.textContent = "READ ARTICLE";
-      button.addEventListener("click", () => {
-        window.open(item.link, "_blank", "noopener");
-      });
-
-      content.append(title, description, button);
-      card.append(image, content);
-      musicBox.appendChild(card);
+    playButton.addEventListener("click", async () => {
+      if (audio.paused) {
+        audioStatus.textContent = "Connecting to WHBR...";
+        try {
+          await audio.play();
+        } catch (error) {
+          audioStatus.textContent = "Couldn't start the stream. Try again.";
+        }
+      } else {
+        audio.pause();
+      }
     });
 
-    if (!musicBox.children.length) {
-      musicBox.textContent = "Music news is currently unavailable.";
-    }
-  } catch (error) {
-    console.error("Music news error:", error);
-    musicBox.textContent = "Music news is currently unavailable.";
-  }
-
-  // IMPORTANT U.S. NEWS
-  try {
-    const url = "https://api.rss2json.com/v1/api.json?rss_url=" +
-      encodeURIComponent("https://www.cbsnews.com/latest/rss/us");
-
-    const response = await fetch(url);
-    if (!response.ok) throw new Error("U.S. news request failed");
-
-    const data = await response.json();
-    const item = (data.items || [])[0];
-
-    usBox.innerHTML = "";
-
-    if (!item) {
-      usBox.textContent = "U.S. news is currently unavailable.";
-      return;
-    }
-
-    const card = document.createElement("div");
-    card.className = "news-card";
-
-    const image = document.createElement("div");
-    image.className = "news-image";
-
-    const img = document.createElement("img");
-    img.src = item.thumbnail || "whbr-logo.png";
-    img.alt = "";
-    image.appendChild(img);
-
-    const content = document.createElement("div");
-    content.className = "news-content";
-
-    const title = document.createElement("h3");
-    title.textContent = item.title || "U.S. News";
-
-    const description = document.createElement("p");
-    description.textContent =
-      (item.description || "").replace(/<[^>]*>/g, "").slice(0, 200) + "...";
-
-    const button = document.createElement("button");
-    button.className = "news-button";
-    button.type = "button";
-    button.textContent = "READ ARTICLE";
-    button.addEventListener("click", () => {
-      window.open(item.link, "_blank", "noopener");
+    audio.addEventListener("playing", () => {
+      audioStatus.textContent = "You're listening live";
+      setPlaying(true);
+    });
+    audio.addEventListener("pause", () => setPlaying(false));
+    audio.addEventListener("waiting", () => {
+      audioStatus.textContent = "Buffering live stream...";
+    });
+    audio.addEventListener("error", () => {
+      audioStatus.textContent = "Stream unavailable. Try again shortly.";
+      setPlaying(false);
     });
 
-    content.append(title, description, button);
-    card.append(image, content);
-    usBox.appendChild(card);
-  } catch (error) {
-    console.error("U.S. news error:", error);
-    usBox.textContent = "U.S. news is currently unavailable.";
-  }
-}
+    /* Keep the blurred background matched to the displayed album art. */
+    function updateBackdrop() {
+      const imageUrl = albumCover.currentSrc || albumCover.src;
+      if (!imageUrl) return;
+      backdrop.style.backgroundImage = `url("${imageUrl.replace(/"/g, '\\"')}")`;
+    }
+    albumCover.addEventListener("load", updateBackdrop);
+    albumCover.addEventListener("error", () => {
+      albumCover.src = "whbr-logo.png";
+    });
+    updateBackdrop();
 
-loadNews();
-setInterval(loadNews, 300000);
-</script>
+    /* RSS news feeds */
+    const feeds = [
+      {
+        element: "nationalNews",
+        url: "https://www.rollingstone.com/music/music-news/feed/",
+        fallback: "Music news is temporarily unavailable."
+      },
+      {
+        element: "usNews",
+        url: "https://www.cbsnews.com/latest/rss/main",
+        fallback: "U.S. news is temporarily unavailable."
+      }
+    ];
 
+    function escapeHTML(value = "") {
+      return String(value).replace(/[&<>"']/g, char => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      }[char]));
+    }
+
+    function getImage(item) {
+      return item.thumbnail || item.enclosure?.link ||
+        item.enclosure?.url || "whbr-logo.png";
+    }
+
+    async function loadNews(feed) {
+      const container = document.getElementById(feed.element);
+      try {
+        const endpoint = "https://api.rss2json.com/v1/api.json?rss_url=" +
+          encodeURIComponent(feed.url);
+        const response = await fetch(endpoint);
+        if (!response.ok) throw new Error("News request failed");
+        const data = await response.json();
+        if (!Array.isArray(data.items) || !data.items.length) throw new Error("No news items");
+
+        container.innerHTML = data.items.slice(0, 4).map(item => {
+          const title = escapeHTML(item.title || "Read the latest story");
+          const description = escapeHTML(
+            (item.description || "").replace(/<[^>]*>/g, "").slice(0, 125)
+          );
+          const image = escapeHTML(getImage(item));
+          const link = /^https?:\/\//i.test(item.link || "") ? item.link : "#";
+          return `
+            <article class="news-card">
+              <img class="news-image" src="${image}" alt="" loading="lazy"
+                   onerror="this.onerror=null;this.src='whbr-logo.png'">
+              <div class="news-content">
+                <h3>${title}</h3>
+                <p>${description}</p>
+                <a class="news-button" href="${escapeHTML(link)}"
+                   target="_blank" rel="noopener noreferrer">Read Story ↗</a>
+              </div>
+            </article>`;
+        }).join("");
+      } catch (error) {
+        container.innerHTML = `<p class="loading">${feed.fallback}</p>`;
+      }
+    }
+
+    function refreshNews() {
+      feeds.forEach(loadNews);
+    }
+    refreshNews();
+    setInterval(refreshNews, 5 * 60 * 1000);
+  </script>
 </body>
 </html>
