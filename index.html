@@ -799,62 +799,55 @@
     const fallbackTitle = "WHBR ROANOKE";
     const fallbackArtist = "Always AD Free";
 
-    async function updateNowPlaying() {
-      try {
-        const response = await fetch(
-          "nowplaying.txt?t=" + Date.now(),
-          { cache: "no-store" }
-        );
+   
+async function updateNowPlaying() {
+  try {
+    const response = await fetch(
+      "https://whbr-live-metadata.braedenbrown460.workers.dev/api/nowplaying?t=" + Date.now(),
+      { cache: "no-store" }
+    );
 
-        if (!response.ok) throw new Error("Metadata not available");
+    if (!response.ok) {
+      throw new Error("Metadata not available");
+    }
 
-        const raw = (await response.text()).trim();
+    const data = await response.json();
+    const artist = (data.artist || "").trim();
+    const title = (data.title || "").trim();
 
-        if (!raw || raw.length > 300) throw new Error("Empty metadata");
+    if (!artist || !title) {
+      throw new Error("Empty metadata");
+    }
 
-        const ignored = [
-          "LIVE!",
-          "LIVE - WHBR",
-          "WHBR RADIO",
-          "ALL OF YOUR FAVORITES - WHBR",
-          "ALWAYS AD FREE - WHBR",
-          "ALWAYS FREE - WHBR RADIO",
-          "RADIO - WHBR",
-          "BRAEDENBROWN @WHBR",
-          "-"
-        ];
+    const ignored = [
+      "LIVE!",
+      "LIVE - WHBR",
+      "WHBR RADIO",
+      "ALL OF YOUR FAVORITES - WHBR",
+      "ALWAYS AD FREE - WHBR",
+      "ALWAYS FREE - WHBR RADIO",
+      "RADIO - WHBR",
+      "BRAEDENBROWN @WHBR",
+      "-"
+    ];
 
-        if (ignored.includes(raw.toUpperCase())) {
-          titleElement.textContent = fallbackTitle;
-          artistElement.textContent = fallbackArtist;
-          return;
-        }
+    const combined = `${artist} - ${title}`.toUpperCase();
 
-        let artist = "";
-        let title = raw;
+    if (ignored.includes(combined) || title === "-") {
+      titleElement.textContent = fallbackTitle;
+      artistElement.textContent = fallbackArtist;
+      return;
+    }
 
-        const separators = [" - ", " – ", " — "];
+    titleElement.textContent = title;
+    artistElement.textContent = artist;
 
-        for (const separator of separators) {
-          const splitAt = raw.indexOf(separator);
-          if (splitAt > 0) {
-            artist = raw.slice(0, splitAt).trim();
-            title = raw.slice(splitAt + separator.length).trim();
-            break;
-          }
-        }
+  } catch (error) {
+    console.error("WHBR metadata error:", error);
+    titleElement.textContent = fallbackTitle;
+    artistElement.textContent = fallbackArtist;
+  }
 
-        if (artist && title) {
-          titleElement.textContent = title;
-          artistElement.textContent = artist;
-        } else {
-          titleElement.textContent = raw;
-          artistElement.textContent = fallbackArtist;
-        }
-      } catch {
-        titleElement.textContent = fallbackTitle;
-        artistElement.textContent = fallbackArtist;
-      }
     }
 
     /* ON AIR SHOW: Eastern Time, including daylight-saving changes.
