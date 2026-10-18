@@ -3,229 +3,210 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#080808">
-<title>WHBR Roanoke — Real Rock Without the Ads</title>
-<meta name="description" content="Listen to WHBR Roanoke live, with classic rock, punk rock, the latest news, and featured daily rock programming.">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101010">
+<title>WHBR Radio | Real Rock Without the Ads</title>
+<meta name="description" content="Listen to WHBR Roanoke live. Classic rock, punk rock, music news, sports, and more. Always ad-free.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-:root{--red:#e51d2a;--bg:#080808;--muted:#aaa;--line:#292929}
+:root{--red:#e52330;--dark:#101010;--panel:#191919;--line:#303030;--muted:#aaa}
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:100px}
-body{min-height:100vh;background:var(--bg);color:#fff;font-family:Inter,Arial,sans-serif}
+html{scroll-behavior:smooth;scroll-padding-top:85px}
+body{background:#101010;color:#f8f8f8;font-family:Inter,Arial,sans-serif}
 a{color:inherit}
 button{font:inherit}
-.backdrop{position:fixed;inset:-35px;z-index:-2;background:#171717 center/cover no-repeat;filter:blur(38px) brightness(.23) saturate(1.3);transform:scale(1.08)}
-.backdrop:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0007,#000d 60%,#080808)}
-header{height:82px;position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:0 5%;background:#050505e8;backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
-.logo{width:150px;max-height:62px;object-fit:contain}
-.nav{display:flex;align-items:center;gap:23px}
-.nav a{text-decoration:none;font-size:11px;font-weight:800;color:#ddd}
-.nav a:hover{color:#ff5962}
-.live-tag{display:flex;align-items:center;gap:8px;padding:9px 12px;background:var(--red);font-size:10px;font-weight:800;letter-spacing:1px}
-.dot{width:7px;height:7px;border-radius:50%;background:#fff;animation:pulse 1.5s infinite}
-main{width:min(1240px,90%);margin:auto}
-.hero{padding:48px 0 27px}
-.kicker{display:flex;align-items:center;gap:9px;color:#ff5962;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:15px}
-h1,h2,.display{font-family:Anton,Impact,sans-serif;font-weight:400;text-transform:uppercase}
-h1{font-size:clamp(42px,7vw,80px);line-height:.98}
-h1 span{color:var(--red)}
-.hero p{margin-top:16px;color:#c1c1c1;font-size:14px;line-height:1.7}
-.player{display:grid;grid-template-columns:220px minmax(0,1fr) 80px;align-items:center;gap:27px;padding:27px;background:linear-gradient(110deg,#171717f5,#080808ed);border:1px solid #343434;border-radius:17px;box-shadow:0 22px 70px #0008}
+img{max-width:100%}
+.wrap{width:min(1180px,94%);margin:auto}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(10,10,10,.96);border-bottom:1px solid #303030;backdrop-filter:blur(15px)}
+.topinner{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.logo{width:145px;max-height:59px;object-fit:contain}
+.nav{display:flex;align-items:center;gap:25px}
+.nav a{font-size:11px;font-weight:800;text-decoration:none;color:#ddd;letter-spacing:.5px}
+.nav a:hover{color:#ff5c65}
+.nav-live{display:flex;align-items:center;gap:8px;background:var(--red);padding:11px 14px;color:#fff!important}
+.dot{width:7px;height:7px;display:inline-block;border-radius:50%;background:#fff;animation:pulse 1.6s infinite}
+.masthead{padding:24px 0 19px;border-bottom:1px solid #282828;background:linear-gradient(110deg,#181818,#111)}
+.masthead-row{display:flex;align-items:center;justify-content:space-between;gap:25px}
+.brandline{font-family:"Barlow Condensed",sans-serif;font-size:clamp(32px,5vw,48px);font-weight:900;line-height:.95;text-transform:uppercase}
+.brandline span{color:var(--red)}
+.tagline{font-size:10px;font-weight:800;letter-spacing:2px;color:#bbb;margin-top:7px}
+.masthead-note{color:#aaa;font-size:11px;text-align:right;line-height:1.8}
+.masthead-note strong{color:#fff}
+main{padding-bottom:35px}
+.listen-section{padding:24px 0 8px}
+.listen-card{display:grid;grid-template-columns:135px minmax(0,1fr) 66px;align-items:center;gap:22px;padding:20px;background:linear-gradient(110deg,#242424,#171717);border:1px solid #363636;border-radius:10px}
 .album-wrap{position:relative}
-.album{display:block;width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;background:#202020}
-.album-label{position:absolute;top:10px;left:10px;padding:6px 8px;background:var(--red);font-size:9px;font-weight:800;letter-spacing:1px}
-.now-label{display:flex;align-items:center;gap:8px;color:#ff5962;font-size:10px;font-weight:800;letter-spacing:2px;margin-bottom:13px}
-.song-title{font-size:clamp(27px,4vw,46px);line-height:1.1;overflow-wrap:anywhere}
-.song-artist{margin-top:10px;color:#bbb;font-size:18px}
-.audio-status{margin-top:18px;color:#999;font-size:11px}
-.play-button{width:72px;height:72px;border:0;border-radius:50%;background:var(--red);color:#fff;font-size:25px;cursor:pointer;box-shadow:0 0 30px #e51d2a40;transition:transform .2s}
-.play-button:hover{transform:scale(1.08)}
-.play-button:focus-visible{outline:3px solid white;outline-offset:4px}
-.player-bottom{grid-column:1/-1;display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:16px;color:#aaa;font-size:10px}
-.player-bottom strong{color:#fff;letter-spacing:1px}
-.red{color:var(--red)}
-.section{padding-top:56px}
-.section-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:22px}
-.section-head h2{font-size:30px;border-left:4px solid var(--red);padding-left:13px;line-height:1.1}
-.section-head p{font-size:11px;color:var(--muted);text-align:right}
-.schedule{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
-.show-card{position:relative;overflow:hidden;min-height:225px;padding:27px;border:1px solid #333;border-radius:15px;background:linear-gradient(125deg,#191919f5,#0c0c0cf5);display:flex;flex-direction:column;justify-content:space-between}
-.show-card:after{content:"";position:absolute;width:170px;height:170px;right:-60px;top:-60px;border-radius:50%;border:25px solid #e51d2a12;pointer-events:none}
-.show-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
-.show-category{color:#ff5962;font-size:10px;font-weight:800;letter-spacing:1.5px}
-.show-time{padding:7px 9px;background:#e51d2a1c;border:1px solid #e51d2a60;color:#ff777e;font-size:10px;font-weight:800;white-space:nowrap}
-.show-title{font-family:Anton,Impact,sans-serif;font-size:clamp(29px,4vw,43px);line-height:1.1;margin:22px 0 9px}
-.show-description{color:#bbb;font-size:12px;line-height:1.7;max-width:440px}
-.show-bottom{display:flex;align-items:center;gap:9px;margin-top:25px;color:#999;font-size:10px;font-weight:700;letter-spacing:1px}
-.show-line{height:3px;width:38px;background:var(--red)}
-.schedule-note{color:#888;font-size:10px;margin-top:15px}
-.stories{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-.story{overflow:hidden;border:1px solid var(--line);border-radius:13px;background:#101010f2;transition:transform .2s,border-color .2s}
-.story:hover{transform:translateY(-4px);border-color:var(--red)}
+.album{width:135px;height:135px;object-fit:cover;display:block;background:#292929;border-radius:5px}
+.album-label{position:absolute;left:7px;top:7px;padding:5px 7px;background:var(--red);font-size:8px;font-weight:800;letter-spacing:1px}
+.nowplaying{display:flex;align-items:center;gap:7px;color:#ff626a;font-size:10px;font-weight:800;letter-spacing:1.4px;margin-bottom:8px}
+.song-title{font-family:"Barlow Condensed",sans-serif;font-size:clamp(27px,4vw,42px);font-weight:800;line-height:1.08;overflow-wrap:anywhere}
+.song-artist{font-size:14px;color:#c3c3c3;margin-top:7px}
+.audio-status{font-size:10px;color:#999;margin-top:13px}
+.play-button{width:62px;height:62px;border:0;border-radius:50%;background:var(--red);color:white;font-size:24px;cursor:pointer;box-shadow:0 0 22px #e5233030;transition:transform .18s}
+.play-button:hover{transform:scale(1.07)}
+.play-button:focus-visible{outline:2px solid white;outline-offset:4px}
+.player-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:15px;color:#aaa;font-size:10px}
+.player-footer strong{color:#fff;letter-spacing:.8px}
+.section{padding-top:35px}
+.section-title{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:17px;padding-bottom:11px;border-bottom:1px solid #363636}
+.section-title h2{font-family:"Barlow Condensed",sans-serif;font-size:29px;font-weight:800;text-transform:uppercase;line-height:1}
+.section-title h2 span{color:var(--red)}
+.section-title p{font-size:10px;color:#999;text-align:right}
+.stories{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.story{min-width:0;background:#191919;border:1px solid #303030;border-radius:7px;overflow:hidden;transition:border-color .2s,transform .2s}
+.story:hover{border-color:#666;transform:translateY(-2px)}
 .story-link{height:100%;display:flex;flex-direction:column;text-decoration:none}
-.story-image{width:100%;aspect-ratio:16/9;object-fit:cover;background:#222}
-.story-body{display:flex;flex-direction:column;flex:1;padding:17px}
-.story-category{font-size:10px;font-weight:800;letter-spacing:1.2px;color:#ff5962;text-transform:uppercase}
-.story-title{font-size:15px;font-weight:800;line-height:1.5;margin-top:9px}
-.story-date{font-size:11px;color:#858585;margin-top:auto;padding-top:16px}
-.story-link:hover .story-title{color:#ff777e}
-.loading{color:#999;font-size:13px;padding:18px 0}
-.format-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
-.format{padding:20px 16px;border:1px solid var(--line);background:#111e;border-radius:12px}
-.format strong{display:block;font-family:Anton,Impact,sans-serif;font-size:23px;font-weight:400}
-.format span{display:block;color:#999;font-size:11px;margin-top:6px}
-.about{margin:55px 0 48px;padding:30px;border:1px solid var(--line);border-radius:15px;background:#0e0ee8}
-.about{background:rgba(14,14,14,.93)}
-.about h2{font-size:28px;margin-bottom:13px}
-.about p{font-size:13px;color:#bbb;line-height:1.9;margin-top:8px}
-.about strong{color:#fff}
-footer{padding:28px 5%;border-top:1px solid var(--line);background:#050505;text-align:center;color:#777;font-size:11px;line-height:1.9}
-footer strong{color:#fff;letter-spacing:1.5px}
+.story-image{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#292929}
+.story-content{padding:14px;display:flex;flex-direction:column;flex:1}
+.story-category{font-size:9px;font-weight:800;letter-spacing:1.3px;color:#ff5962;text-transform:uppercase}
+.story-title{font-size:14px;line-height:1.5;font-weight:800;margin-top:7px}
+.story-date{font-size:10px;color:#888;margin-top:auto;padding-top:13px}
+.story-link:hover .story-title{color:#ff7b82}
+.loading{padding:18px 0;color:#aaa;font-size:12px;grid-column:1/-1}
+.schedule-strip{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.schedule-item{display:flex;align-items:center;gap:14px;padding:15px 17px;background:#191919;border:1px solid #303030;border-radius:7px}
+.schedule-time{flex-shrink:0;background:#292929;border-left:3px solid var(--red);padding:9px 11px;font-size:10px;font-weight:800;line-height:1.5}
+.schedule-info{min-width:0}
+.schedule-info h3{font-family:"Barlow Condensed",sans-serif;font-size:22px;font-weight:800;text-transform:uppercase}
+.schedule-info p{font-size:10px;color:#999;margin-top:3px;line-height:1.5}
+.schedule-note{font-size:10px;color:#888;margin-top:10px}
+.about{margin-top:35px;padding:18px 20px;background:#171717;border:1px solid #2b2b2b;border-radius:7px}
+.about h2{font-family:"Barlow Condensed",sans-serif;font-size:23px;font-weight:800;text-transform:uppercase;margin-bottom:7px}
+.about p{font-size:11px;line-height:1.8;color:#aaa}
+.about strong{color:#eee}
+footer{border-top:1px solid #303030;background:#090909;padding:22px 0;text-align:center;color:#888;font-size:10px;line-height:1.9}
+footer strong{color:#eee;letter-spacing:1.5px}
 @keyframes pulse{50%{opacity:.35}}
-@media(max-width:850px){
- .player{grid-template-columns:155px minmax(0,1fr);gap:20px;padding:20px}
- .player-controls{grid-column:1/-1;display:flex;justify-content:flex-end}
- .play-button{width:60px;height:60px}
- .stories{grid-template-columns:repeat(2,minmax(0,1fr))}
- .format-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:760px){
+ .nav{gap:13px}
+ .nav a:not(.nav-live){display:none}
+ .listen-card{grid-template-columns:105px minmax(0,1fr) 52px;gap:14px;padding:14px}
+ .album{width:105px;height:105px}
+ .play-button{width:50px;height:50px;font-size:20px}
+ .stories{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+ .story-content{padding:11px}
+ .story-title{font-size:13px}
+ .schedule-item{padding:12px;gap:9px}
+ .schedule-info h3{font-size:19px}
 }
-@media(max-width:600px){
- header{height:72px;padding:0 4%}
+@media(max-width:480px){
+ .wrap{width:93%}
+ .topinner{min-height:65px}
  .logo{width:115px}
- .nav{gap:10px}
- .nav a{display:none}
- main{width:92%}
- .hero{padding-top:36px}
- .hero p{font-size:13px}
- .player{grid-template-columns:100px minmax(0,1fr);gap:14px;padding:15px}
+ .nav-live{padding:9px;font-size:9px}
+ .masthead{padding:18px 0}
+ .masthead-row{align-items:flex-start}
+ .masthead-note{font-size:9px}
+ .tagline{font-size:8px;letter-spacing:1.5px}
+ .listen-card{grid-template-columns:84px minmax(0,1fr);gap:12px;padding:12px}
+ .album{width:84px;height:84px}
  .song-title{font-size:25px}
- .song-artist{font-size:14px}
- .now-label{font-size:9px;letter-spacing:1px;margin-bottom:9px}
- .audio-status{margin-top:12px}
- .player-bottom{font-size:9px}
- .schedule{grid-template-columns:1fr}
- .show-card{min-height:205px;padding:22px}
- .show-title{font-size:35px}
- .stories{grid-template-columns:1fr}
- .story-image{aspect-ratio:16/8}
- .section-head h2{font-size:26px}
- .section-head p{max-width:48%;line-height:1.5}
- .about{padding:22px}
+ .song-artist{font-size:12px}
+ .nowplaying{font-size:8px;letter-spacing:.8px}
+ .player-controls{grid-column:1/-1;display:flex;justify-content:flex-end}
+ .player-footer{font-size:9px}
+ .section{padding-top:28px}
+ .section-title h2{font-size:26px}
+ .stories{gap:10px}
+ .story-title{font-size:12px}
+ .story-content{padding:9px}
+ .story-category{font-size:8px}
+ .schedule-strip{grid-template-columns:1fr}
 }
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 
 <body>
-<div class="backdrop" id="album-backdrop"></div>
-
-<header>
-  <a href="#" aria-label="WHBR home"><img class="logo" src="whbr-logo.png" alt="WHBR Radio"></a>
-  <nav class="nav" aria-label="Main navigation">
-    <a href="#schedule">SCHEDULE</a>
-    <a href="#latest-stories">LATEST STORIES</a>
-    <a href="#about">ABOUT</a>
-    <div class="live-tag"><span class="dot"></span> ON AIR</div>
-  </nav>
+<header class="topbar">
+  <div class="wrap topinner">
+    <a href="#" aria-label="WHBR home"><img class="logo" src="whbr-logo.png" alt="WHBR Radio"></a>
+    <nav class="nav" aria-label="Site navigation">
+      <a href="#latest-stories">NEWS</a>
+      <a href="#schedule">SCHEDULE</a>
+      <a href="#about">ABOUT</a>
+      <a class="nav-live" href="#listen"><span class="dot"></span> LISTEN LIVE</a>
+    </nav>
+  </div>
 </header>
 
-<main>
-  <section class="hero">
-    <div class="kicker"><span class="dot"></span> Roanoke, Virginia · Broadcasting 24/7</div>
-    <h1>Real Rock.<br><span>Without the Ads.</span></h1>
-    <p>The greatest classic rock riffs and punk rock favorites.<br>Turn it up. Leave the commercials behind.</p>
-  </section>
-
-  <section class="player" aria-label="WHBR live radio player">
-    <div class="album-wrap">
-      <img class="album" id="album-cover" src="whbr-logo.png" alt="Now playing artwork">
-      <span class="album-label">WHBR LIVE</span>
-    </div>
+<div class="masthead">
+  <div class="wrap masthead-row">
     <div>
-      <div class="now-label"><span class="dot"></span> NOW PLAYING</div>
-      <h2 class="song-title" id="song-title">WHBR Roanoke</h2>
-      <p class="song-artist" id="song-artist">Real Rock Without the Ads</p>
-      <p class="audio-status" id="audio-status" role="status">Press play to listen live</p>
+      <div class="brandline">WHBR <span>ROANOKE</span></div>
+      <div class="tagline">REAL ROCK WITHOUT THE ADS</div>
     </div>
-    <div class="player-controls">
-      <button class="play-button" id="play-button" aria-label="Play radio">▶</button>
-    </div>
-    <div class="player-bottom">
-      <strong><span class="red">●</span> 100% AD-FREE RADIO</strong>
-      <span>CLASSIC ROCK · PUNK ROCK · ALL DAY</span>
-    </div>
-  </section>
+    <div class="masthead-note"><strong>ROANOKE, VIRGINIA</strong><br>Classic Rock · Punk Rock · 24/7</div>
+  </div>
+</div>
 
-  <section class="section" id="schedule">
-    <div class="section-head">
-      <h2>On-Air Schedule</h2>
-      <p>Special rock blocks<br>Roanoke / Eastern Time</p>
+<main class="wrap">
+  <section class="listen-section" id="listen">
+    <div class="listen-card">
+      <div class="album-wrap">
+        <img class="album" id="album-cover" src="whbr-logo.png" alt="Now playing album artwork">
+        <span class="album-label">WHBR LIVE</span>
+      </div>
+      <div>
+        <div class="nowplaying"><span class="dot"></span> NOW PLAYING ON WHBR</div>
+        <h1 class="song-title" id="song-title">WHBR Roanoke</h1>
+        <p class="song-artist" id="song-artist">Real Rock Without the Ads</p>
+        <p class="audio-status" id="audio-status" role="status">Press play to listen live</p>
+      </div>
+      <div class="player-controls">
+        <button class="play-button" id="play-button" aria-label="Play radio" title="Play radio">▶</button>
+      </div>
     </div>
-
-    <div class="schedule">
-      <article class="show-card">
-        <div class="show-top">
-          <span class="show-category">THE 90s TAKEOVER</span>
-          <span class="show-time">9 AM – 2 PM</span>
-        </div>
-        <div>
-          <h3 class="show-title">All '90s Rock</h3>
-          <p class="show-description">Five hours of '90s rock favorites, alternative anthems, and punk rock energy. Turn it up and relive the decade.</p>
-        </div>
-        <div class="show-bottom"><span class="show-line"></span> 9:00 AM – 2:00 PM</div>
-      </article>
-
-      <article class="show-card">
-        <div class="show-top">
-          <span class="show-category">THE 80s ROCK BLOCK</span>
-          <span class="show-time">8 PM – 12 AM</span>
-        </div>
-        <div>
-          <h3 class="show-title">All '80s Rock</h3>
-          <p class="show-description">Four hours of huge guitar riffs, classic rock legends, and unforgettable '80s anthems to own the night.</p>
-        </div>
-        <div class="show-bottom"><span class="show-line"></span> 8:00 PM – Midnight</div>
-      </article>
+    <div class="player-footer">
+      <strong><span style="color:#e52330">●</span> ALWAYS AD-FREE</strong>
+      <span>TURN IT UP. THIS IS WHBR.</span>
     </div>
-    <p class="schedule-note">All times Eastern. These are featured programming blocks; WHBR continues playing music around the clock.</p>
   </section>
 
   <section class="section" id="latest-stories">
-    <div class="section-head">
-      <h2>Latest Stories</h2>
-      <p>Music · Sports · National News · Politics</p>
+    <div class="section-title">
+      <h2>Latest <span>Stories</span></h2>
+      <p>Music · Sports · National · Politics</p>
     </div>
     <div class="stories" id="latestNews">
       <p class="loading">Loading the latest stories...</p>
     </div>
   </section>
 
-  <section class="section" id="music">
-    <div class="section-head">
-      <h2>The Sound of WHBR</h2>
-      <p>Great rock. No interruptions.</p>
+  <section class="section" id="schedule">
+    <div class="section-title">
+      <h2>On-Air <span>Schedule</span></h2>
+      <p>Featured rock blocks</p>
     </div>
-    <div class="format-grid">
-      <div class="format"><strong>70s ROCK</strong><span>Timeless guitar legends</span></div>
-      <div class="format"><strong>80s ROCK</strong><span>Big riffs and anthems</span></div>
-      <div class="format"><strong>90s PUNK</strong><span>Fast, loud and unforgettable</span></div>
-      <div class="format"><strong>2000s</strong><span>Modern rock favorites</span></div>
+    <div class="schedule-strip">
+      <article class="schedule-item">
+        <div class="schedule-time">9 AM<br>– 2 PM</div>
+        <div class="schedule-info">
+          <h3>All '90s Rock</h3>
+          <p>Five hours of '90s rock and punk favorites.</p>
+        </div>
+      </article>
+      <article class="schedule-item">
+        <div class="schedule-time">8 PM<br>– MIDNIGHT</div>
+        <div class="schedule-info">
+          <h3>All '80s Rock</h3>
+          <p>Classic riffs and unforgettable '80s anthems.</p>
+        </div>
+      </article>
     </div>
+    <p class="schedule-note">All times Eastern. WHBR continues streaming music around the clock.</p>
   </section>
 
   <section class="about" id="about">
     <h2>About WHBR Roanoke</h2>
-    <p>WHBR Roanoke brings you unforgettable guitar riffs from '70s and '80s classic rock, along with the best punk rock hits from the '90s and early 2000s. From legendary rock anthems to high-energy punk favorites, we play the music you love.</p>
-    <p>Broadcasting from Roanoke, Virginia, WHBR brings great rock music to listeners everywhere, 24 hours a day, completely ad-free. <strong>No commercials, no interruptions — just real rock, without the ads!</strong></p>
+    <p>From legendary '70s and '80s rock to '90s punk and early-2000s favorites, WHBR plays the music you love from Roanoke, Virginia — <strong>24 hours a day, with no commercials.</strong></p>
   </section>
 </main>
 
 <footer>
-  <strong>WHBR ROANOKE RADIO</strong><br>
-  Real Rock Without the Ads · Broadcasting 24/7 from Roanoke, Virginia
+  <div class="wrap"><strong>WHBR ROANOKE RADIO</strong><br>REAL ROCK WITHOUT THE ADS · BROADCASTING 24/7</div>
 </footer>
 
 <audio id="whbrAudio" preload="none">
@@ -237,11 +218,11 @@ const audio=document.getElementById("whbrAudio");
 const playButton=document.getElementById("play-button");
 const audioStatus=document.getElementById("audio-status");
 const albumCover=document.getElementById("album-cover");
-const backdrop=document.getElementById("album-backdrop");
 
 function setPlaying(playing){
   playButton.textContent=playing?"Ⅱ":"▶";
   playButton.setAttribute("aria-label",playing?"Pause radio":"Play radio");
+  playButton.title=playing?"Pause radio":"Play radio";
 }
 playButton.addEventListener("click",async()=>{
   if(audio.paused){
@@ -261,18 +242,30 @@ audio.addEventListener("error",()=>{
   setPlaying(false);
 });
 
+/* The blurred background tracks album artwork when your metadata system updates it. */
 function updateBackdrop(){
   const src=albumCover.currentSrc||albumCover.src;
-  if(src)backdrop.style.backgroundImage=`url("${src.replace(/"/g,'\\"')}")`;
+  if(!src)return;
+  document.body.style.backgroundImage=`linear-gradient(#101010e8,#101010f5),url("${src.replace(/"/g,'\\"')}")`;
+  document.body.style.backgroundAttachment="fixed";
+  document.body.style.backgroundSize="cover";
+  document.body.style.backgroundPosition="center";
 }
 albumCover.addEventListener("load",updateBackdrop);
 updateBackdrop();
 
+/* Category-specific fallback photos: news cards will not fall back to the station logo. */
+const fallbackImages={
+  "Music News":"https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=700&q=80",
+  "Sports":"https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=700&q=80",
+  "National News":"https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=700&q=80",
+  "Politics":"https://images.unsplash.com/photo-1520869562399-e772f042f422?auto=format&fit=crop&w=700&q=80"
+};
 const newsFeeds=[
-  {category:"Music News",url:"https://www.rollingstone.com/music/music-news/feed/"},
-  {category:"Sports",url:"https://www.espn.com/espn/rss/news"},
-  {category:"National News",url:"https://www.cbsnews.com/latest/rss/main"},
-  {category:"Politics",url:"https://rss.politico.com/politics-news.xml"}
+  {category:"Music News",url:"https://www.rollingstone.com/music/music-news/feed/",count:2},
+  {category:"Sports",url:"https://www.espn.com/espn/rss/news",count:2},
+  {category:"National News",url:"https://www.cbsnews.com/latest/rss/main",count:1},
+  {category:"Politics",url:"https://rss.politico.com/politics-news.xml",count:1}
 ];
 const newsContainer=document.getElementById("latestNews");
 
@@ -281,17 +274,17 @@ function escapeHTML(value=""){
     "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
   }[c]));
 }
-function findImage(item){
+function extractImage(item){
   if(item.thumbnail)return item.thumbnail;
   if(item.enclosure?.link)return item.enclosure.link;
   if(item.enclosure?.url)return item.enclosure.url;
-  const html=item.description||item.content||"";
-  const match=html.match(/<img[^>]+src=["']([^"']+)/i);
-  return match?match[1]:"whbr-logo.png";
+  const content=item.description||item.content||"";
+  const match=content.match(/<img[^>]+src=["']([^"']+)/i);
+  return match?match[1]:"";
 }
 async function fetchFeed(feed){
-  const url="https://api.rss2json.com/v1/api.json?rss_url="+encodeURIComponent(feed.url);
-  const response=await fetch(url);
+  const endpoint="https://api.rss2json.com/v1/api.json?rss_url="+encodeURIComponent(feed.url);
+  const response=await fetch(endpoint);
   if(!response.ok)throw new Error("Feed unavailable");
   const data=await response.json();
   return(data.items||[]).map(item=>({
@@ -299,40 +292,49 @@ async function fetchFeed(feed){
     title:item.title||"Read the latest story",
     link:item.link||"",
     date:item.pubDate||"",
-    image:findImage(item)
+    image:extractImage(item)
   }));
 }
-function displayDate(value){
+function formatDate(value){
   const date=new Date(value);
   if(!value||Number.isNaN(date.getTime()))return "";
   return date.toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"});
 }
 async function loadLatestNews(){
-  try{
-    const results=await Promise.allSettled(newsFeeds.map(fetchFeed));
-    const stories=results.filter(r=>r.status==="fulfilled")
-      .flatMap(r=>r.value)
-      .filter(s=>/^https?:\/\//i.test(s.link))
-      .sort((a,b)=>new Date(b.date||0)-new Date(a.date||0))
-      .slice(0,6);
+  const results=await Promise.allSettled(newsFeeds.map(fetchFeed));
+  const byCategory={};
+  results.forEach((result,index)=>{
+    if(result.status==="fulfilled"){
+      const category=newsFeeds[index].category;
+      byCategory[category]=result.value
+        .filter(item=>/^https?:\/\//i.test(item.link))
+        .slice(0,newsFeeds[index].count);
+    }
+  });
 
-    if(!stories.length)throw new Error("No stories");
-    newsContainer.innerHTML=stories.map(story=>{
-      const image=/^https?:\/\//i.test(story.image)?story.image:"whbr-logo.png";
-      return `<article class="story">
-        <a class="story-link" href="${escapeHTML(story.link)}" target="_blank" rel="noopener noreferrer">
-          <img class="story-image" src="${escapeHTML(image)}" alt="" loading="lazy" onerror="this.onerror=null;this.src='whbr-logo.png'">
-          <div class="story-body">
-            <span class="story-category">${escapeHTML(story.category)}</span>
-            <h3 class="story-title">${escapeHTML(story.title)}</h3>
-            <span class="story-date">${escapeHTML(displayDate(story.date))}</span>
-          </div>
-        </a>
-      </article>`;
-    }).join("");
-  }catch{
-    newsContainer.innerHTML='<p class="loading">The latest stories are temporarily unavailable. Please check back soon.</p>';
+  let stories=newsFeeds.flatMap(feed=>byCategory[feed.category]||[]);
+  stories.sort((a,b)=>new Date(b.date||0)-new Date(a.date||0));
+  stories=stories.slice(0,6);
+
+  if(!stories.length){
+    newsContainer.innerHTML='<p class="loading">News is temporarily unavailable. Please check back soon.</p>';
+    return;
   }
+
+  newsContainer.innerHTML=stories.map(story=>{
+    const image=/^https?:\/\//i.test(story.image)
+      ?story.image:fallbackImages[story.category];
+    return `<article class="story">
+      <a class="story-link" href="${escapeHTML(story.link)}" target="_blank" rel="noopener noreferrer">
+        <img class="story-image" src="${escapeHTML(image)}" alt="" loading="lazy">
+        <div class="story-content">
+          <span class="story-category">${escapeHTML(story.category)}</span>
+          <h3 class="story-title">${escapeHTML(story.title)}</h3>
+          <span class="story-date">${escapeHTML(formatDate(story.date))}</span>
+        </div>
+      </a>
+    </article>`;
+  }).join("");
 }
 loadLatestNews();
 setInterval(loadLatestNews,300000);
