@@ -3,139 +3,131 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#e3222b">
-  <meta name="description" content="WHBR Roanoke — Real Rock Without the Ads. Classic rock from the 70s, 80s, 90s and beyond, streaming 24/7.">
-  <title>WHBR Roanoke | Real Rock Without the Ads</title>
+  <meta name="description" content="WHBR Radio — Real Rock Without the Ads.">
+  <title>WHBR Radio | Real Rock Without the Ads</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --red: #e3222b;
-      --red-dark: #a90f19;
+      --red-dark: #a30d16;
       --black: #090909;
-      --panel: #141414;
-      --panel-light: #1b1b1b;
-      --text: #f7f7f7;
-      --muted: #a5a5a5;
+      --panel: #151515;
+      --text: #f8f8f8;
+      --muted: #a6a6a6;
       --line: rgba(255,255,255,.09);
-      --max-width: 1440px;
+      --max: 1380px;
     }
 
     * { box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
       background: var(--black);
       color: var(--text);
-      font-family: "Inter", Arial, sans-serif;
+      font-family: Inter, Arial, sans-serif;
       -webkit-font-smoothing: antialiased;
     }
 
-    a { color: inherit; text-decoration: none; }
     button { font: inherit; }
 
-    /* TOP STATION BANNER */
+    /* RED WHBR BANNER */
+
     .station-banner {
-      min-height: 100px;
       position: relative;
       overflow: hidden;
-      background:
-        linear-gradient(105deg, #8e0b13 0%, #d91b26 42%, #f02a33 100%);
-      border-bottom: 1px solid rgba(255,255,255,.16);
+      background: linear-gradient(110deg, #920d16, #df1c27 60%, #f12b35);
+      border-bottom: 1px solid rgba(255,255,255,.15);
     }
 
-    .station-banner::before {
+    .station-banner::after {
       content: "";
       position: absolute;
       inset: 0;
-      opacity: .16;
+      pointer-events: none;
       background: repeating-linear-gradient(
         125deg,
         transparent 0,
-        transparent 35px,
-        rgba(0,0,0,.35) 36px,
-        rgba(0,0,0,.35) 38px
+        transparent 38px,
+        rgba(0,0,0,.12) 39px,
+        rgba(0,0,0,.12) 41px
       );
-      pointer-events: none;
     }
 
     .banner-inner {
-      max-width: var(--max-width);
+      position: relative;
+      z-index: 1;
+      max-width: var(--max);
       min-height: 100px;
+      padding: 16px 5%;
       margin: auto;
-      padding: 17px 5.2%;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
-      position: relative;
+      gap: 20px;
     }
 
     .station-promise {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 13px;
       font-size: 11px;
-      line-height: 1.6;
-      letter-spacing: 2.2px;
+      line-height: 1.65;
       font-weight: 800;
-      text-transform: uppercase;
+      letter-spacing: 2px;
     }
 
-    .promise-mark {
+    .promise-line {
       width: 4px;
-      height: 39px;
-      background: white;
-      box-shadow: 0 0 18px rgba(255,255,255,.25);
+      height: 40px;
+      background: #fff;
     }
 
     .station-promise small {
       display: block;
-      color: rgba(255,255,255,.75);
-      font-size: 10px;
-      letter-spacing: 2px;
+      color: rgba(255,255,255,.76);
+      font-size: 9px;
+      letter-spacing: 1.8px;
     }
 
     .banner-brand {
+      color: #fff;
       font-family: "Barlow Condensed", Impact, sans-serif;
-      font-size: clamp(48px, 7vw, 76px);
-      line-height: .9;
+      font-size: clamp(52px, 7vw, 78px);
       font-weight: 900;
+      line-height: .9;
       letter-spacing: 3px;
-      color: white;
-      text-shadow: 0 4px 0 rgba(0,0,0,.15);
       white-space: nowrap;
+      text-shadow: 0 3px 0 rgba(0,0,0,.15);
     }
 
     /* LIVE PLAYER */
-    .player-wrap {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 28px 5.2% 0;
+
+    .player-area {
+      max-width: var(--max);
+      margin: auto;
+      padding: 27px 5% 0;
     }
 
     .player {
-      min-height: 155px;
-      width: 100%;
+      min-height: 150px;
       display: grid;
-      grid-template-columns: 104px minmax(0, 1fr) 90px;
+      grid-template-columns: 104px minmax(0, 1fr) 82px;
       align-items: center;
       gap: 23px;
-      padding: 23px 27px;
+      padding: 22px 27px;
       background:
-        radial-gradient(ellipse at 0% 50%, rgba(227,34,43,.16), transparent 50%),
-        linear-gradient(115deg, #1a1a1a, #101010 70%);
-      border: 1px solid rgba(255,255,255,.1);
+        radial-gradient(ellipse at 0% 50%, rgba(227,34,43,.16), transparent 52%),
+        linear-gradient(115deg, #1b1b1b, #101010);
+      border: 1px solid var(--line);
       border-left: 4px solid var(--red);
       border-radius: 5px;
-      box-shadow: 0 16px 45px rgba(0,0,0,.3);
-      position: relative;
+      box-shadow: 0 15px 40px rgba(0,0,0,.28);
     }
 
     .station-art {
@@ -144,35 +136,30 @@
       display: grid;
       place-items: center;
       overflow: hidden;
-      background: linear-gradient(145deg, #ed2933, #8c0d15);
-      border: 1px solid rgba(255,255,255,.16);
+      background: linear-gradient(145deg, #e92731, #850c14);
+      border: 1px solid rgba(255,255,255,.14);
       border-radius: 3px;
-      box-shadow: 0 8px 24px rgba(0,0,0,.35);
     }
 
     .station-art img {
       width: 100%;
       height: 100%;
+      padding: 7px;
       object-fit: contain;
-      padding: 8px;
     }
 
     .art-fallback {
       font-family: "Barlow Condensed", Impact, sans-serif;
-      font-size: 31px;
+      font-size: 30px;
       font-weight: 900;
-      letter-spacing: -1px;
-      color: white;
     }
 
-    .player-info { min-width: 0; }
-
-    .live-line {
+    .live-row {
       display: flex;
       align-items: center;
       flex-wrap: wrap;
       gap: 10px;
-      margin-bottom: 9px;
+      margin-bottom: 10px;
     }
 
     .live-badge {
@@ -180,10 +167,10 @@
       align-items: center;
       gap: 7px;
       padding: 5px 8px;
-      color: white;
       background: var(--red);
+      color: white;
       border-radius: 2px;
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 800;
       letter-spacing: 1.3px;
     }
@@ -193,53 +180,52 @@
       height: 6px;
       background: white;
       border-radius: 50%;
-      animation: livePulse 1.8s infinite;
+      animation: pulse 1.8s infinite;
     }
 
-    .player-eyebrow {
+    .station-label {
       color: #aaa;
       font-size: 10px;
       font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
+      letter-spacing: 1.6px;
     }
 
-    .player-title {
+    .track-title {
       margin: 0;
+      overflow-wrap: anywhere;
       font-family: "Barlow Condensed", Impact, sans-serif;
-      font-size: clamp(25px, 3.3vw, 39px);
-      line-height: 1;
+      font-size: clamp(27px, 3.5vw, 40px);
       font-weight: 800;
-      letter-spacing: .4px;
+      line-height: 1.05;
       text-transform: uppercase;
     }
 
-    .player-subtitle {
-      margin: 8px 0 0;
-      color: #b6b6b6;
-      font-size: 12px;
+    .track-artist {
+      margin: 6px 0 0;
+      color: #b7b7b7;
+      font-size: 13px;
+      font-weight: 500;
       line-height: 1.5;
-      letter-spacing: .4px;
     }
 
     .play-button {
-      width: 76px;
-      height: 76px;
+      width: 74px;
+      height: 74px;
       justify-self: end;
       display: grid;
       place-items: center;
-      color: white;
       background: var(--red);
+      color: white;
       border: 0;
       border-radius: 50%;
       cursor: pointer;
-      box-shadow: 0 0 0 7px rgba(227,34,43,.11);
-      transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+      box-shadow: 0 0 0 7px rgba(227,34,43,.12);
+      transition: transform .2s, background .2s, box-shadow .2s;
     }
 
     .play-button:hover {
-      background: #f3353e;
       transform: scale(1.06);
+      background: #f3333c;
       box-shadow: 0 0 0 10px rgba(227,34,43,.13);
     }
 
@@ -248,49 +234,46 @@
       outline-offset: 5px;
     }
 
+    .play-button:disabled {
+      opacity: .7;
+      cursor: wait;
+    }
+
     .play-button svg {
       width: 27px;
       height: 27px;
       fill: currentColor;
     }
 
-    .play-button .pause-icon { display: none; }
+    .pause-icon { display: none; }
     .play-button.playing .play-icon { display: none; }
     .play-button.playing .pause-icon { display: block; }
 
     .player-status {
       min-height: 18px;
-      margin-top: 13px;
-      color: #a8a8a8;
+      padding: 12px 2px 0;
+      color: #999;
       font-size: 11px;
-      letter-spacing: .2px;
     }
 
-    .player-status.error { color: #ff777d; }
+    .player-status.error { color: #ff747b; }
 
-    @keyframes livePulse {
-      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(255,255,255,.45); }
-      50% { opacity: .65; box-shadow: 0 0 0 4px rgba(255,255,255,0); }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .55; }
     }
 
-    /* PAGE CONTENT */
+    /* SCHEDULE */
+
     .content {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 65px 5.2% 70px;
-    }
-
-    .section-heading {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 20px;
-      margin-bottom: 25px;
+      max-width: var(--max);
+      margin: auto;
+      padding: 62px 5% 65px;
     }
 
     .section-kicker {
       display: block;
-      margin-bottom: 7px;
+      margin-bottom: 8px;
       color: var(--red);
       font-size: 10px;
       font-weight: 800;
@@ -298,169 +281,31 @@
       text-transform: uppercase;
     }
 
-    .section-heading h2 {
+    .section-heading {
       margin: 0;
       font-family: "Barlow Condensed", Impact, sans-serif;
-      font-size: clamp(36px, 5vw, 49px);
+      font-size: clamp(38px, 5vw, 49px);
       font-weight: 800;
-      line-height: .98;
+      line-height: 1;
       text-transform: uppercase;
     }
 
-    .section-description {
-      max-width: 450px;
-      margin: 10px 0 0;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.7;
-    }
-
     .heading-rule {
-      width: 48px;
+      width: 46px;
       height: 3px;
       margin-top: 15px;
       background: var(--red);
     }
 
-    .news-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 22px;
-    }
-
-    .news-card {
-      min-width: 0;
-      overflow: hidden;
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 4px;
-      transition: transform .2s ease, border-color .2s ease, background .2s ease;
-    }
-
-    .news-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(227,34,43,.6);
-      background: #191919;
-    }
-
-    .news-image-wrap {
-      height: 190px;
-      overflow: hidden;
-      position: relative;
-      background: #242424;
-    }
-
-    .news-image-wrap::after {
-      content: "";
-      position: absolute;
-      inset: 45% 0 0;
-      background: linear-gradient(transparent, rgba(0,0,0,.42));
-      pointer-events: none;
-    }
-
-    .news-image {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: cover;
-      transition: transform .45s ease;
-    }
-
-    .news-card:hover .news-image { transform: scale(1.045); }
-
-    .news-category {
-      position: absolute;
-      z-index: 1;
-      left: 15px;
-      bottom: 13px;
-      padding: 6px 8px;
-      color: white;
-      background: var(--red);
-      border-radius: 2px;
-      font-size: 9px;
-      font-weight: 800;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-    }
-
-    .news-body { padding: 18px 18px 20px; }
-
-    .news-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-      margin-bottom: 10px;
-      color: #999;
-      font-size: 10px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: .6px;
-    }
-
-    .news-meta .separator { color: var(--red); }
-
-    .news-title {
-      margin: 0 0 10px;
-      font-size: 17px;
-      font-weight: 800;
-      line-height: 1.4;
-      letter-spacing: -.35px;
-    }
-
-    .news-summary {
-      margin: 0;
-      color: #aaa;
-      font-size: 12px;
-      line-height: 1.75;
-    }
-
-    .news-read {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 17px;
-      color: white;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-    }
-
-    .news-read span {
-      color: var(--red);
-      transition: transform .2s ease;
-    }
-
-    .news-card:hover .news-read span { transform: translateX(4px); }
-
-    .news-message {
-      grid-column: 1 / -1;
-      padding: 30px;
-      background: var(--panel);
-      border: 1px solid var(--line);
+    .section-description {
+      margin: 12px 0 0;
       color: var(--muted);
       font-size: 13px;
       line-height: 1.7;
-      text-align: center;
     }
 
-    .news-message button {
-      display: block;
-      margin: 14px auto 0;
-      padding: 10px 15px;
-      background: var(--red);
-      border: 0;
-      border-radius: 2px;
-      color: white;
-      font-weight: 800;
-      font-size: 11px;
-      cursor: pointer;
-    }
-
-    /* SCHEDULE */
     .schedule-section {
-      margin-top: 72px;
-      padding: 34px;
+      padding: 33px;
       background:
         radial-gradient(ellipse at 100% 0%, rgba(227,34,43,.10), transparent 45%),
         #121212;
@@ -471,27 +316,33 @@
     .schedule-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 15px;
-      margin-top: 25px;
+      gap: 16px;
+      margin-top: 26px;
     }
 
     .schedule-card {
       display: flex;
       align-items: center;
-      gap: 19px;
+      gap: 18px;
+      min-width: 0;
       padding: 21px;
       background: rgba(255,255,255,.025);
       border: 1px solid var(--line);
       border-radius: 3px;
+      transition: border-color .2s, background .2s;
+    }
+
+    .schedule-card:hover {
+      background: rgba(255,255,255,.04);
+      border-color: rgba(227,34,43,.45);
     }
 
     .schedule-icon {
-      width: 54px;
-      height: 54px;
-      flex: 0 0 54px;
+      width: 53px;
+      height: 53px;
+      flex: 0 0 53px;
       display: grid;
       place-items: center;
-      color: white;
       background: var(--red);
       border-radius: 3px;
     }
@@ -500,7 +351,7 @@
       width: 25px;
       height: 25px;
       fill: none;
-      stroke: currentColor;
+      stroke: white;
       stroke-width: 1.8;
       stroke-linecap: round;
       stroke-linejoin: round;
@@ -508,7 +359,7 @@
 
     .schedule-time {
       margin-bottom: 5px;
-      color: #ff646b;
+      color: #ff6970;
       font-size: 10px;
       font-weight: 800;
       letter-spacing: 1.3px;
@@ -518,60 +369,41 @@
     .schedule-card h3 {
       margin: 0;
       font-family: "Barlow Condensed", Impact, sans-serif;
-      font-size: 26px;
-      font-weight: 700;
-      line-height: 1.05;
+      font-size: 27px;
+      line-height: 1.1;
       text-transform: uppercase;
     }
 
     .schedule-card p {
       margin: 7px 0 0;
-      color: #a7a7a7;
+      color: #aaa;
       font-size: 11px;
       line-height: 1.6;
     }
 
     .timezone {
-      margin: 17px 0 0;
-      color: #777;
+      margin: 18px 0 0;
+      color: #888;
       font-size: 10px;
-      letter-spacing: .8px;
+      letter-spacing: 1px;
       text-transform: uppercase;
     }
 
     /* ABOUT */
+
     .about-section {
       display: grid;
-      grid-template-columns: .65fr 1.35fr;
+      grid-template-columns: .7fr 1.3fr;
       gap: 40px;
-      align-items: start;
-      padding: 65px 0 0;
-    }
-
-    .about-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      color: #ff646b;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .about-label::before {
-      content: "";
-      width: 23px;
-      height: 2px;
-      background: var(--red);
+      padding-top: 62px;
     }
 
     .about-section h2 {
       margin: 13px 0 0;
       font-family: "Barlow Condensed", Impact, sans-serif;
       font-size: 46px;
-      line-height: .95;
       font-weight: 800;
+      line-height: .98;
       text-transform: uppercase;
     }
 
@@ -585,24 +417,25 @@
     .about-copy p:first-child { color: #eee; }
 
     /* FOOTER */
+
     footer {
-      padding: 25px 5.2%;
-      border-top: 1px solid var(--line);
+      padding: 24px 5%;
       background: #050505;
+      border-top: 1px solid var(--line);
     }
 
     .footer-inner {
-      max-width: var(--max-width);
+      max-width: var(--max);
       margin: auto;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       gap: 20px;
     }
 
     .footer-brand {
       font-family: "Barlow Condensed", Impact, sans-serif;
-      font-size: 26px;
+      font-size: 27px;
       font-weight: 900;
       letter-spacing: 1px;
     }
@@ -613,109 +446,92 @@
       margin-top: 4px;
       color: #777;
       font-size: 10px;
-      line-height: 1.6;
     }
 
     .footer-tagline {
       color: #aaa;
       font-size: 10px;
       font-weight: 700;
-      letter-spacing: 1.4px;
+      letter-spacing: 1.3px;
       text-align: right;
       text-transform: uppercase;
     }
 
-    @media (max-width: 900px) {
-      .news-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .news-image-wrap { height: 175px; }
-      .content { padding-top: 52px; }
-    }
-
-    @media (max-width: 600px) {
-      .station-banner, .banner-inner { min-height: 78px; }
-
-      .banner-inner { padding: 14px 5%; gap: 12px; }
+    @media (max-width: 700px) {
+      .banner-inner {
+        min-height: 80px;
+        padding: 14px 4.5%;
+      }
 
       .station-promise {
         gap: 9px;
         font-size: 9px;
-        letter-spacing: 1.1px;
+        letter-spacing: 1px;
       }
 
       .station-promise small {
         font-size: 8px;
-        letter-spacing: 1px;
+        letter-spacing: .8px;
       }
 
-      .promise-mark { height: 31px; }
+      .promise-line { height: 32px; }
 
       .banner-brand {
-        font-size: clamp(39px, 11vw, 57px);
+        font-size: clamp(43px, 11vw, 59px);
         letter-spacing: 1px;
       }
 
-      .player-wrap { padding: 19px 4.5% 0; }
+      .player-area { padding: 19px 4.5% 0; }
 
       .player {
-        grid-template-columns: 67px minmax(0, 1fr) 55px;
+        grid-template-columns: 68px minmax(0, 1fr) 53px;
         gap: 12px;
-        min-height: 110px;
-        padding: 15px 12px;
+        min-height: 105px;
+        padding: 14px 12px;
       }
 
-      .station-art { width: 67px; height: 67px; }
+      .station-art { width: 68px; height: 68px; }
       .station-art img { padding: 5px; }
-      .art-fallback { font-size: 23px; }
 
-      .live-line { gap: 6px; margin-bottom: 7px; }
+      .art-fallback { font-size: 22px; }
+      .live-row { gap: 6px; margin-bottom: 7px; }
       .live-badge { padding: 4px 6px; font-size: 8px; }
-      .player-eyebrow { font-size: 8px; letter-spacing: .8px; }
-      .player-title { font-size: clamp(22px, 6.1vw, 29px); }
-      .player-subtitle { font-size: 10px; margin-top: 5px; }
+      .station-label { font-size: 8px; letter-spacing: .6px; }
+
+      .track-title { font-size: clamp(21px, 5.7vw, 30px); }
+      .track-artist { margin-top: 5px; font-size: 10px; }
 
       .play-button {
-        width: 52px;
-        height: 52px;
-        box-shadow: 0 0 0 4px rgba(227,34,43,.11);
+        width: 51px;
+        height: 51px;
+        box-shadow: 0 0 0 4px rgba(227,34,43,.12);
       }
 
-      .play-button svg { width: 21px; height: 21px; }
-      .player-status { font-size: 10px; margin-top: 10px; }
+      .play-button svg { width: 20px; height: 20px; }
 
-      .content { padding: 47px 4.5% 50px; }
-      .section-heading { margin-bottom: 20px; }
-      .section-heading h2 { font-size: 39px; }
-      .section-description { font-size: 12px; }
-
-      .news-grid { grid-template-columns: 1fr; gap: 15px; }
-      .news-card { display: grid; grid-template-columns: 115px minmax(0, 1fr); }
-      .news-image-wrap { height: 100%; min-height: 165px; }
-      .news-category { left: 7px; bottom: 8px; padding: 5px; font-size: 8px; letter-spacing: .5px; }
-      .news-body { padding: 13px; }
-      .news-meta { font-size: 9px; margin-bottom: 7px; }
-      .news-title { font-size: 14px; line-height: 1.35; margin-bottom: 7px; }
-      .news-summary { font-size: 11px; line-height: 1.6; }
-      .news-read { margin-top: 11px; font-size: 9px; }
-
-      .schedule-section { margin-top: 48px; padding: 21px 15px; }
+      .content { padding: 43px 4.5% 48px; }
+      .schedule-section { padding: 23px 15px; }
       .schedule-grid { grid-template-columns: 1fr; gap: 11px; margin-top: 20px; }
-      .schedule-card { padding: 15px; gap: 13px; }
-      .schedule-icon { width: 45px; height: 45px; flex-basis: 45px; }
-      .schedule-card h3 { font-size: 24px; }
-
-      .about-section { grid-template-columns: 1fr; gap: 17px; padding-top: 47px; }
+      .schedule-card { padding: 16px; gap: 13px; }
+      .schedule-icon { width: 46px; height: 46px; flex-basis: 46px; }
+      .schedule-card h3 { font-size: 25px; }
+      .about-section { grid-template-columns: 1fr; gap: 17px; padding-top: 45px; }
       .about-section h2 { font-size: 40px; }
       .about-copy p { font-size: 12px; }
+      .footer-tagline { max-width: 130px; font-size: 9px; line-height: 1.8; }
+    }
 
-      .footer-inner { align-items: flex-start; }
-      .footer-tagline { max-width: 135px; font-size: 9px; line-height: 1.8; }
+    @media (max-width: 380px) {
+      .player { grid-template-columns: 55px minmax(0, 1fr) 45px; gap: 9px; padding: 12px 9px; }
+      .station-art { width: 55px; height: 55px; }
+      .play-button { width: 44px; height: 44px; }
+      .station-label { font-size: 7px; }
+      .track-title { font-size: 20px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
-        scroll-behavior: auto !important;
         animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
         transition-duration: .01ms !important;
       }
     }
@@ -726,10 +542,10 @@
   <header class="station-banner">
     <div class="banner-inner">
       <div class="station-promise">
-        <span class="promise-mark"></span>
+        <span class="promise-line"></span>
         <div>
           REAL ROCK<br>WITHOUT THE ADS
-          <small>ROANOKE, VIRGINIA · 24/7</small>
+          <small>CLASSIC ROCK · STREAMING 24/7</small>
         </div>
       </div>
       <div class="banner-brand">WHBR</div>
@@ -737,27 +553,34 @@
   </header>
 
   <main>
-    <section class="player-wrap" aria-label="Live radio player">
+    <section class="player-area" aria-label="WHBR live player">
       <div class="player">
         <div class="station-art">
           <img
             src="whbr-logo.png"
-            alt="WHBR Radio logo"
+            alt="WHBR Radio"
             onerror="this.style.display='none';this.nextElementSibling.style.display='block';"
           >
           <span class="art-fallback" style="display:none">WHBR</span>
         </div>
 
         <div class="player-info">
-          <div class="live-line">
+          <div class="live-row">
             <span class="live-badge"><span class="live-dot"></span> LIVE</span>
-            <span class="player-eyebrow">WHBR RADIO · ROANOKE</span>
+            <span class="station-label">WHBR RADIO</span>
           </div>
-          <h1 class="player-title">Real Rock. Without the Ads.</h1>
-          <p class="player-subtitle">The music you grew up with. The rock you still love. All day, every day.</p>
+
+          <h1 class="track-title" id="track-title">WHBR ROANOKE</h1>
+          <p class="track-artist" id="track-artist">Always AD Free</p>
         </div>
 
-        <button class="play-button" id="play-button" aria-label="Play WHBR Radio" aria-pressed="false">
+        <button
+          class="play-button"
+          id="play-button"
+          type="button"
+          aria-label="Play WHBR Radio"
+          aria-pressed="false"
+        >
           <svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M7 4.8c0-.8.9-1.3 1.6-.9l11 7.1a1.2 1.2 0 0 1 0 2L8.6 20.1c-.7.4-1.6-.1-1.6-.9V4.8z"/>
           </svg>
@@ -774,35 +597,18 @@
       <audio
         id="whbrAudio"
         preload="none"
-        crossorigin="anonymous"
         src="https://uk2freenew.listen2myradio.com/live.mp3?typeportmount=s1_12331_stream_165976521">
       </audio>
     </section>
 
     <div class="content">
-      <section class="news-section" aria-labelledby="news-heading">
-        <div class="section-heading">
-          <div>
-            <span class="section-kicker">What's happening</span>
-            <h2 id="news-heading">The Latest</h2>
-            <div class="heading-rule"></div>
-            <p class="section-description">Music, sports, and the biggest stories making headlines.</p>
-          </div>
-        </div>
-
-        <div class="news-grid" id="news-grid" aria-live="polite">
-          <div class="news-message">Loading the latest headlines…</div>
-        </div>
-      </section>
-
       <section class="schedule-section" aria-labelledby="schedule-heading">
-        <div class="section-heading">
-          <div>
-            <span class="section-kicker">Turn it up</span>
-            <h2 id="schedule-heading">On The Air</h2>
-            <p class="section-description">Dedicated decades. Four hours of rock. No interruptions from ads.</p>
-          </div>
-        </div>
+        <span class="section-kicker">Turn it up</span>
+        <h2 class="section-heading" id="schedule-heading">On The Air</h2>
+        <div class="heading-rule"></div>
+        <p class="section-description">
+          Dedicated decades. Four hours of rock. Always ad free.
+        </p>
 
         <div class="schedule-grid">
           <article class="schedule-card">
@@ -822,9 +628,8 @@
           <article class="schedule-card">
             <div class="schedule-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24">
-                <path d="M12 3v3M12 18v3M3 12h3M18 12h3"></path>
-                <circle cx="12" cy="12" r="7"></circle>
-                <path d="M9 12l2 2 4-4"></path>
+                <circle cx="12" cy="12" r="9"></circle>
+                <path d="M12 7v5l3.5 2"></path>
               </svg>
             </div>
             <div>
@@ -835,17 +640,24 @@
           </article>
         </div>
 
-        <p class="timezone">All times Eastern · Roanoke, Virginia</p>
+        <p class="timezone">All times Eastern</p>
       </section>
 
       <section class="about-section" aria-labelledby="about-heading">
         <div>
-          <span class="about-label">About the station</span>
+          <span class="section-kicker">About the station</span>
           <h2 id="about-heading">Real Rock.<br>No Ads.</h2>
         </div>
         <div class="about-copy">
-          <p>WHBR Roanoke brings you the greatest classic rock songs ever recorded. Legendary artists, unforgettable riffs, and timeless music 24 hours a day.</p>
-          <p>Broadcasting from Roanoke, Virginia, WHBR connects listeners everywhere with the music that shaped generations. From the 70s and 80s to 90s rock and beyond, we're here for one reason: the music.</p>
+          <p>
+            WHBR Roanoke brings you the greatest classic rock songs ever recorded.
+            Legendary artists, unforgettable riffs, and timeless music 24 hours a day.
+          </p>
+          <p>
+            Broadcasting from Roanoke, Virginia, WHBR connects listeners with
+            the music that shaped generations. From the 70s and 80s to 90s rock
+            and beyond, we're here for one reason: the music.
+          </p>
         </div>
       </section>
     </div>
@@ -855,24 +667,24 @@
     <div class="footer-inner">
       <div>
         <div class="footer-brand"><span>WHBR</span> RADIO</div>
-        <div class="footer-copy">Roanoke, Virginia · Streaming 24/7</div>
+        <div class="footer-copy">Streaming 24/7</div>
       </div>
       <div class="footer-tagline">Real Rock<br>Without the Ads</div>
     </div>
   </footer>
 
   <script>
-    /* LIVE PLAYER */
+    /* STREAM PLAYER */
     const audio = document.getElementById("whbrAudio");
     const playButton = document.getElementById("play-button");
     const audioStatus = document.getElementById("audio-status");
 
-    function setPlayerState(isPlaying) {
-      playButton.classList.toggle("playing", isPlaying);
-      playButton.setAttribute("aria-pressed", String(isPlaying));
+    function setPlaying(playing) {
+      playButton.classList.toggle("playing", playing);
+      playButton.setAttribute("aria-pressed", String(playing));
       playButton.setAttribute(
         "aria-label",
-        isPlaying ? "Pause WHBR Radio" : "Play WHBR Radio"
+        playing ? "Pause WHBR Radio" : "Play WHBR Radio"
       );
     }
 
@@ -891,238 +703,105 @@
       } catch (error) {
         audioStatus.classList.add("error");
         audioStatus.textContent =
-          "The stream could not start. Please try again in a moment.";
-        setPlayerState(false);
+          "The stream couldn't start. Please try again.";
+        setPlaying(false);
       } finally {
         playButton.disabled = false;
       }
     });
 
     audio.addEventListener("playing", () => {
-      setPlayerState(true);
+      setPlaying(true);
       audioStatus.classList.remove("error");
       audioStatus.textContent = "You're listening live to WHBR Radio.";
     });
 
     audio.addEventListener("pause", () => {
-      setPlayerState(false);
+      setPlaying(false);
       if (!audio.ended) audioStatus.textContent = "Stream paused.";
     });
 
     audio.addEventListener("waiting", () => {
-      audioStatus.textContent = "Buffering the live stream…";
+      audioStatus.textContent = "Buffering live audio…";
     });
 
     audio.addEventListener("error", () => {
-      setPlayerState(false);
+      setPlaying(false);
       audioStatus.classList.add("error");
       audioStatus.textContent =
-        "Unable to reach the stream. Check the connection and try again.";
+        "Unable to connect to the stream. Please try again.";
     });
 
-    /* NEWS CARDS
-       Headlines are loaded from public RSS feeds through RSS2JSON.
-       If a feed is temporarily unavailable, the other feeds can still load. */
-    const newsGrid = document.getElementById("news-grid");
+    /* NOW PLAYING METADATA
+       The page checks for a text file named nowplaying.txt next to index.html.
+       Example file contents: Def Leppard - Pour Some Sugar On Me
+       Metadata will show only when that file is published and accessible. */
+    const titleElement = document.getElementById("track-title");
+    const artistElement = document.getElementById("track-artist");
 
-    const newsFeeds = [
-      {
-        name: "Music",
-        url: "https://www.nme.com/news/music/feed",
-        fallbackImage: "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=900&q=80"
-      },
-      {
-        name: "Music",
-        url: "https://www.rollingstone.com/music/music-news/feed/",
-        fallbackImage: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=900&q=80"
-      },
-      {
-        name: "Sports",
-        url: "https://www.espn.com/espn/rss/news",
-        fallbackImage: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=900&q=80"
-      },
-      {
-        name: "U.S. News",
-        url: "https://www.cbsnews.com/latest/rss/main/",
-        fallbackImage: "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=900&q=80"
-      },
-      {
-        name: "Politics",
-        url: "https://rss.politico.com/politics-news.xml",
-        fallbackImage: "https://images.unsplash.com/photo-1520869562399-e772f042f422?auto=format&fit=crop&w=900&q=80"
-      }
-    ];
+    const fallbackTitle = "WHBR ROANOKE";
+    const fallbackArtist = "Always AD Free";
 
-    const escapeHTML = (value) => String(value ?? "").replace(/[&<>"']/g, char => ({
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#39;"
-    })[char]);
-
-    function stripHTML(value) {
-      const doc = new DOMParser().parseFromString(String(value || ""), "text/html");
-      return (doc.body.textContent || "").replace(/\s+/g, " ").trim();
-    }
-
-    function validHttpUrl(value) {
+    async function updateNowPlaying() {
       try {
-        const url = new URL(value);
-        return url.protocol === "https:" || url.protocol === "http:";
-      } catch {
-        return false;
-      }
-    }
-
-    function extractImage(item, fallback) {
-      const possible = [
-        item.thumbnail,
-        item.enclosure && item.enclosure.link,
-        item.enclosure && item.enclosure.url,
-        item["media:content"] && item["media:content"].url,
-        item["media:thumbnail"] && item["media:thumbnail"].url
-      ];
-
-      const found = possible.find(value =>
-        typeof value === "string" && validHttpUrl(value)
-      );
-
-      return found || fallback;
-    }
-
-    function formatDate(value) {
-      const date = new Date(value);
-      if (!value || Number.isNaN(date.getTime())) return "Latest";
-
-      return new Intl.DateTimeFormat("en-US", {
-        month: "short",
-        day: "numeric",
-        year: "numeric"
-      }).format(date);
-    }
-
-    function createNewsCard(item, category, fallbackImage) {
-      const title = stripHTML(item.title) || "Read the latest story";
-      const summary = stripHTML(
-        item.description || item.content || item.contentSnippet || ""
-      );
-
-      const url = validHttpUrl(item.link) ? item.link : "";
-      const image = extractImage(item, fallbackImage);
-      const date = formatDate(item.pubDate || item.isoDate || item.published);
-
-      const card = document.createElement("article");
-      card.className = "news-card";
-
-      const inner = `
-        <div class="news-image-wrap">
-          <img
-            class="news-image"
-            src="${escapeHTML(image)}"
-            alt=""
-            loading="lazy"
-            referrerpolicy="no-referrer"
-          >
-          <span class="news-category">${escapeHTML(category)}</span>
-        </div>
-        <div class="news-body">
-          <div class="news-meta">
-            <span>${escapeHTML(date)}</span>
-            <span class="separator">/</span>
-            <span>${escapeHTML(item.author || item.creator || category)}</span>
-          </div>
-          <h3 class="news-title">${escapeHTML(title)}</h3>
-          <p class="news-summary">${escapeHTML(
-            summary ? (summary.length > 155 ? summary.slice(0, 152).trim() + "…" : summary) :
-            "Read the full story for the latest details."
-          )}</p>
-          ${
-            url
-              ? `<a class="news-read" href="${escapeHTML(url)}" target="_blank" rel="noopener noreferrer">Read Story <span>→</span></a>`
-              : `<span class="news-read">Latest Update</span>`
-          }
-        </div>
-      `;
-
-      card.innerHTML = inner;
-
-      const imageElement = card.querySelector(".news-image");
-      imageElement.addEventListener("error", () => {
-        if (imageElement.src !== fallbackImage) {
-          imageElement.src = fallbackImage;
-        }
-      }, { once: true });
-
-      return card;
-    }
-
-    async function loadFeed(feed) {
-      const endpoint =
-        "https://api.rss2json.com/v1/api.json?rss_url=" +
-        encodeURIComponent(feed.url);
-
-      const response = await fetch(endpoint);
-      if (!response.ok) throw new Error("Feed request failed");
-
-      const data = await response.json();
-      if (data.status !== "ok" || !Array.isArray(data.items)) {
-        throw new Error("Feed unavailable");
-      }
-
-      return data.items.map(item => ({
-        ...item,
-        _category: feed.name,
-        _fallbackImage: feed.fallbackImage
-      }));
-    }
-
-    async function loadNews() {
-      newsGrid.innerHTML = '<div class="news-message">Loading the latest headlines…</div>';
-
-      const results = await Promise.allSettled(newsFeeds.map(loadFeed));
-      const allItems = [];
-
-      results.forEach(result => {
-        if (result.status === "fulfilled") {
-          allItems.push(...result.value);
-        }
-      });
-
-      const uniqueItems = [];
-      const seen = new Set();
-
-      allItems
-        .sort((a, b) => new Date(b.pubDate || 0) - new Date(a.pubDate || 0))
-        .forEach(item => {
-          const key = (item.link || "") + "|" + stripHTML(item.title).toLowerCase();
-          if (key !== "|" && !seen.has(key)) {
-            seen.add(key);
-            uniqueItems.push(item);
-          }
-        });
-
-      if (uniqueItems.length === 0) {
-        newsGrid.innerHTML = `
-          <div class="news-message">
-            The news feeds are temporarily unavailable. You can try loading the headlines again.
-            <button type="button" id="retry-news">Reload Headlines</button>
-          </div>
-        `;
-        document.getElementById("retry-news").addEventListener("click", loadNews);
-        return;
-      }
-
-      newsGrid.innerHTML = "";
-
-      uniqueItems.slice(0, 6).forEach(item => {
-        newsGrid.appendChild(
-          createNewsCard(item, item._category, item._fallbackImage)
+        const response = await fetch(
+          "nowplaying.txt?t=" + Date.now(),
+          { cache: "no-store" }
         );
-      });
+
+        if (!response.ok) throw new Error("Metadata not available");
+
+        const raw = (await response.text()).trim();
+
+        if (!raw || raw.length > 300) throw new Error("Empty metadata");
+
+        const ignored = [
+          "LIVE!",
+          "LIVE - WHBR",
+          "WHBR RADIO",
+          "ALL OF YOUR FAVORITES - WHBR",
+          "ALWAYS AD FREE - WHBR",
+          "ALWAYS FREE - WHBR RADIO",
+          "RADIO - WHBR",
+          "BRAEDENBROWN @WHBR",
+          "-"
+        ];
+
+        if (ignored.includes(raw.toUpperCase())) {
+          titleElement.textContent = fallbackTitle;
+          artistElement.textContent = fallbackArtist;
+          return;
+        }
+
+        let artist = "";
+        let title = raw;
+
+        const separators = [" - ", " – ", " — "];
+
+        for (const separator of separators) {
+          const splitAt = raw.indexOf(separator);
+          if (splitAt > 0) {
+            artist = raw.slice(0, splitAt).trim();
+            title = raw.slice(splitAt + separator.length).trim();
+            break;
+          }
+        }
+
+        if (artist && title) {
+          titleElement.textContent = title;
+          artistElement.textContent = artist;
+        } else {
+          titleElement.textContent = raw;
+          artistElement.textContent = fallbackArtist;
+        }
+      } catch {
+        titleElement.textContent = fallbackTitle;
+        artistElement.textContent = fallbackArtist;
+      }
     }
 
-    loadNews();
+    updateNowPlaying();
+    setInterval(updateNowPlaying, 10000);
   </script>
 </body>
 </html>
