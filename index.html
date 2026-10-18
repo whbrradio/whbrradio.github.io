@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -606,12 +607,11 @@
     <section class="player-area" aria-label="WHBR live player">
       <div class="player">
         <div class="station-art">
-       <img
-  id="album-art"
-  src="whbr-logo.png"
-  alt="Current song album cover"
-  onerror="this.onerror=null;this.src='whbr-logo.png';"
->
+          <img
+            src="whbr-logo.png"
+            alt="WHBR Radio"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='block';"
+          >
           <span class="art-fallback" style="display:none">WHBR</span>
         </div>
 
@@ -621,8 +621,8 @@
             <span class="station-label">WHBR RADIO</span>
           </div>
 
-          <h1 class="track-title" id="track-title">WHBR RADIO</h1>
-          <p class="track-artist" id="track-artist">AD FREE MUSIC 24/7</p>
+          <h1 class="track-title" id="track-title">WHBR ROANOKE</h1>
+          <p class="track-artist" id="track-artist">Always AD Free</p>
           <div class="on-air-line">
             <span class="on-air-indicator" aria-hidden="true"></span>
             <span id="on-air-show">ON AIR: The Classic Rock Rotation</span>
@@ -662,7 +662,7 @@
         <h2 class="section-heading" id="schedule-heading">On The Air</h2>
         <div class="heading-rule"></div>
         <p class="section-description">
-          Tune in to these events to make your day rock!
+          Dedicated decades. Four hours of rock. Always ad free.
         </p>
 
         <div class="schedule-grid">
@@ -710,11 +710,13 @@
         </div>
         <div class="about-copy">
           <p>
-            WHBR Roanoke brings you the greatest rock songs ever recorded. Legendary artists, and timeless music 24 hours a day.
+            WHBR Roanoke brings you the greatest classic rock songs ever recorded.
+            Legendary artists, unforgettable riffs, and timeless music 24 hours a day.
           </p>
           <p>
             Broadcasting from Roanoke, Virginia, WHBR connects listeners with
-            the music that shaped generations. From the 70s and 80s guitar riffs to the 90s Rock Anthems, WHBR plays non-stop music, That's right. No ADS
+            the music that shaped generations. From the guitar riffs of 70s and 80s to the 90s rock
+            and beyond, we give you 100% ad-free listening. Our promise
           </p>
         </div>
       </section>
@@ -799,106 +801,68 @@
 
     const fallbackTitle = "WHBR ROANOKE";
     const fallbackArtist = "Always AD Free";
-const albumArt = document.getElementById("album-art");
-const defaultAlbumArt = "whbr-logo.png";
-let lastArtworkSong = "";
+    const defaultDocumentTitle = "WHBR Radio | Real Rock Without the Ads";
 
-async function updateAlbumArt(artist, title) {
-  const songKey = `${artist} - ${title}`;
+    async function updateNowPlaying() {
+      try {
+        const response = await fetch(
+          "nowplaying.txt?t=" + Date.now(),
+          { cache: "no-store" }
+        );
 
-  if (songKey === lastArtworkSong) return;
-  lastArtworkSong = songKey;
+        if (!response.ok) throw new Error("Metadata not available");
 
-  albumArt.style.opacity = "0.5";
+        const raw = (await response.text()).trim();
 
-  try {
-    const searchTerm = encodeURIComponent(`${artist} ${title}`);
-    const response = await fetch(
-      `https://itunes.apple.com/search?term=${searchTerm}&entity=song&limit=10`
-    );
-
-    if (!response.ok) throw new Error("iTunes search failed");
-
-    const data = await response.json();
-    const normalize = value =>
-      value.toLowerCase().replace(/[^a-z0-9]/g, "");
-
-    const match = (data.results || []).find(song =>
-      normalize(song.artistName) === normalize(artist) &&
-      normalize(song.trackName) === normalize(title)
-    );
-
-    const artwork = match?.artworkUrl100
-      ?.replace("100x100bb", "600x600bb");
-
-    albumArt.onerror = () => {
-      albumArt.onerror = null;
-      albumArt.src = defaultAlbumArt;
-      albumArt.style.opacity = "1";
-    };
-
-    albumArt.onload = () => {
-      albumArt.style.opacity = "1";
-    };
-
-    albumArt.src = artwork || defaultAlbumArt;
-  } catch (error) {
-    console.error("WHBR iTunes artwork error:", error);
-    albumArt.src = defaultAlbumArt;
-    albumArt.style.opacity = "1";
-  }
-}
-   
-async function updateNowPlaying() {
-  try {
-    const response = await fetch(
-      "https://whbr-live-metadata.braedenbrown460.workers.dev/api/nowplaying?t=" + Date.now(),
-      { cache: "no-store" }
-    );
-
-    if (!response.ok) {
-      throw new Error("Metadata not available");
-    }
-
-    const data = await response.json();
-    const artist = (data.artist || "").trim();
-    const title = (data.title || "").trim();
-
-    if (!artist || !title) {
-      throw new Error("Empty metadata");
-    }
+        if (!raw || raw.length > 300) throw new Error("Empty metadata");
 
         const ignored = [
-      "LIVE!",
-      "LIVE - WHBR",
-      "WHBR RADIO",
-      "ALL OF YOUR FAVORITES - WHBR",
-      "ALWAYS AD FREE - WHBR",
-      "ALWAYS FREE - WHBR RADIO",
-      "RADIO - WHBR",
-      "BRAEDENBROWN @WHBR",
-      "-"
-    ];
+          "LIVE!",
+          "LIVE - WHBR",
+          "WHBR RADIO",
+          "ALL OF YOUR FAVORITES - WHBR",
+          "ALWAYS AD FREE - WHBR",
+          "ALWAYS FREE - WHBR RADIO",
+          "RADIO - WHBR",
+          "BRAEDENBROWN @WHBR",
+          "-"
+        ];
 
-    const combined = `${artist} - ${title}`.toUpperCase();
+        if (ignored.includes(raw.toUpperCase())) {
+          titleElement.textContent = fallbackTitle;
+          artistElement.textContent = fallbackArtist;
+          document.title = defaultDocumentTitle;
+          return;
+        }
 
-    if (ignored.includes(combined) || title === "-") {
-      titleElement.textContent = fallbackTitle;
-      artistElement.textContent = fallbackArtist;
-      albumArt.src = defaultAlbumArt;
-      lastArtworkSong = "";
-      return;
-    }
+        let artist = "";
+        let title = raw;
 
-    titleElement.textContent = title;
-    artistElement.textContent = artist;
-    updateAlbumArt(artist, title);
-  } catch (error) {
-    console.error("WHBR metadata error:", error);
-    titleElement.textContent = fallbackTitle;
-    artistElement.textContent = fallbackArtist;
-  }
+        const separators = [" - ", " – ", " — "];
 
+        for (const separator of separators) {
+          const splitAt = raw.indexOf(separator);
+          if (splitAt > 0) {
+            artist = raw.slice(0, splitAt).trim();
+            title = raw.slice(splitAt + separator.length).trim();
+            break;
+          }
+        }
+
+        if (artist && title) {
+          titleElement.textContent = title;
+          artistElement.textContent = artist;
+          document.title = `${title} - ${artist} | WHBR Radio`;
+        } else {
+          titleElement.textContent = raw;
+          artistElement.textContent = fallbackArtist;
+          document.title = `${raw} | WHBR Radio`;
+        }
+      } catch {
+        titleElement.textContent = fallbackTitle;
+        artistElement.textContent = fallbackArtist;
+        document.title = defaultDocumentTitle;
+      }
     }
 
     /* ON AIR SHOW: Eastern Time, including daylight-saving changes.
