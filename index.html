@@ -33,6 +33,89 @@
       -webkit-font-smoothing: antialiased;
     }
 
+<!-- WHBR TEMPORARY STREAM BANNER -->
+<div class="whbr-outage-banner">
+  <span class="whbr-status-dot"></span>
+  <strong>WHBR TEMPORARILY DOWN</strong>
+  <span class="whbr-banner-divider">|</span>
+  <span>Listen live here:</span>
+  <a href="http://whbrradio.duckdns.org:8000/stream" target="_blank" rel="noopener noreferrer">
+    LISTEN NOW ↗
+  </a>
+</div>
+
+<style>
+  .whbr-outage-banner {
+    width: 100%;
+    box-sizing: border-box;
+    background: linear-gradient(90deg, #300000, #111111, #300000);
+    border-bottom: 2px solid #e00000;
+    color: #ffffff;
+    padding: 13px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    text-align: center;
+    position: relative;
+    z-index: 9999;
+  }
+
+  .whbr-status-dot {
+    width: 9px;
+    height: 9px;
+    background: #ff2525;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 10px #ff2525;
+    animation: whbr-pulse 1.5s infinite;
+  }
+
+  .whbr-outage-banner strong {
+    color: #ff3b3b;
+    letter-spacing: 1px;
+  }
+
+  .whbr-banner-divider {
+    color: #777777;
+  }
+
+  .whbr-outage-banner a {
+    color: #ffffff;
+    background: #d40000;
+    padding: 8px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    transition: background 0.2s ease;
+  }
+
+  .whbr-outage-banner a:hover {
+    background: #ff2020;
+  }
+
+  @keyframes whbr-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  @media (max-width: 600px) {
+    .whbr-outage-banner {
+      gap: 9px;
+      padding: 12px 8px;
+      font-size: 12px;
+    }
+
+    .whbr-banner-divider {
+      display: none;
+    }
+  }
+</style>
+
     button { font: inherit; }
 
     /* RED WHBR BANNER */
