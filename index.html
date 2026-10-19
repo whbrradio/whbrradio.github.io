@@ -1110,4 +1110,578 @@
   </script>
 
 </body>
-</html>
+
+<!-- ================= WHBR MY FAVORITES ================= -->
+
+<style>
+  #whbr-favorites {
+    max-width: 1242px;
+    margin: 25px auto 60px;
+    padding: 30px 5%;
+    color: #fff;
+    font-family: Inter, Arial, sans-serif;
+  }
+
+  #whbr-favorites h2 {
+    margin: 0;
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: clamp(38px, 5vw, 55px);
+    text-transform: uppercase;
+  }
+
+  #whbr-favorites .whbr-red {
+    color: #e3222b;
+  }
+
+  #whbr-favorites .whbr-fav-description {
+    color: #aaa;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  #whbr-favorites .whbr-fav-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 13px;
+    margin: 10px 0;
+    background: #151515;
+    border: 1px solid #303030;
+    border-radius: 7px;
+  }
+
+  #whbr-favorites .whbr-fav-card img {
+    width: 70px;
+    height: 70px;
+    flex-shrink: 0;
+    object-fit: cover;
+    background: #090909;
+    border-radius: 4px;
+  }
+
+  #whbr-favorites .whbr-fav-details {
+    flex: 1;
+    min-width: 0;
+  }
+
+  #whbr-favorites .whbr-fav-title {
+    font-weight: 800;
+    font-size: 14px;
+    overflow-wrap: anywhere;
+  }
+
+  #whbr-favorites .whbr-fav-artist {
+    margin-top: 5px;
+    color: #aaa;
+    font-size: 12px;
+  }
+
+  #whbr-favorites button {
+    padding: 10px 13px;
+    color: white;
+    background: #202020;
+    border: 1px solid #414141;
+    border-radius: 5px;
+    font-weight: 800;
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  #whbr-favorites button:hover {
+    border-color: #e3222b;
+  }
+
+  #whbr-favorites .whbr-fav-primary {
+    background: #e3222b;
+    border-color: #e3222b;
+  }
+
+  #whbr-favorites .whbr-fav-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 10px;
+  }
+
+  #whbr-favorites .whbr-fav-empty {
+    padding: 25px;
+    color: #aaa;
+    background: #121212;
+    border: 1px dashed #444;
+    border-radius: 7px;
+    text-align: center;
+    line-height: 1.7;
+  }
+
+  #whbr-favorites .whbr-fav-status {
+    min-height: 20px;
+    color: #aaa;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  #whbr-favorites .whbr-fav-status.error {
+    color: #ff656b;
+  }
+
+  #whbr-favorites #whbr-favorite-video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 0;
+    border-radius: 7px;
+    background: #000;
+  }
+
+  @media(max-width: 500px) {
+    #whbr-favorites .whbr-fav-card img {
+      width: 52px;
+      height: 52px;
+    }
+
+    #whbr-favorites .whbr-fav-card {
+      gap: 9px;
+      padding: 9px;
+    }
+  }
+</style>
+
+<section id="whbr-favorites">
+  <span class="whbr-red" style="font-size:10px;font-weight:800;letter-spacing:3px">
+    YOUR PERSONAL PLAYLIST
+  </span>
+
+  <h2>My Favorites <span id="whbr-fav-count" class="whbr-red">(0)</span></h2>
+
+  <div style="height:4px;width:60px;background:#e3222b;margin:16px 0"></div>
+
+  <p class="whbr-fav-description">
+    Heart songs you love while listening to WHBR, then play them here anytime.
+  </p>
+
+  <div style="padding:20px;background:#151515;border:1px solid #303030;border-radius:8px;margin:20px 0">
+    <div style="font-size:10px;color:#e3222b;font-weight:800;letter-spacing:2px;margin-bottom:10px">
+      SELECTED SONG
+    </div>
+
+    <h3 id="whbr-fav-current-title" style="margin:0 0 6px;font-size:22px">
+      WHBR RADIO
+    </h3>
+
+    <p id="whbr-fav-current-artist" style="margin:0 0 16px;color:#aaa;font-size:13px">
+      Real Rock Without the Ads
+    </p>
+
+    <button id="whbr-fav-heart" class="whbr-fav-primary" type="button">
+      ♡ Save Current Song
+    </button>
+
+    <button id="whbr-fav-switch-live" type="button" hidden>
+      ↻ Switch to Live Stream
+    </button>
+
+    <p id="whbr-fav-status" class="whbr-fav-status" role="status" aria-live="polite">
+      Your favorites are saved in this browser.
+    </p>
+
+    <div id="whbr-fav-video-wrap" hidden>
+      <iframe
+        id="whbr-favorite-video"
+        title="WHBR favorite song player"
+        allow="autoplay; encrypted-media; picture-in-picture"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:28px 0 16px">
+    <h3 style="margin:0;font-size:21px">Your Saved Songs</h3>
+    <button id="whbr-fav-clear" type="button">Clear All</button>
+  </div>
+
+  <div id="whbr-fav-list">
+    <div class="whbr-fav-empty">
+      <strong style="display:block;color:white;margin-bottom:6px">No favorites yet</strong>
+      When a song you love is playing, press “Save Current Song.”
+    </div>
+  </div>
+
+  <p class="whbr-fav-description" style="font-size:11px">
+    Your favorites are saved on this device and browser. Songs unavailable for
+    embedded playback will be marked as unavailable.
+  </p>
+</section>
+
+<script>
+(() => {
+  "use strict";
+
+  const STORAGE_KEY = "whbrFavorites_v1";
+
+  /*
+    AUTOMATIC SEARCH CONFIGURATION
+
+    To enable automatic matching, set SEARCH_ENDPOINT to a service you control
+    that accepts ?q=Artist%20Song and returns JSON such as:
+    {"videoId":"YouTubeVideoID"}
+
+    Leave blank until that service exists. This code will not pretend that
+    an unsuccessful search has found a playable song.
+  */
+  const SEARCH_ENDPOINT = "";
+
+  const $ = id => document.getElementById(id);
+
+  const titleEl = $("track-title");
+  const artistEl = $("track-artist");
+  const albumEl = $("album-art");
+  const liveAudio = $("whbrAudio");
+
+  const currentTitle = $("whbr-fav-current-title");
+  const currentArtist = $("whbr-fav-current-artist");
+  const heartButton = $("whbr-fav-heart");
+  const switchLiveButton = $("whbr-fav-switch-live");
+  const statusEl = $("whbr-fav-status");
+  const listEl = $("whbr-fav-list");
+  const countEl = $("whbr-fav-count");
+  const videoWrap = $("whbr-fav-video-wrap");
+  const videoFrame = $("whbr-favorite-video");
+
+  let mode = "live";
+  let selectedId = null;
+  let lastSeenSong = "";
+
+  function getFavorites() {
+    try {
+      const value = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      return Array.isArray(value) ? value : [];
+    } catch {
+      return [];
+    }
+  }
+
+  function saveFavorites(items) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+      return true;
+    } catch {
+      setStatus("Unable to save favorites. Check your browser storage settings.", true);
+      return false;
+    }
+  }
+
+  function setStatus(message, error = false) {
+    statusEl.textContent = message;
+    statusEl.classList.toggle("error", error);
+  }
+
+  function normalize(text) {
+    return String(text || "").trim().toLowerCase().replace(/\s+/g, " ");
+  }
+
+  function songKey(song) {
+    return normalize(song.artist) + "||" + normalize(song.title);
+  }
+
+  function getCurrentSong() {
+    const title = titleEl?.textContent?.trim() || "";
+    const artist = artistEl?.textContent?.trim() || "";
+
+    if (!title || !artist ||
+        /WHBR RADIO|WHBR ROANOKE|AD FREE MUSIC|ALWAYS AD FREE/i.test(title)) {
+      return null;
+    }
+
+    return {
+      title,
+      artist,
+      artwork: albumEl?.src || "whbr-logo.png"
+    };
+  }
+
+  function syncHeart() {
+    const song = getCurrentSong();
+
+    currentTitle.textContent = song?.title || "WHBR RADIO";
+    currentArtist.textContent = song?.artist || "Real Rock Without the Ads";
+
+    const saved = song && getFavorites().some(item =>
+      songKey(item) === songKey(song)
+    );
+
+    heartButton.textContent = saved
+      ? "♥ Saved to My Favorites"
+      : "♡ Save Current Song";
+
+    heartButton.disabled = !song || mode !== "live";
+  }
+
+  function renderFavorites() {
+    const favorites = getFavorites();
+
+    countEl.textContent = `(${favorites.length})`;
+    listEl.replaceChildren();
+
+    if (!favorites.length) {
+      const empty = document.createElement("div");
+      empty.className = "whbr-fav-empty";
+
+      const strong = document.createElement("strong");
+      strong.textContent = "No favorites yet";
+      strong.style.cssText = "display:block;color:white;margin-bottom:6px";
+
+      empty.append(strong, document.createTextNode(
+        "When a song you love is playing, press “Save Current Song.”"
+      ));
+
+      listEl.appendChild(empty);
+      syncHeart();
+      return;
+    }
+
+    favorites.forEach(song => {
+      const card = document.createElement("article");
+      card.className = "whbr-fav-card";
+
+      const image = document.createElement("img");
+      image.src = song.artwork || "whbr-logo.png";
+      image.alt = "Album artwork";
+      image.onerror = () => {
+        image.onerror = null;
+        image.src = "whbr-logo.png";
+      };
+
+      const details = document.createElement("div");
+      details.className = "whbr-fav-details";
+
+      const title = document.createElement("div");
+      title.className = "whbr-fav-title";
+      title.textContent = song.title;
+
+      const artist = document.createElement("div");
+      artist.className = "whbr-fav-artist";
+      artist.textContent = song.artist;
+
+      const actions = document.createElement("div");
+      actions.className = "whbr-fav-actions";
+
+      const play = document.createElement("button");
+      play.type = "button";
+      play.className = "whbr-fav-primary";
+      play.textContent = "▶ Play";
+      play.addEventListener("click", () => playFavorite(song.id));
+
+      const remove = document.createElement("button");
+      remove.type = "button";
+      remove.textContent = "♥ Remove";
+      remove.addEventListener("click", () => removeFavorite(song.id));
+
+      actions.append(play, remove);
+      details.append(title, artist, actions);
+      card.append(image, details);
+      listEl.appendChild(card);
+    });
+
+    syncHeart();
+  }
+
+  heartButton.addEventListener("click", async () => {
+    const song = getCurrentSong();
+
+    if (!song) {
+      setStatus("Wait for a song title to appear before saving it.", true);
+      return;
+    }
+
+    const favorites = getFavorites();
+    const existing = favorites.find(item => songKey(item) === songKey(song));
+
+    if (existing) {
+      saveFavorites(favorites.filter(item => item.id !== existing.id));
+      renderFavorites();
+      setStatus("Removed from My Favorites.");
+      return;
+    }
+
+    const item = {
+      ...song,
+      id: Date.now().toString(36) + Math.random().toString(36).slice(2, 8),
+      videoId: null,
+      lookupStatus: "pending"
+    };
+
+    favorites.unshift(item);
+
+    if (!saveFavorites(favorites)) return;
+
+    renderFavorites();
+    setStatus("Song saved. Searching for a playable version…");
+
+    await findVideo(item.id);
+  });
+
+  async function findVideo(id) {
+    const song = getFavorites().find(item => item.id === id);
+    if (!song) return;
+
+    if (!SEARCH_ENDPOINT) {
+      updateLookupStatus(id, "unavailable");
+      setStatus(
+        "Song saved, but automatic search isn't configured yet. A search service is needed to find its playable video.",
+        true
+      );
+      return;
+    }
+
+    try {
+      const url = new URL(SEARCH_ENDPOINT);
+      url.searchParams.set("q", `${song.artist} ${song.title} official audio`);
+
+      const response = await fetch(url.toString(), { cache: "no-store" });
+      if (!response.ok) throw new Error("Search request failed");
+
+      const result = await response.json();
+
+      if (!result.videoId || !/^[\w-]{11}$/.test(result.videoId)) {
+        throw new Error("No playable match found");
+      }
+
+      updateLookupStatus(id, "ready", result.videoId);
+      setStatus(`Found a video for “${song.title}”. Press Play to listen.`);
+    } catch (error) {
+      updateLookupStatus(id, "unavailable");
+      setStatus(`“${song.title}” is not available to play.`, true);
+    }
+  }
+
+  function updateLookupStatus(id, status, videoId = null) {
+    const favorites = getFavorites();
+    const song = favorites.find(item => item.id === id);
+
+    if (!song) return;
+
+    song.lookupStatus = status;
+    if (videoId) song.videoId = videoId;
+
+    saveFavorites(favorites);
+    renderFavorites();
+  }
+
+  function removeFavorite(id) {
+    const song = getFavorites().find(item => item.id === id);
+
+    saveFavorites(getFavorites().filter(item => item.id !== id));
+
+    if (selectedId === id) switchToLive(false);
+
+    renderFavorites();
+    setStatus(song ? `Removed “${song.title}” from My Favorites.` : "Favorite removed.");
+  }
+
+  async function playFavorite(id) {
+    const song = getFavorites().find(item => item.id === id);
+    if (!song) return;
+
+    if (!song.videoId) {
+      if (song.lookupStatus === "pending") {
+        setStatus(`Searching for “${song.title}”…`);
+        return;
+      }
+
+      setStatus(`“${song.title}” is not available to play.`, true);
+      return;
+    }
+
+    mode = "favorite";
+    selectedId = id;
+
+    if (liveAudio) {
+      liveAudio.pause();
+    }
+
+    videoWrap.hidden = false;
+    switchLiveButton.hidden = false;
+
+    currentTitle.textContent = song.title;
+    currentArtist.textContent = song.artist;
+
+    /*
+      Standard YouTube embed. If YouTube rejects embedding, the iframe error
+      cannot always be detected, so the player also gives users a direct status.
+    */
+    videoFrame.src =
+      "https://www.youtube-nocookie.com/embed/" +
+      encodeURIComponent(song.videoId) +
+      "?autoplay=1&playsinline=1&rel=0";
+
+    setStatus(`Loading “${song.title}”…`);
+
+    setTimeout(() => {
+      if (mode === "favorite" && selectedId === id) {
+        setStatus(
+          `If “${song.title}” doesn't start, it may be unavailable for embedded playback.`,
+          true
+        );
+      }
+    }, 9000);
+
+    syncHeart();
+  }
+
+  function switchToLive(showMessage = true) {
+    mode = "live";
+    selectedId = null;
+
+    videoFrame.src = "about:blank";
+    videoWrap.hidden = true;
+    switchLiveButton.hidden = true;
+
+    syncHeart();
+
+    if (showMessage) {
+      setStatus("Switched to WHBR Live. Press your main Play button to listen.");
+    }
+  }
+
+  switchLiveButton.addEventListener("click", () => switchToLive());
+
+  $("whbr-fav-clear").addEventListener("click", () => {
+    if (!getFavorites().length) {
+      setStatus("Your favorites list is already empty.");
+      return;
+    }
+
+    if (!confirm("Clear all your saved favorites?")) return;
+
+    saveFavorites([]);
+
+    if (mode === "favorite") switchToLive(false);
+
+    renderFavorites();
+    setStatus("All favorites cleared.");
+  });
+
+  /*
+    Watch your existing live metadata fields. Your current WHBR metadata
+    updater continues running normally.
+  */
+  function watchCurrentSong() {
+    if (mode === "live") {
+      const song = getCurrentSong();
+      const key = song ? songKey(song) : "";
+
+      if (key && key !== lastSeenSong) {
+        lastSeenSong = key;
+        syncHeart();
+      }
+    }
+  }
+
+  renderFavorites();
+  syncHeart();
+  setInterval(watchCurrentSong, 2000);
+})();
+</script>
+
+<!-- =============== END WHBR MY FAVORITES =============== -->
+
