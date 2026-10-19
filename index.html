@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +24,13 @@
       --max: 1380px;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       margin: 0;
@@ -33,11 +40,676 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    a {
+      color: inherit;
+    }
 
+    /* TEMPORARY STREAM NOTICE */
+
+    .whbr-outage-banner {
+      width: 100%;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      background: linear-gradient(90deg, #300000, #111, #300000);
+      border-bottom: 2px solid var(--red);
+      color: white;
+      font-size: 13px;
+      text-align: center;
+      position: relative;
+      z-index: 1000;
+    }
+
+    .whbr-status-dot {
+      width: 9px;
+      height: 9px;
+      flex-shrink: 0;
+      background: #ff3030;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #ff3030;
+      animation: whbr-pulse 1.5s infinite;
+    }
+
+    .whbr-outage-banner strong {
+      color: #ff424b;
+      letter-spacing: 1px;
+    }
+
+    .whbr-outage-banner a {
+      display: inline-block;
+      padding: 8px 14px;
+      background: var(--red);
+      border-radius: 4px;
+      color: white;
+      text-decoration: none;
+      font-weight: 800;
+      letter-spacing: .5px;
+      transition: background .2s ease;
+    }
+
+    .whbr-outage-banner a:hover {
+      background: #ff414a;
+    }
+
+    @keyframes whbr-pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .4; }
+    }
+
+    /* STATION HEADER */
+
+    .station-banner {
+      width: 100%;
+      background: #080808;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .banner-inner {
+      max-width: var(--max);
+      min-height: 100px;
+      margin: 0 auto;
+      padding: 18px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .station-promise {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-family: "Barlow Condensed", Impact, sans-serif;
+      font-size: 22px;
+      line-height: 1.05;
+      font-weight: 900;
+      letter-spacing: 1.2px;
+    }
+
+    .promise-line {
+      width: 5px;
+      height: 47px;
+      flex-shrink: 0;
+      background: var(--red);
+    }
+
+    .station-promise small {
+      display: block;
+      margin-top: 7px;
+      color: var(--muted);
+      font: 700 10px Inter, Arial, sans-serif;
+      letter-spacing: 2px;
+    }
+
+    .banner-brand {
+      color: white;
+      font-family: "Barlow Condensed", Impact, sans-serif;
+      font-size: clamp(48px, 7vw, 76px);
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-shadow: 3px 3px 0 var(--red-dark);
+    }
+
+    /* PLAYER */
+
+    .player-area {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 38px 5% 22px;
+    }
+
+    .player {
+      min-height: 210px;
+      padding: 24px 35px 24px 24px;
+      display: flex;
+      align-items: center;
+      gap: 27px;
+      position: relative;
+      background: linear-gradient(120deg, #191919, #101010);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 9px;
+      box-shadow: 0 12px 35px rgba(0,0,0,.3);
+    }
+
+    .station-art {
+      width: 158px;
+      height: 158px;
+      flex: 0 0 158px;
+      overflow: hidden;
+      background: #111;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 5px;
+    }
+
+    #album-art {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: opacity .35s ease;
+    }
+
+    .player-info {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .live-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 13px;
+    }
+
+    .live-badge {
+      padding: 5px 9px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 3px;
+      background: var(--red);
+      color: white;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .live-dot {
+      width: 6px;
+      height: 6px;
+      background: white;
+      border-radius: 50%;
+      animation: whbr-pulse 1.5s infinite;
+    }
+
+    .station-label {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    .track-title {
+      margin: 0;
+      overflow-wrap: anywhere;
+      font-family: "Barlow Condensed", Impact, sans-serif;
+      font-size: clamp(25px, 3.2vw, 43px);
+      font-weight: 800;
+      line-height: 1.05;
+      text-transform: uppercase;
+    }
+
+    .track-artist {
+      margin: 8px 0 15px;
+      color: #c6c6c6;
+      font-size: 15px;
+      line-height: 1.4;
+    }
+
+    .on-air-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #bcbcbc;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .on-air-indicator {
+      width: 7px;
+      height: 7px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: #37d67a;
+      box-shadow: 0 0 8px rgba(55,214,122,.5);
+    }
+
+    .play-button {
+      width: 76px;
+      height: 76px;
+      flex: 0 0 76px;
+      margin-right: -72px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+      cursor: pointer;
+      background: var(--red);
+      border: 5px solid var(--black);
+      border-radius: 50%;
+      color: white;
+      box-shadow: 0 0 25px rgba(227,34,43,.22);
+      transition: transform .2s ease, background .2s ease;
+    }
+
+    .play-button:hover {
+      transform: scale(1.06);
+      background: #ff303a;
+    }
+
+    .play-button:disabled {
+      opacity: .65;
+      cursor: wait;
+    }
+
+    .play-button svg {
+      width: 28px;
+      height: 28px;
+      fill: currentColor;
+    }
+
+    .pause-icon {
+      display: none;
+    }
+
+    .play-button.playing .play-icon {
+      display: none;
+    }
+
+    .play-button.playing .pause-icon {
+      display: block;
+    }
+
+    .player-status {
+      min-height: 20px;
+      margin-top: 15px;
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .player-status.error {
+      color: #ff656b;
+    }
+
+    /* MAIN CONTENT */
+
+    .content {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 20px 5% 65px;
+    }
+
+    .schedule-section {
+      padding: 28px 0 55px;
+    }
+
+    .section-kicker {
+      display: block;
+      margin-bottom: 9px;
+      color: var(--red);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .section-heading,
+    .about-section h2 {
+      margin: 0;
+      font-family: "Barlow Condensed", Impact, sans-serif;
+      font-size: clamp(36px, 5vw, 53px);
+      font-weight: 900;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .heading-rule {
+      width: 60px;
+      height: 4px;
+      margin: 16px 0;
+      background: var(--red);
+    }
+
+    .section-description {
+      margin: 0 0 27px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .schedule-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 17px;
+    }
+
+    .schedule-card {
+      min-width: 0;
+      padding: 22px 18px;
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      transition: border-color .2s ease, transform .2s ease;
+    }
+
+    .schedule-card:hover {
+      border-color: rgba(227,34,43,.65);
+      transform: translateY(-3px);
+    }
+
+    .schedule-icon {
+      width: 75px;
+      min-width: 75px;
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #220d0e;
+      border: 1px solid rgba(227,34,43,.3);
+      border-radius: 5px;
+    }
+
+    .time-main {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-family: "Barlow Condensed", Impact, sans-serif;
+      font-size: 23px;
+      font-weight: 900;
+    }
+
+    .time-period {
+      margin-left: 2px;
+      color: #ff7379;
+      font-family: Inter, Arial, sans-serif;
+      font-size: 9px;
+      font-weight: 800;
+      vertical-align: super;
+    }
+
+    .time-dash {
+      color: #777;
+      font-size: 15px;
+    }
+
+    .schedule-time {
+      margin-bottom: 8px;
+      color: #ff7379;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .5px;
+    }
+
+    .schedule-card h3 {
+      margin: 0 0 8px;
+      font-family: "Barlow Condensed", Impact, sans-serif;
+      font-size: 23px;
+      font-weight: 800;
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+
+    .schedule-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .timezone {
+      margin: 18px 0 0;
+      color: #777;
+      font-size: 11px;
+    }
+
+    /* ABOUT */
+
+    .about-section {
+      padding: 45px 0 25px;
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 50px;
+      border-top: 1px solid var(--line);
+    }
+
+    .about-section h2 {
+      font-size: clamp(43px, 5vw, 62px);
+    }
+
+    .about-copy p {
+      margin: 0 0 18px;
+      color: #b9b9b9;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    /* FOOTER */
+
+    footer {
+      background: #050505;
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-inner {
+      max-width: var(--max);
+      min-height: 115px;
+      margin: 0 auto;
+      padding: 25px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .footer-brand {
+      font-family: "Barlow Condensed", Impact, sans-serif;
+      font-size: 27px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .footer-brand span {
+      color: var(--red);
+    }
+
+    .footer-copy {
+      margin-top: 5px;
+      color: #777;
+      font-size: 11px;
+    }
+
+    .footer-tagline {
+      color: #ccc;
+      font-family: "Barlow Condensed", Impact, sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      line-height: 1.15;
+      text-align: right;
+      text-transform: uppercase;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 900px) {
+      .schedule-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .schedule-card {
+        align-items: center;
+      }
+
+      .schedule-icon {
+        flex-shrink: 0;
+      }
+
+      .about-section {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .whbr-outage-banner {
+        gap: 8px;
+        padding: 12px 8px;
+        font-size: 11px;
+      }
+
+      .banner-inner {
+        min-height: 80px;
+        padding: 15px 5%;
+      }
+
+      .station-promise {
+        gap: 10px;
+        font-size: 17px;
+      }
+
+      .promise-line {
+        height: 40px;
+      }
+
+      .station-promise small {
+        font-size: 8px;
+        letter-spacing: 1px;
+      }
+
+      .banner-brand {
+        font-size: 49px;
+      }
+
+      .player-area {
+        padding: 25px 5% 15px;
+      }
+
+      .player {
+        min-height: 0;
+        padding: 18px 15px;
+        gap: 14px;
+      }
+
+      .station-art {
+        width: 92px;
+        height: 92px;
+        flex-basis: 92px;
+      }
+
+      .live-row {
+        gap: 7px;
+        margin-bottom: 8px;
+      }
+
+      .live-badge {
+        padding: 4px 6px;
+        font-size: 9px;
+      }
+
+      .station-label {
+        font-size: 8px;
+        letter-spacing: 1px;
+      }
+
+      .track-title {
+        font-size: clamp(19px, 5vw, 27px);
+      }
+
+      .track-artist {
+        margin: 5px 0 9px;
+        font-size: 12px;
+      }
+
+      .on-air-line {
+        font-size: 9px;
+      }
+
+      .play-button {
+        width: 53px;
+        height: 53px;
+        flex-basis: 53px;
+        margin-right: -29px;
+        border-width: 3px;
+      }
+
+      .play-button svg {
+        width: 21px;
+        height: 21px;
+      }
+
+      .content {
+        padding-top: 10px;
+      }
+
+      .schedule-card {
+        padding: 17px 13px;
+        gap: 12px;
+      }
+
+      .schedule-icon {
+        width: 70px;
+        min-width: 70px;
+      }
+
+      .time-main {
+        font-size: 21px;
+      }
+
+      .schedule-card h3 {
+        font-size: 21px;
+      }
+
+      .footer-inner {
+        min-height: 100px;
+      }
+    }
+
+    @media (max-width: 370px) {
+      .station-art {
+        width: 72px;
+        height: 72px;
+        flex-basis: 72px;
+      }
+
+      .player {
+        gap: 10px;
+        padding-left: 10px;
+      }
+
+      .play-button {
+        margin-right: -25px;
+      }
+
+      .station-label {
+        display: none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
   </style>
 </head>
 
 <body>
+
+  <!-- TEMPORARY STREAM BANNER -->
+  <div class="whbr-outage-banner">
+    <span class="whbr-status-dot" aria-hidden="true"></span>
+    <strong>WHBR TEMPORARILY DOWN</strong>
+    <span>Listen live here:</span>
+    <a href="http://whbrradio.duckdns.org:8000/stream"
+       target="_blank"
+       rel="noopener noreferrer">
+      LISTEN NOW ↗
+    </a>
+  </div>
+
+  <!-- STATION HEADER -->
   <header class="station-banner">
     <div class="banner-inner">
       <div class="station-promise">
@@ -52,26 +724,30 @@
   </header>
 
   <main>
+    <!-- LIVE PLAYER -->
     <section class="player-area" aria-label="WHBR live player">
       <div class="player">
+
         <div class="station-art">
-       <img
-  id="album-art"
-  src="whbr-logo.png"
-  alt="Current song album cover"
-  onerror="this.onerror=null;this.src='whbr-logo.png';"
->
-          <span class="art-fallback" style="display:none">WHBR</span>
+          <img
+            id="album-art"
+            src="whbr-logo.png"
+            alt="Current song album cover"
+            onerror="this.onerror=null;this.src='whbr-logo.png';"
+          >
         </div>
 
         <div class="player-info">
           <div class="live-row">
-            <span class="live-badge"><span class="live-dot"></span> LIVE</span>
+            <span class="live-badge">
+              <span class="live-dot"></span> LIVE
+            </span>
             <span class="station-label">WHBR RADIO</span>
           </div>
 
           <h1 class="track-title" id="track-title">WHBR RADIO</h1>
           <p class="track-artist" id="track-artist">AD FREE MUSIC 24/7</p>
+
           <div class="on-air-line">
             <span class="on-air-indicator" aria-hidden="true"></span>
             <span id="on-air-show">ON AIR: The Classic Rock Rotation</span>
@@ -98,14 +774,16 @@
         Press play to listen live.
       </div>
 
-      <audio
-  id="whbrAudio"
-  preload="none"
-  src="http://http://73.177.149.88:8000/stream">
-</audio>
+      <!-- CORRECTED ICECAST STREAM URL -->
+      <audio id="whbrAudio"
+             preload="none"
+             src="http://whbrradio.duckdns.org:8000/stream">
+      </audio>
     </section>
 
     <div class="content">
+
+      <!-- SCHEDULE -->
       <section class="schedule-section" aria-labelledby="schedule-heading">
         <span class="section-kicker">Turn it up</span>
         <h2 class="section-heading" id="schedule-heading">On The Air</h2>
@@ -115,9 +793,14 @@
         </p>
 
         <div class="schedule-grid">
+
           <article class="schedule-card">
             <div class="schedule-icon" aria-label="9 AM to 1 PM">
-              <span class="time-main"><span>9<span class="time-period">AM</span></span><span class="time-dash">–</span><span>1<span class="time-period">PM</span></span></span>
+              <span class="time-main">
+                <span>9<span class="time-period">AM</span></span>
+                <span class="time-dash">–</span>
+                <span>1<span class="time-period">PM</span></span>
+              </span>
             </div>
             <div>
               <div class="schedule-time">9:00 AM – 1:00 PM</div>
@@ -128,7 +811,11 @@
 
           <article class="schedule-card">
             <div class="schedule-icon" aria-label="8 PM to midnight">
-              <span class="time-main"><span>8<span class="time-period">PM</span></span><span class="time-dash">–</span><span>12<span class="time-period">AM</span></span></span>
+              <span class="time-main">
+                <span>8<span class="time-period">PM</span></span>
+                <span class="time-dash">–</span>
+                <span>12<span class="time-period">AM</span></span>
+              </span>
             </div>
             <div>
               <div class="schedule-time">8:00 PM – Midnight</div>
@@ -139,7 +826,11 @@
 
           <article class="schedule-card">
             <div class="schedule-icon" aria-label="5 PM to 6 PM">
-              <span class="time-main"><span>5<span class="time-period">PM</span></span><span class="time-dash">–</span><span>6<span class="time-period">PM</span></span></span>
+              <span class="time-main">
+                <span>5<span class="time-period">PM</span></span>
+                <span class="time-dash">–</span>
+                <span>6<span class="time-period">PM</span></span>
+              </span>
             </div>
             <div>
               <div class="schedule-time">5:00 PM – 6:00 PM</div>
@@ -147,29 +838,37 @@
               <p>Big riffs and hard-rock favorites for the drive home.</p>
             </div>
           </article>
+
         </div>
 
         <p class="timezone">All times Eastern</p>
       </section>
 
+      <!-- ABOUT -->
       <section class="about-section" aria-labelledby="about-heading">
         <div>
           <span class="section-kicker">About the station</span>
           <h2 id="about-heading">Real Rock.<br>No Ads.</h2>
         </div>
+
         <div class="about-copy">
           <p>
-            WHBR Roanoke brings you the greatest rock songs ever recorded. Legendary artists, and timeless music 24 hours a day.
+            WHBR Roanoke brings you the greatest rock songs ever recorded.
+            Legendary artists and timeless music 24 hours a day.
           </p>
           <p>
-            Broadcasting from Roanoke, Virginia, WHBR connects listeners with
-            the music that shaped generations. From the 70s and 80s guitar riffs to the 90s Rock Anthems, WHBR plays non-stop music, That's right. No ADS
+            Broadcasting from Roanoke, Virginia, WHBR connects listeners
+            with the music that shaped generations. From the 70s and 80s
+            guitar riffs to the 90s rock anthems, WHBR plays nonstop music.
+            That's right. No ads.
           </p>
         </div>
       </section>
+
     </div>
   </main>
 
+  <!-- FOOTER -->
   <footer>
     <div class="footer-inner">
       <div>
@@ -182,6 +881,7 @@
 
   <script>
     /* STREAM PLAYER */
+
     const audio = document.getElementById("whbrAudio");
     const playButton = document.getElementById("play-button");
     const audioStatus = document.getElementById("audio-status");
@@ -210,7 +910,7 @@
       } catch (error) {
         audioStatus.classList.add("error");
         audioStatus.textContent =
-          "The stream couldn't start. Please try again.";
+          "Unable to start the stream. Try LISTEN NOW above.";
         setPlaying(false);
       } finally {
         playButton.disabled = false;
@@ -236,123 +936,134 @@
       setPlaying(false);
       audioStatus.classList.add("error");
       audioStatus.textContent =
-        "Unable to connect to the stream. Please try again.";
+        "Unable to connect. Use LISTEN NOW above to test the stream.";
     });
 
-    /* NOW PLAYING METADATA
-       The page checks for a text file named nowplaying.txt next to index.html.
-       Example file contents: Def Leppard - Pour Some Sugar On Me
-       Metadata will show only when that file is published and accessible. */
+    /* NOW PLAYING METADATA */
+
     const titleElement = document.getElementById("track-title");
     const artistElement = document.getElementById("track-artist");
+    const albumArt = document.getElementById("album-art");
 
     const fallbackTitle = "WHBR ROANOKE";
     const fallbackArtist = "Always AD Free";
-const albumArt = document.getElementById("album-art");
-const defaultAlbumArt = "whbr-logo.png";
-let lastArtworkSong = "";
+    const defaultAlbumArt = "whbr-logo.png";
 
-async function updateAlbumArt(artist, title) {
-  const songKey = `${artist} - ${title}`;
+    let lastArtworkSong = "";
+    let lastValidMetadata = "";
 
-  if (songKey === lastArtworkSong) return;
-  lastArtworkSong = songKey;
+    async function updateAlbumArt(artist, title) {
+      const songKey = `${artist} - ${title}`;
 
-  albumArt.style.opacity = "0.5";
+      if (songKey === lastArtworkSong) return;
+      lastArtworkSong = songKey;
 
-  try {
-    const searchTerm = encodeURIComponent(`${artist} ${title}`);
-    const response = await fetch(
-      `https://itunes.apple.com/search?term=${searchTerm}&entity=song&limit=10`
-    );
+      albumArt.style.opacity = "0.5";
 
-    if (!response.ok) throw new Error("iTunes search failed");
+      try {
+        const searchTerm = encodeURIComponent(`${artist} ${title}`);
+        const response = await fetch(
+          `https://itunes.apple.com/search?term=${searchTerm}&entity=song&limit=10`
+        );
 
-    const data = await response.json();
-    const normalize = value =>
-      value.toLowerCase().replace(/[^a-z0-9]/g, "");
+        if (!response.ok) throw new Error("iTunes search failed");
 
-    const match = (data.results || []).find(song =>
-      normalize(song.artistName) === normalize(artist) &&
-      normalize(song.trackName) === normalize(title)
-    );
+        const data = await response.json();
 
-    const artwork = match?.artworkUrl100
-      ?.replace("100x100bb", "600x600bb");
+        const normalize = value =>
+          value.toLowerCase().replace(/[^a-z0-9]/g, "");
 
-    albumArt.onerror = () => {
-      albumArt.onerror = null;
-      albumArt.src = defaultAlbumArt;
-      albumArt.style.opacity = "1";
-    };
+        const match = (data.results || []).find(song =>
+          normalize(song.artistName) === normalize(artist) &&
+          normalize(song.trackName) === normalize(title)
+        );
 
-    albumArt.onload = () => {
-      albumArt.style.opacity = "1";
-    };
+        const artwork = match?.artworkUrl100
+          ?.replace("100x100bb", "600x600bb");
 
-    albumArt.src = artwork || defaultAlbumArt;
-  } catch (error) {
-    console.error("WHBR iTunes artwork error:", error);
-    albumArt.src = defaultAlbumArt;
-    albumArt.style.opacity = "1";
-  }
-}
-   
-async function updateNowPlaying() {
-  try {
-    const response = await fetch(
-      "https://whbr-live-metadata.braedenbrown460.workers.dev/api/nowplaying?t=" + Date.now(),
-      { cache: "no-store" }
-    );
+        albumArt.onerror = () => {
+          albumArt.onerror = null;
+          albumArt.src = defaultAlbumArt;
+          albumArt.style.opacity = "1";
+        };
 
-    if (!response.ok) {
-      throw new Error("Metadata not available");
+        albumArt.onload = () => {
+          albumArt.style.opacity = "1";
+        };
+
+        albumArt.src = artwork || defaultAlbumArt;
+      } catch (error) {
+        console.error("WHBR artwork error:", error);
+        albumArt.src = defaultAlbumArt;
+        albumArt.style.opacity = "1";
+      }
     }
 
-    const data = await response.json();
-    const artist = (data.artist || "").trim();
-    const title = (data.title || "").trim();
+    async function updateNowPlaying() {
+      try {
+        const response = await fetch(
+          "https://whbr-live-metadata.braedenbrown460.workers.dev/api/nowplaying?t=" + Date.now(),
+          { cache: "no-store" }
+        );
 
-    if (!artist || !title) {
-      throw new Error("Empty metadata");
-    }
+        if (!response.ok) {
+          throw new Error("Metadata not available");
+        }
+
+        const data = await response.json();
+        const artist = (data.artist || "").trim();
+        const title = (data.title || "").trim();
+
+        if (!artist || !title) {
+          throw new Error("Empty metadata");
+        }
 
         const ignored = [
-      "LIVE!",
-      "LIVE - WHBR",
-      "WHBR RADIO",
-      "ALL OF YOUR FAVORITES - WHBR",
-      "ALWAYS AD FREE - WHBR",
-      "ALWAYS FREE - WHBR RADIO",
-      "RADIO - WHBR",
-      "BRAEDENBROWN @WHBR",
-      "-"
-    ];
+          "LIVE!",
+          "LIVE - WHBR",
+          "WHBR RADIO",
+          "ALL OF YOUR FAVORITES - WHBR",
+          "ALWAYS AD FREE - WHBR",
+          "ALWAYS FREE - WHBR RADIO",
+          "RADIO - WHBR",
+          "BRAEDENBROWN @WHBR",
+          "-"
+        ];
 
-    const combined = `${artist} - ${title}`.toUpperCase();
+        const combined = `${artist} - ${title}`.toUpperCase();
 
-    if (ignored.includes(combined) || title === "-") {
-      titleElement.textContent = fallbackTitle;
-      artistElement.textContent = fallbackArtist;
-      albumArt.src = defaultAlbumArt;
-      lastArtworkSong = "";
-      return;
+        if (ignored.includes(combined) || title === "-") {
+          titleElement.textContent = fallbackTitle;
+          artistElement.textContent = fallbackArtist;
+          albumArt.src = defaultAlbumArt;
+          albumArt.style.opacity = "1";
+          lastArtworkSong = "";
+          lastValidMetadata = "";
+          return;
+        }
+
+        const songKey = `${artist} - ${title}`;
+
+        titleElement.textContent = title;
+        artistElement.textContent = artist;
+
+        if (songKey !== lastValidMetadata) {
+          lastValidMetadata = songKey;
+          updateAlbumArt(artist, title);
+        }
+      } catch (error) {
+        console.error("WHBR metadata error:", error);
+
+        // Keep the last successfully displayed song if a refresh fails.
+        if (!lastValidMetadata) {
+          titleElement.textContent = fallbackTitle;
+          artistElement.textContent = fallbackArtist;
+        }
+      }
     }
 
-    titleElement.textContent = title;
-    artistElement.textContent = artist;
-    updateAlbumArt(artist, title);
-  } catch (error) {
-    console.error("WHBR metadata error:", error);
-    titleElement.textContent = fallbackTitle;
-    artistElement.textContent = fallbackArtist;
-  }
+    /* ON AIR SHOW — EASTERN TIME */
 
-    }
-
-    /* ON AIR SHOW: Eastern Time, including daylight-saving changes.
-       Times are interpreted as recurring daily schedule blocks.
-       Outside these listed shows, the player displays The Classic Rock Rotation. */
     const onAirShowElement = document.getElementById("on-air-show");
 
     function getEasternMinutesNow() {
@@ -363,8 +1074,14 @@ async function updateNowPlaying() {
         hourCycle: "h23"
       }).formatToParts(new Date());
 
-      const hour = Number(parts.find(part => part.type === "hour").value);
-      const minute = Number(parts.find(part => part.type === "minute").value);
+      const hour = Number(
+        parts.find(part => part.type === "hour").value
+      );
+
+      const minute = Number(
+        parts.find(part => part.type === "minute").value
+      );
+
       return hour * 60 + minute;
     }
 
@@ -383,11 +1100,14 @@ async function updateNowPlaying() {
       onAirShowElement.textContent = "ON AIR: " + show;
     }
 
+    /* START AUTOMATIC UPDATES */
+
     updateNowPlaying();
     setInterval(updateNowPlaying, 10000);
+
     updateOnAirShow();
     setInterval(updateOnAirShow, 30000);
   </script>
+
 </body>
 </html>
-```
