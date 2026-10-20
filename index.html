@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,13 +24,9 @@
       --max: 1380px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
@@ -40,9 +36,7 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    a {
-      color: inherit;
-    }
+    a { color: inherit; }
 
     /* STATION HEADER */
 
@@ -172,6 +166,11 @@
       animation: whbr-pulse 1.5s infinite;
     }
 
+    @keyframes whbr-pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .35; }
+    }
+
     .station-label {
       color: var(--muted);
       font-size: 10px;
@@ -249,17 +248,9 @@
       fill: currentColor;
     }
 
-    .pause-icon {
-      display: none;
-    }
-
-    .play-button.playing .play-icon {
-      display: none;
-    }
-
-    .play-button.playing .pause-icon {
-      display: block;
-    }
+    .pause-icon { display: none; }
+    .play-button.playing .play-icon { display: none; }
+    .play-button.playing .pause-icon { display: block; }
 
     .player-status {
       min-height: 20px;
@@ -269,8 +260,43 @@
       text-align: center;
     }
 
-    .player-status.error {
-      color: #ff656b;
+    .player-status.error { color: #ff656b; }
+
+    /* CASTER.FM PLAYER */
+
+    .caster-box {
+      margin: 15px auto 0;
+      max-width: 380px;
+      padding: 12px;
+      background: #121212;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+    }
+
+    .caster-heading {
+      margin: 0 0 9px;
+      color: #bbb;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-align: center;
+    }
+
+    .cstrEmbed {
+      width: 100%;
+      min-height: 90px;
+    }
+
+    .caster-help {
+      margin: 8px 0 0;
+      color: #888;
+      font-size: 11px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .caster-help a {
+      color: #ff7379;
     }
 
     /* MAIN CONTENT */
@@ -281,9 +307,7 @@
       padding: 20px 5% 65px;
     }
 
-    .schedule-section {
-      padding: 28px 0 55px;
-    }
+    .schedule-section { padding: 28px 0 55px; }
 
     .section-kicker {
       display: block;
@@ -372,10 +396,7 @@
       vertical-align: super;
     }
 
-    .time-dash {
-      color: #777;
-      font-size: 15px;
-    }
+    .time-dash { color: #777; font-size: 15px; }
 
     .schedule-time {
       margin-bottom: 8px;
@@ -417,9 +438,7 @@
       border-top: 1px solid var(--line);
     }
 
-    .about-section h2 {
-      font-size: clamp(43px, 5vw, 62px);
-    }
+    .about-section h2 { font-size: clamp(43px, 5vw, 62px); }
 
     .about-copy p {
       margin: 0 0 18px;
@@ -453,9 +472,7 @@
       letter-spacing: 1px;
     }
 
-    .footer-brand span {
-      color: var(--red);
-    }
+    .footer-brand span { color: var(--red); }
 
     .footer-copy {
       margin-top: 5px;
@@ -476,24 +493,18 @@
     /* MOBILE */
 
     @media (max-width: 900px) {
-      .schedule-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .schedule-card {
-        align-items: center;
-      }
-
-      .schedule-icon {
-        flex-shrink: 0;
-      }
+      .schedule-grid { grid-template-columns: 1fr; }
+      .schedule-card { align-items: center; }
+      .schedule-icon { flex-shrink: 0; }
 
       .about-section {
         grid-template-columns: 1fr;
         gap: 25px;
       }
     }
-.banner-inner {
+
+    @media (max-width: 600px) {
+      .banner-inner {
         min-height: 80px;
         padding: 15px 5%;
       }
@@ -503,22 +514,16 @@
         font-size: 17px;
       }
 
-      .promise-line {
-        height: 40px;
-      }
+      .promise-line { height: 40px; }
 
       .station-promise small {
         font-size: 8px;
         letter-spacing: 1px;
       }
 
-      .banner-brand {
-        font-size: 49px;
-      }
+      .banner-brand { font-size: 49px; }
 
-      .player-area {
-        padding: 25px 5% 15px;
-      }
+      .player-area { padding: 25px 5% 15px; }
 
       .player {
         min-height: 0;
@@ -547,18 +552,14 @@
         letter-spacing: 1px;
       }
 
-      .track-title {
-        font-size: clamp(19px, 5vw, 27px);
-      }
+      .track-title { font-size: clamp(19px, 5vw, 27px); }
 
       .track-artist {
         margin: 5px 0 9px;
         font-size: 12px;
       }
 
-      .on-air-line {
-        font-size: 9px;
-      }
+      .on-air-line { font-size: 9px; }
 
       .play-button {
         width: 53px;
@@ -573,9 +574,7 @@
         height: 21px;
       }
 
-      .content {
-        padding-top: 10px;
-      }
+      .content { padding-top: 10px; }
 
       .schedule-card {
         padding: 17px 13px;
@@ -587,17 +586,9 @@
         min-width: 70px;
       }
 
-      .time-main {
-        font-size: 21px;
-      }
-
-      .schedule-card h3 {
-        font-size: 21px;
-      }
-
-      .footer-inner {
-        min-height: 100px;
-      }
+      .time-main { font-size: 21px; }
+      .schedule-card h3 { font-size: 21px; }
+      .footer-inner { min-height: 100px; }
     }
 
     @media (max-width: 370px) {
@@ -612,13 +603,8 @@
         padding-left: 10px;
       }
 
-      .play-button {
-        margin-right: -25px;
-      }
-
-      .station-label {
-        display: none;
-      }
+      .play-button { margin-right: -25px; }
+      .station-label { display: none; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -699,11 +685,26 @@
         Press play to listen live.
       </div>
 
-      <!-- CORRECTED ICECAST STREAM URL -->
-      <audio id="whbrAudio"
-             preload="none"
-             src="https://uk2freenew.listen2myradio.com/live.mp3?typeportmount=s1_12331_stream_100425952">
-      </audio>
+      <!-- CASTER.FM PLAYER
+           This player handles the protected stream on the free plan. -->
+      <div class="caster-box">
+        <p class="caster-heading">WHBR LIVE STREAM</p>
+
+        <div
+          class="cstrEmbed"
+          data-type="newStreamPlayer"
+          data-publicToken="4b3fc593-49f0-4ac8-8e40-063778e00f78"
+          data-theme="dark"
+          data-color="B60000"
+          data-channelId=""
+          data-rendered="false">
+          <a href="https://www.caster.fm">Caster.fm Radio Hosting</a>
+        </div>
+
+        <p class="caster-help">
+          If the main play button cannot start playback, use the player controls above.
+        </p>
+      </div>
     </section>
 
     <div class="content">
@@ -804,10 +805,15 @@
     </div>
   </footer>
 
-  <script>
-    /* STREAM PLAYER */
+  <!-- Load Caster.fm's player script -->
+  <script src="https://cdn.cloud.caster.fm/widgets/embed.js"></script>
 
-    const audio = document.getElementById("whbrAudio");
+  <script>
+    /* PLAYER STATUS
+       Caster.fm's embedded player handles the protected audio stream.
+       A cross-origin embedded player cannot reliably be controlled
+       by the custom button, so we direct listeners to its real controls. */
+
     const playButton = document.getElementById("play-button");
     const audioStatus = document.getElementById("audio-status");
 
@@ -820,49 +826,51 @@
       );
     }
 
-    playButton.addEventListener("click", async () => {
-      if (!audio.paused) {
-        audio.pause();
-        return;
-      }
+    playButton.addEventListener("click", () => {
+      const casterAudio = document.querySelector(".caster-box audio");
 
-      audioStatus.classList.remove("error");
-      audioStatus.textContent = "Connecting to WHBR…";
-      playButton.disabled = true;
+      if (casterAudio) {
+        if (casterAudio.paused) {
+          audioStatus.classList.remove("error");
+          audioStatus.textContent = "Connecting to WHBR…";
 
-      try {
-        await audio.play();
-      } catch (error) {
+          casterAudio.play().then(() => {
+            setPlaying(true);
+            audioStatus.textContent = "You're listening live to WHBR Radio.";
+          }).catch(() => {
+            setPlaying(false);
+            audioStatus.classList.add("error");
+            audioStatus.textContent =
+              "Use the Caster.fm player controls to start listening.";
+          });
+        } else {
+          casterAudio.pause();
+          setPlaying(false);
+          audioStatus.textContent = "Stream paused.";
+        }
+      } else {
         audioStatus.classList.add("error");
         audioStatus.textContent =
-          "Unable to start the stream. Check that Icecast is running and try again.";
-        setPlaying(false);
-      } finally {
-        playButton.disabled = false;
+          "Use the Caster.fm player controls below to start listening.";
       }
     });
 
-    audio.addEventListener("playing", () => {
-      setPlaying(true);
-      audioStatus.classList.remove("error");
-      audioStatus.textContent = "You're listening live to WHBR Radio.";
-    });
+    document.addEventListener("play", event => {
+      if (event.target instanceof HTMLAudioElement &&
+          event.target.closest(".caster-box")) {
+        setPlaying(true);
+        audioStatus.classList.remove("error");
+        audioStatus.textContent = "You're listening live to WHBR Radio.";
+      }
+    }, true);
 
-    audio.addEventListener("pause", () => {
-      setPlaying(false);
-      if (!audio.ended) audioStatus.textContent = "Stream paused.";
-    });
-
-    audio.addEventListener("waiting", () => {
-      audioStatus.textContent = "Buffering live audio…";
-    });
-
-    audio.addEventListener("error", () => {
-      setPlaying(false);
-      audioStatus.classList.add("error");
-      audioStatus.textContent =
-        "Unable to connect to the local stream. Check that Icecast is running.";
-    });
+    document.addEventListener("pause", event => {
+      if (event.target instanceof HTMLAudioElement &&
+          event.target.closest(".caster-box")) {
+        setPlaying(false);
+        audioStatus.textContent = "Stream paused.";
+      }
+    }, true);
 
     /* NOW PLAYING METADATA */
 
@@ -979,7 +987,6 @@
       } catch (error) {
         console.error("WHBR metadata error:", error);
 
-        // Keep the last successfully displayed song if a refresh fails.
         if (!lastValidMetadata) {
           titleElement.textContent = fallbackTitle;
           artistElement.textContent = fallbackArtist;
@@ -1018,7 +1025,7 @@
         show = "All ’90s Rock";
       } else if (minutes >= 17 * 60 && minutes < 18 * 60) {
         show = "Hard Rock for the Road";
-      } else if (minutes >= 20 * 60 || minutes < 0) {
+      } else if (minutes >= 20 * 60) {
         show = "All ’80s Rock";
       }
 
@@ -1035,3 +1042,5 @@
   </script>
 
 </body>
+</html>
+```
