@@ -1,4 +1,4 @@
-```html
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +38,7 @@
 
     a { color: inherit; }
 
-    /* STATION HEADER */
+    /* HEADER */
 
     .station-banner {
       width: 100%;
@@ -93,7 +93,7 @@
       text-shadow: 3px 3px 0 var(--red-dark);
     }
 
-    /* PLAYER */
+    /* CUSTOM WHBR PLAYER */
 
     .player-area {
       max-width: var(--max);
@@ -103,15 +103,17 @@
 
     .player {
       min-height: 210px;
-      padding: 24px 35px 24px 24px;
+      padding: 24px 105px 24px 24px;
       display: flex;
       align-items: center;
       gap: 27px;
       position: relative;
+      isolation: isolate;
       background: linear-gradient(120deg, #191919, #101010);
       border: 1px solid rgba(255,255,255,.1);
       border-radius: 9px;
       box-shadow: 0 12px 35px rgba(0,0,0,.3);
+      overflow: visible;
     }
 
     .station-art {
@@ -213,40 +215,49 @@
       box-shadow: 0 0 8px rgba(55,214,122,.5);
     }
 
-    /* CASTER.FM EMBED */
+    /* CASTER.FM PLAY BUTTON CROP */
 
-    .caster-box {
-      margin: 18px 0 0;
-      padding: 18px;
-      background: #fff;
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 9px;
-      color: #171717;
+ .caster-button-crop {
+  position: relative;
+  right: auto;
+  top: auto;
+  transform: none;
+  width: -100px;
+  height: 45px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #222;
+  box-shadow: none;
+  margin-top: 100px;
+}
+
+.caster-button-crop .cstrEmbed {
+  position: relative;
+  top: -250px;
+ left: -160px !important;
+  width: 100%;
+  min-width: 0;
+  height: 180px;
+  min-height: 180px;
+  overflow: visible;
+  background: transparent;
+  color: white;
+}
+
+    .caster-button-crop .cstrEmbed iframe {
+      max-width: none !important;
+      border: 0 !important;
     }
 
-    .caster-heading {
-      margin: 0 0 12px;
-      color: #171717;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 2px;
-      text-align: center;
-    }
-
-    .cstrEmbed {
-      width: 100%;
-      min-height: 90px;
-    }
+    /* Status text stays below the custom player. */
 
     .player-status {
       min-height: 20px;
-      margin-top: 15px;
+      margin-top: 12px;
       color: var(--muted);
-      font-size: 12px;
+      font-size: 11px;
       text-align: center;
     }
-
-    .player-status.error { color: #ff656b; }
 
     /* MAIN CONTENT */
 
@@ -444,7 +455,6 @@
     @media (max-width: 900px) {
       .schedule-grid { grid-template-columns: 1fr; }
       .schedule-card { align-items: center; }
-      .schedule-icon { flex-shrink: 0; }
 
       .about-section {
         grid-template-columns: 1fr;
@@ -476,7 +486,7 @@
 
       .player {
         min-height: 0;
-        padding: 18px 15px;
+        padding: 18px 75px 18px 15px;
         gap: 14px;
       }
 
@@ -510,7 +520,16 @@
 
       .on-air-line { font-size: 9px; }
 
-      .caster-box { padding: 12px; }
+      .caster-button-crop {
+        right: 10px;
+        width: 54px;
+        height: 54px;
+      }
+
+      .caster-button-crop .cstrEmbed {
+        transform: scale(.85);
+        transform-origin: top left;
+      }
 
       .content { padding-top: 10px; }
 
@@ -557,7 +576,6 @@
 
 <body>
 
-  <!-- STATION HEADER -->
   <header class="station-banner">
     <div class="banner-inner">
       <div class="station-promise">
@@ -572,8 +590,8 @@
   </header>
 
   <main>
-    <!-- LIVE PLAYER -->
     <section class="player-area" aria-label="WHBR live player">
+
       <div class="player">
 
         <div class="station-art">
@@ -601,34 +619,33 @@
             <span id="on-air-show">ON AIR: The Classic Rock Rotation</span>
           </div>
         </div>
+
+        <!-- The Caster.fm widget is clipped to a small play-button area. -->
+        <div class="caster-button-crop" aria-label="WHBR stream controls">
+          <div
+            data-type="newStreamPlayer"
+            data-publicToken="4b3fc593-49f0-4ac8-8e40-063778e00f78"
+            data-theme="dark"
+            data-color="e81e4d"
+            data-channelId=""
+            data-rendered="false"
+            class="cstrEmbed">
+            <a href="https://www.caster.fm">Shoutcast Hosting</a>
+            <a href="https://www.caster.fm">Stream Hosting</a>
+            <a href="https://www.caster.fm">Radio Server Hosting</a>
+          </div>
+        </div>
+
       </div>
 
       <div class="player-status" id="audio-status" role="status" aria-live="polite">
-        Use the Caster.fm player below to listen live.
+        Press play to listen to WHBR live.
       </div>
 
-      <!-- YOUR CASTER.FM EMBED PLAYER -->
-      <div class="caster-box">
-        <p class="caster-heading">WHBR LIVE STREAM</p>
-
-        <div
-          data-type="newStreamPlayer"
-          data-publicToken="4b3fc593-49f0-4ac8-8e40-063778e00f78"
-          data-theme="light"
-          data-color="e81e4d"
-          data-channelId=""
-          data-rendered="false"
-          class="cstrEmbed">
-          <a href="https://www.caster.fm">Shoutcast Hosting</a>
-          <a href="https://www.caster.fm">Stream Hosting</a>
-          <a href="https://www.caster.fm">Radio Server Hosting</a>
-        </div>
-      </div>
     </section>
 
     <div class="content">
 
-      <!-- SCHEDULE -->
       <section class="schedule-section" aria-labelledby="schedule-heading">
         <span class="section-kicker">Turn it up</span>
         <h2 class="section-heading" id="schedule-heading">On The Air</h2>
@@ -689,7 +706,6 @@
         <p class="timezone">All times Eastern</p>
       </section>
 
-      <!-- ABOUT -->
       <section class="about-section" aria-labelledby="about-heading">
         <div>
           <span class="section-kicker">About the station</span>
@@ -713,7 +729,6 @@
     </div>
   </main>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-inner">
       <div>
@@ -724,8 +739,8 @@
     </div>
   </footer>
 
-  <!-- CASTER.FM PLAYER SCRIPT -->
-  <script src="//cdn.cloud.caster.fm//widgets/embed.js"></script>
+  <!-- CASTER.FM EMBED SCRIPT -->
+  <script src="https://cdn.cloud.caster.fm/widgets/embed.js"></script>
 
   <script>
     /* NOW PLAYING METADATA */
@@ -781,6 +796,7 @@
         };
 
         albumArt.src = artwork || defaultAlbumArt;
+
       } catch (error) {
         console.error("WHBR artwork error:", error);
         albumArt.src = defaultAlbumArt;
@@ -840,6 +856,7 @@
           lastValidMetadata = songKey;
           updateAlbumArt(artist, title);
         }
+
       } catch (error) {
         console.error("WHBR metadata error:", error);
 
@@ -899,4 +916,3 @@
 
 </body>
 </html>
-```
