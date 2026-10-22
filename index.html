@@ -12,17 +12,21 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      --red: #e3222b;
-      --red-dark: #a30d16;
-      --black: #090909;
-      --panel: #151515;
-      --text: #f8f8f8;
-      --muted: #a6a6a6;
-      --line: rgba(255,255,255,.09);
-      --max: 1380px;
-    }
+  
+<style>
+:root {
+
+--red: #FF263D;
+--red-dark: #B80F27;
+--black: #08090D;
+--panel: #101C32;
+--text: #F2F4F8;
+--muted: #A8B3C7;
+--line: rgba(255,255,255,.10);
+
+  --max: 1380px;
+}
+
 
     * { box-sizing: border-box; }
 
@@ -223,7 +227,7 @@
   top: auto;
   transform: none;
   width: -100px;
-  height: 45px;
+  height: 50px;
   overflow: hidden;
   border-radius: 8px;
   background: #222;
@@ -233,7 +237,7 @@
 
 .caster-button-crop .cstrEmbed {
   position: relative;
-  top: -250px;
+  top: -235px;
  left: -160px !important;
   width: 100%;
   min-width: 0;
@@ -450,6 +454,35 @@
       text-transform: uppercase;
     }
 
+/* LIVE NOW EVENT BADGE */
+.live-now-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+  padding: 5px 9px;
+  border-radius: 3px;
+  background: #FF263D;
+  color: #FFFFFF;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  box-shadow: 0 0 14px rgba(255, 38, 61, 0.3);
+}
+
+.live-now-badge .live-dot {
+  width: 7px;
+  height: 7px;
+  background: #FFFFFF;
+  border-radius: 50%;
+  animation: whbr-pulse 1.2s infinite;
+}
+
+.schedule-card.event-live {
+  border-color: #FF263D;
+  box-shadow: 0 0 18px rgba(255, 38, 61, 0.14);
+}
+
     /* MOBILE */
 
     @media (max-width: 900px) {
@@ -520,11 +553,36 @@
 
       .on-air-line { font-size: 9px; }
 
-      .caster-button-crop {
-        right: 10px;
-        width: 54px;
-        height: 54px;
-      }
+    
+.caster-button-crop {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 54px;
+  height: 54px;
+  margin-top: 0;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.caster-button-crop .cstrEmbed {
+  position: relative;
+  top: -235px;
+  left: -160px !important;
+  width: 300px;
+  min-width: 300px;
+  height: 180px;
+  min-height: 180px;
+  transform: scale(.85);
+  transform-origin: top left;
+}
+
+.caster-button-crop iframe {
+  max-width: none !important;
+  border: 0 !important;
+}
+
 
       .caster-button-crop .cstrEmbed {
         transform: scale(.85);
@@ -904,6 +962,51 @@
 
       onAirShowElement.textContent = "ON AIR: " + show;
     }
+
+/* AUTOMATIC LIVE NOW EVENT BADGES */
+function updateEventBadges() {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York",
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23"
+  }).formatToParts(new Date());
+
+  const hour = Number(parts.find(p => p.type === "hour").value);
+  const minute = Number(parts.find(p => p.type === "minute").value);
+  const now = hour * 60 + minute;
+
+  const events = [
+    { title: "All ’90s Rock", start: 9 * 60, end: 13 * 60 },
+    { title: "All ’80s Rock", start: 20 * 60, end: 24 * 60 },
+    { title: "Hard Rock for the Road", start: 17 * 60, end: 18 * 60 }
+  ];
+
+  document.querySelectorAll(".schedule-card").forEach(card => {
+    const heading = card.querySelector("h3");
+    if (!heading) return;
+
+    const event = events.find(e => e.title === heading.textContent.trim());
+    if (!event) return;
+
+    const isLive = event.start <= now && now < event.end;
+    card.classList.toggle("event-live", isLive);
+
+    let badge = card.querySelector(".live-now-badge");
+
+    if (isLive && !badge) {
+      badge = document.createElement("div");
+      badge.className = "live-now-badge";
+      badge.innerHTML = '<span class="live-dot"></span> LIVE NOW';
+      heading.parentElement.insertBefore(badge, heading);
+    } else if (!isLive && badge) {
+      badge.remove();
+    }
+  });
+}
+
+updateEventBadges();
+setInterval(updateEventBadges, 15000);
 
     /* START AUTOMATIC UPDATES */
 
