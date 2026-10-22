@@ -1,0 +1,1116 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#050505">
+  <meta name="description" content="Explore the legends of rock on WHBR Radio.">
+  <title>Rock Zone | WHBR Radio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --red: #BE1B41;
+      --red-bright: #f32950;
+      --black: #050505;
+      --panel: #101010;
+      --panel-light: #171717;
+      --white: #ffffff;
+      --muted: #b7b7b7;
+      --line: rgba(255,255,255,.10);
+      --max: 1380px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--black);
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(190,27,65,.10), transparent 42%),
+        var(--black);
+      color: var(--white);
+      font-family: "Roboto", sans-serif;
+      padding-bottom: 105px;
+    }
+
+    body.modal-open { overflow: hidden; }
+
+    a { color: inherit; }
+
+    button { font: inherit; }
+
+    /* Compact header — no large hero banner */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(5,5,5,.96);
+      border-bottom: 2px solid var(--red);
+      backdrop-filter: blur(12px);
+    }
+
+    .topbar-inner {
+      max-width: var(--max);
+      margin: auto;
+      min-height: 70px;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      background: var(--red);
+      color: #fff;
+      font-family: "Oswald", sans-serif;
+      font-weight: 700;
+      font-size: 27px;
+      line-height: 1;
+      padding: 7px 11px;
+      letter-spacing: 1px;
+    }
+
+    .brand-copy strong {
+      display: block;
+      font-family: "Oswald", sans-serif;
+      font-size: 21px;
+      line-height: 1.15;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .brand-copy span {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: 2px;
+      margin-top: 3px;
+      text-transform: uppercase;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: #111;
+      color: white;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: background .2s, border-color .2s;
+    }
+
+    .back-link:hover {
+      background: var(--red);
+      border-color: var(--red);
+    }
+
+    /* Main content */
+    .page {
+      max-width: var(--max);
+      margin: auto;
+      padding: 36px 24px 45px;
+    }
+
+    .section-heading {
+      margin-bottom: 24px;
+    }
+
+    .eyebrow {
+      color: var(--red-bright);
+      font-family: "Oswald", sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 9px;
+      font-family: "Oswald", sans-serif;
+      font-size: clamp(34px, 5vw, 54px);
+      line-height: 1.05;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    .intro {
+      max-width: 720px;
+      color: #c5c5c5;
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 0;
+    }
+
+    .red-rule {
+      width: 74px;
+      height: 4px;
+      background: var(--red);
+      margin-top: 19px;
+    }
+
+    /* Static genre labels — not buttons or links */
+    .genre-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin: 26px 0 40px;
+    }
+
+    .genre-label {
+      display: inline-block;
+      background: #111;
+      border: 1px solid #292929;
+      color: #ddd;
+      padding: 8px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      border-radius: 3px;
+    }
+
+    .artists-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 19px;
+    }
+
+    .artists-heading h2 {
+      font-family: "Oswald", sans-serif;
+      font-size: clamp(25px, 3vw, 34px);
+      text-transform: uppercase;
+      margin-bottom: 0;
+    }
+
+    .artists-heading p {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 3px;
+    }
+
+    .artist-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .artist-card {
+      overflow: hidden;
+      min-width: 0;
+      background: linear-gradient(145deg, #161616, #0b0b0b);
+      border: 1px solid #292929;
+      border-radius: 6px;
+      transition: transform .2s, border-color .2s, box-shadow .2s;
+    }
+
+    .artist-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(243,41,80,.7);
+      box-shadow: 0 12px 35px rgba(0,0,0,.3);
+    }
+
+    .artist-image-wrap {
+      height: 220px;
+      background:
+        radial-gradient(ellipse at center, rgba(190,27,65,.24), transparent 60%),
+        #141414;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .artist-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: .88;
+      transition: transform .35s, opacity .35s;
+    }
+
+    .artist-card:hover .artist-image {
+      transform: scale(1.045);
+      opacity: 1;
+    }
+
+    .image-fallback {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      text-align: center;
+      color: #fff;
+      font-family: "Oswald", sans-serif;
+      font-size: 29px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-shadow: 0 3px 18px #000;
+      background: linear-gradient(135deg, #242424, #090909 65%, #421020);
+    }
+
+    .artist-image-wrap::after {
+      content: "";
+      position: absolute;
+      inset: 35% 0 0;
+      pointer-events: none;
+      background: linear-gradient(transparent, rgba(0,0,0,.65));
+    }
+
+    .artist-content {
+      padding: 19px;
+    }
+
+    .artist-era {
+      color: var(--red-bright);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .artist-content h3 {
+      font-family: "Oswald", sans-serif;
+      font-size: 27px;
+      line-height: 1.15;
+      margin-bottom: 9px;
+      text-transform: uppercase;
+    }
+
+    .artist-content p {
+      color: #bdbdbd;
+      font-size: 13px;
+      line-height: 1.65;
+      min-height: 43px;
+      margin-bottom: 18px;
+    }
+
+    .learn-more {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border: 0;
+      border-radius: 3px;
+      padding: 12px 14px;
+      background: var(--red);
+      color: white;
+      font-family: "Oswald", sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background .2s;
+    }
+
+    .learn-more:hover,
+    .learn-more:focus-visible {
+      background: var(--red-bright);
+      outline: none;
+    }
+
+    .learn-more .arrow {
+      font-size: 19px;
+      line-height: 1;
+    }
+
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 24px;
+      text-align: center;
+      color: #888;
+      font-size: 12px;
+      letter-spacing: .5px;
+    }
+
+    .footer strong { color: white; }
+
+    /* Band biography popup */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      padding: 22px;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,.83);
+      backdrop-filter: blur(7px);
+    }
+
+    .modal.open { display: flex; }
+
+    .modal-dialog {
+      position: relative;
+      width: min(790px, 100%);
+      max-height: min(84vh, 900px);
+      display: flex;
+      flex-direction: column;
+      background: #101010;
+      border: 1px solid rgba(255,255,255,.14);
+      border-top: 4px solid var(--red);
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 25px 100px rgba(0,0,0,.65);
+      animation: modal-in .18s ease-out;
+    }
+
+    @keyframes modal-in {
+      from { opacity: 0; transform: translateY(12px) scale(.99); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .modal-top {
+      position: relative;
+      min-height: 155px;
+      display: flex;
+      align-items: end;
+      padding: 27px 70px 24px 27px;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.94), rgba(0,0,0,.48)),
+        linear-gradient(135deg, #46101f, #101010 70%);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .modal-kicker {
+      color: #ff6a85;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+
+    .modal-title {
+      font-family: "Oswald", sans-serif;
+      font-size: clamp(30px, 5vw, 43px);
+      line-height: 1.05;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 50%;
+      background: #1d1d1d;
+      color: white;
+      font-size: 27px;
+      line-height: 1;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .modal-close:hover,
+    .modal-close:focus-visible {
+      background: var(--red);
+      outline: none;
+    }
+
+    .modal-body {
+      padding: 25px 28px 30px;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+
+    .modal-body p {
+      color: #d2d2d2;
+      font-size: 15px;
+      line-height: 1.85;
+      margin: 0 0 17px;
+    }
+
+    .modal-body p:last-child { margin-bottom: 0; }
+
+    .modal-fact {
+      margin-top: 23px;
+      padding: 15px 17px;
+      border-left: 3px solid var(--red);
+      background: #191919;
+      color: #eee;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    /* Fixed bottom player bar */
+    .bottom-player {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 80;
+      min-height: 78px;
+      background: rgba(5,5,5,.97);
+      border-top: 2px solid var(--red);
+      box-shadow: 0 -8px 28px rgba(0,0,0,.5);
+      backdrop-filter: blur(12px);
+    }
+
+    .player-inner {
+      position: relative;
+      max-width: var(--max);
+      min-height: 78px;
+      margin: auto;
+      padding: 10px 104px 10px 24px;
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .now-art {
+      width: 52px;
+      height: 52px;
+      flex: 0 0 52px;
+      object-fit: cover;
+      border-radius: 3px;
+      background: #191919;
+      border: 1px solid #333;
+    }
+
+    .now-copy {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .now-kicker {
+      color: #ff526f;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .now-title {
+      color: #fff;
+      font-family: "Oswald", sans-serif;
+      font-size: 16px;
+      line-height: 1.2;
+      font-weight: 600;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .now-artist {
+      color: #aaa;
+      font-size: 12px;
+      margin-top: 3px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* Caster.fm cropped to show only the play-button area */
+    .caster-button-crop {
+      position: absolute;
+      right: 10px;
+      top: calc(50% + 7px);
+      transform: translateY(-50%);
+      width: 68px;
+      height: 68px;
+      margin-top: 0;
+      overflow: hidden;
+      z-index: 10;
+    }
+
+    .caster-button-crop .cstrEmbed {
+      position: relative;
+      top: -235px;
+      left: -160px !important;
+      width: 300px;
+      min-width: 300px;
+      height: 180px;
+      min-height: 180px;
+      transform: scale(1.05);
+      transform-origin: top left;
+    }
+
+    .caster-button-crop iframe {
+      max-width: none !important;
+      border: 0 !important;
+    }
+
+    .player-live {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: #ddd;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ff2448;
+      box-shadow: 0 0 10px rgba(255,36,72,.7);
+    }
+
+    @media (max-width: 850px) {
+      .artist-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .artist-image-wrap { height: 205px; }
+      .player-live { display: none; }
+    }
+
+    @media (max-width: 560px) {
+      .topbar-inner { min-height: 62px; padding: 8px 14px; }
+      .brand-mark { font-size: 22px; padding: 7px 9px; }
+      .brand-copy strong { font-size: 17px; }
+      .brand-copy span { font-size: 8px; letter-spacing: 1.3px; }
+      .back-link { padding: 9px 10px; font-size: 11px; gap: 5px; }
+      .page { padding: 28px 14px 32px; }
+      .artist-grid { grid-template-columns: 1fr; gap: 15px; }
+      .artist-image-wrap { height: 230px; }
+      .artist-content { padding: 17px; }
+      .artist-content p { min-height: 0; }
+      .artists-heading { align-items: start; flex-direction: column; }
+      .modal { padding: 10px; }
+      .modal-dialog { max-height: 88vh; }
+      .modal-top { min-height: 130px; padding: 22px 60px 19px 19px; }
+      .modal-body { padding: 20px; }
+      .modal-body p { font-size: 14px; line-height: 1.8; }
+      .player-inner { padding: 9px 92px 9px 12px; gap: 10px; }
+      .now-art { width: 45px; height: 45px; flex-basis: 45px; }
+      .now-title { font-size: 14px; }
+      .now-artist { font-size: 11px; }
+
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="https://whbrradio.github.io/" aria-label="WHBR Radio homepage">
+        <span class="brand-mark">WHBR</span>
+        <span class="brand-copy">
+          <strong>Rock Zone</strong>
+          <span>WHBR Radio</span>
+        </span>
+      </a>
+
+      <a class="back-link" href="https://whbrradio.github.io/">
+        <span aria-hidden="true">←</span>
+        Back to Live Station
+      </a>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="section-heading">
+      <div class="eyebrow">The sound that changed everything</div>
+      <h1>Rock Zone</h1>
+      <p class="intro">
+        Meet the bands behind the riffs, records, and anthems that made rock
+        music legendary. Explore their stories, their sound, and the impact
+        they left on generations of rock fans.
+      </p>
+      <div class="red-rule"></div>
+    </section>
+
+    <div class="genre-list" aria-label="Rock styles">
+      <span class="genre-label">Classic Rock</span>
+      <span class="genre-label">Hard Rock</span>
+      <span class="genre-label">Grunge</span>
+      <span class="genre-label">Heavy Metal</span>
+      <span class="genre-label">Punk Rock</span>
+      <span class="genre-label">Alternative Rock</span>
+    </div>
+
+    <section aria-labelledby="legends-heading">
+      <div class="artists-heading">
+        <div>
+          <div class="eyebrow">Turn it up</div>
+          <h2 id="legends-heading">Rock Legends</h2>
+        </div>
+        <p>Choose a band to read their story.</p>
+      </div>
+
+      <div class="artist-grid">
+        <article class="artist-card">
+          <div class="artist-image-wrap">
+            <img class="artist-image" data-wiki="AC/DC" alt="AC/DC band photo" loading="lazy">
+            <div class="image-fallback" hidden>AC/DC</div>
+          </div>
+          <div class="artist-content">
+            <div class="artist-era">Hard Rock · Australia</div>
+            <h3>AC/DC</h3>
+            <p>High-voltage riffs, pounding drums, and rock anthems built to be played loud.</p>
+            <button class="learn-more" data-band="acdc" aria-haspopup="dialog">
+              Learn More <span class="arrow" aria-hidden="true">→</span>
+            </button>
+          </div>
+        </article>
+
+        <article class="artist-card">
+          <div class="artist-image-wrap">
+            <img class="artist-image" data-wiki="Guns N' Roses" alt="Guns N' Roses band photo" loading="lazy">
+            <div class="image-fallback" hidden>Guns N' Roses</div>
+          </div>
+          <div class="artist-content">
+            <div class="artist-era">Hard Rock · United States</div>
+            <h3>Guns N' Roses</h3>
+            <p>Bluesy guitar solos, a wild edge, and some of hard rock's most recognizable songs.</p>
+            <button class="learn-more" data-band="gnr" aria-haspopup="dialog">
+              Learn More <span class="arrow" aria-hidden="true">→</span>
+            </button>
+          </div>
+        </article>
+
+        <article class="artist-card">
+          <div class="artist-image-wrap">
+            <img class="artist-image" data-wiki="Nirvana (band)" alt="Nirvana band photo" loading="lazy">
+            <div class="image-fallback" hidden>Nirvana</div>
+          </div>
+          <div class="artist-content">
+            <div class="artist-era">Grunge · United States</div>
+            <h3>Nirvana</h3>
+            <p>Raw guitars, unforgettable melodies, and a sound that helped define a generation.</p>
+            <button class="learn-more" data-band="nirvana" aria-haspopup="dialog">
+              Learn More <span class="arrow" aria-hidden="true">→</span>
+            </button>
+          </div>
+        </article>
+
+        <article class="artist-card">
+          <div class="artist-image-wrap">
+            <img class="artist-image" data-wiki="Metallica" alt="Metallica band photo" loading="lazy">
+            <div class="image-fallback" hidden>Metallica</div>
+          </div>
+          <div class="artist-content">
+            <div class="artist-era">Heavy Metal · United States</div>
+            <h3>Metallica</h3>
+            <p>Fast, powerful, and precise metal that took heavy music to stadium-sized audiences.</p>
+            <button class="learn-more" data-band="metallica" aria-haspopup="dialog">
+              Learn More <span class="arrow" aria-hidden="true">→</span>
+            </button>
+          </div>
+        </article>
+
+        <article class="artist-card">
+          <div class="artist-image-wrap">
+            <img class="artist-image" data-wiki="Green Day" alt="Green Day band photo" loading="lazy">
+            <div class="image-fallback" hidden>Green Day</div>
+          </div>
+          <div class="artist-content">
+            <div class="artist-era">Punk Rock · United States</div>
+            <h3>Green Day</h3>
+            <p>Catchy punk energy, sharp hooks, and songs made for singing along at full volume.</p>
+            <button class="learn-more" data-band="greenday" aria-haspopup="dialog">
+              Learn More <span class="arrow" aria-hidden="true">→</span>
+            </button>
+          </div>
+        </article>
+
+        <article class="artist-card">
+          <div class="artist-image-wrap">
+            <img class="artist-image" data-wiki="Foo Fighters" alt="Foo Fighters band photo" loading="lazy">
+            <div class="image-fallback" hidden>Foo Fighters</div>
+          </div>
+          <div class="artist-content">
+            <div class="artist-era">Alternative Rock · United States</div>
+            <h3>Foo Fighters</h3>
+            <p>Huge choruses, muscular guitars, and modern rock songs with classic arena spirit.</p>
+            <button class="learn-more" data-band="foofighters" aria-haspopup="dialog">
+              Learn More <span class="arrow" aria-hidden="true">→</span>
+            </button>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <strong>WHBR RADIO</strong> · Real Rock Without the Ads
+  </footer>
+
+  <!-- Band information popup -->
+  <div class="modal" id="band-modal" role="dialog" aria-modal="true"
+       aria-labelledby="modal-title" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-top">
+        <div>
+          <div class="modal-kicker">Inside the music</div>
+          <h2 class="modal-title" id="modal-title">Band Name</h2>
+        </div>
+        <button class="modal-close" id="modal-close" aria-label="Close band information">×</button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Persistent player: song details plus the cropped Caster.fm play area -->
+  <aside class="bottom-player" aria-label="WHBR live player">
+    <div class="player-inner">
+      <img
+        class="now-art"
+        id="now-art"
+        alt="Current song album artwork"
+        src="https://placehold.co/120x120/151515/BE1B41?text=WHBR"
+      >
+
+      <div class="now-copy">
+        <div class="now-kicker">Now Playing · WHBR Live</div>
+        <div class="now-title" id="now-title">WHBR RADIO</div>
+        <div class="now-artist" id="now-artist">Real Rock Without the Ads</div>
+      </div>
+
+      <div class="player-live"><span class="live-dot"></span> Live</div>
+
+      <div class="caster-button-crop" aria-label="Play or pause WHBR Radio">
+        <div
+          class="cstrEmbed"
+          data-type="newStreamPlayer"
+          data-publicToken="4b3fc593-49f0-4ac8-8e40-063778e00f78"
+          data-theme="dark"
+          data-color="BE1B41"
+          data-channelId=""
+          data-rendered="false"
+        >
+          <a href="https://www.caster.fm">Shoutcast Hosting</a>
+          <a href="https://www.caster.fm">Stream Hosting</a>
+          <a href="https://www.caster.fm">Radio Server Hosting</a>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <script src="https://cdn.cloud.caster.fm/widgets/embed.js"></script>
+
+  <script>
+    /* -------------------------------------------------------
+       BAND BIOGRAPHIES
+       Each card opens a long description in the popup window.
+    ------------------------------------------------------- */
+
+    const bandInfo = {
+      acdc: {
+        name: "AC/DC",
+        paragraphs: [
+          "AC/DC formed in Sydney, Australia, in 1973, founded by brothers Malcolm and Angus Young. The group built its identity around a simple but powerful idea: rock music should hit hard, sound unmistakable, and never lose its sense of fun. Angus Young's school-uniform stage outfit, his energetic performances, and the band's tightly locked guitar sound became part of rock history.",
+          "The band developed a style that mixed hard rock and blues influences into direct, riff-driven songs. Rather than relying on elaborate arrangements, AC/DC made the guitar riff the heart of the music. Malcolm Young's rhythm playing provided a remarkably steady foundation, while Angus's lead guitar brought sharp hooks and explosive solos. The result was a sound that was instantly recognizable whether heard on a record, a radio, or a massive concert stage.",
+          "Their early Australian releases helped establish the group, and international success followed with albums such as Highway to Hell. In 1980, the death of singer Bon Scott was a devastating loss. The band continued with Brian Johnson as vocalist and released Back in Black, an album that became one of the most successful rock records ever made. Its songs, production, and instantly recognizable opening riffs introduced AC/DC to an even larger worldwide audience.",
+          "Over the decades, AC/DC remained committed to its core sound: loud guitars, a strong backbeat, memorable choruses, and lyrics that often celebrate rebellion, danger, humor, and the thrill of rock and roll. Songs such as Back in Black, You Shook Me All Night Long, Highway to Hell, and Thunderstruck became staples of classic-rock radio, sporting events, parties, and live shows.",
+          "AC/DC's influence can be heard in countless hard-rock bands that followed. Their music shows how a great riff and a relentless groove can be just as powerful as complexity. For listeners who want rock that is direct, energetic, and built for turning up the volume, AC/DC remains one of the defining bands of the genre."
+        ],
+        fact: "Essential albums to explore: Highway to Hell, Back in Black, and The Razors Edge."
+      },
+
+      gnr: {
+        name: "Guns N' Roses",
+        paragraphs: [
+          "Guns N' Roses emerged from the Los Angeles rock scene in the mid-1980s. Formed in 1985, the group brought together musicians whose sound combined the danger and attitude of hard rock with the swagger of blues-based guitar music. The classic lineup featured singer Axl Rose, guitarists Slash and Izzy Stradlin, bassist Duff McKagan, and drummer Steven Adler.",
+          "The band's 1987 debut album, Appetite for Destruction, became a landmark of late-1980s rock. Initially, the group stood apart from the polished pop-metal style popular at the time. Their music sounded rougher, more street-level, and less predictable. Slash's melodic guitar lines, Axl Rose's distinctive voice, and the rhythm section's loose but forceful groove gave the songs a character of their own.",
+          "Welcome to the Jungle introduced listeners to a tense, chaotic vision of city life, while Sweet Child o' Mine paired a famous opening guitar figure with a large, emotional chorus. Paradise City delivered a huge sing-along refrain, and tracks such as Mr. Brownstone showed the band's darker side. The album's success grew over time and helped turn Guns N' Roses into one of the biggest rock acts in the world.",
+          "The group followed with the ambitious Use Your Illusion I and Use Your Illusion II in 1991. These records expanded their musical range, balancing aggressive rockers with longer, more dramatic songs. November Rain became particularly notable for its sweeping arrangement, piano passages, guitar solos, and cinematic music video. The albums showed that the band could move beyond short, explosive hard-rock songs without abandoning its larger-than-life identity.",
+          "Guns N' Roses became famous for both its music and its unpredictable history, including lineup changes and periods of separation. Despite those challenges, the band's catalog continued to attract new listeners. Its combination of memorable guitar work, theatrical vocals, blues influence, and raw attitude made it a defining act of its era and a lasting presence in hard-rock culture."
+        ],
+        fact: "Essential albums to explore: Appetite for Destruction and Use Your Illusion I and II."
+      },
+
+      nirvana: {
+        name: "Nirvana",
+        paragraphs: [
+          "Nirvana formed in Aberdeen, Washington, in 1987, with singer and guitarist Kurt Cobain and bassist Krist Novoselic at the center of the group. Drummer Dave Grohl joined in 1990 and became part of the lineup that would bring the band to worldwide attention. Nirvana came out of the underground alternative scene, where independent bands were experimenting with heavier guitars, unconventional song structures, and more personal songwriting.",
+          "The group's early recordings helped build a following, but the 1991 album Nevermind changed the scale of its audience almost overnight. The single Smells Like Teen Spirit became a defining song of the early 1990s. Its quiet-to-loud structure, distorted guitar riff, and explosive chorus captured a feeling of frustration and restless energy that resonated with many young listeners.",
+          "Nirvana's sound blended the heaviness of punk and underground rock with strong pop instincts. Cobain could write melodies that were memorable even when surrounded by abrasive guitars and emotionally unsettled lyrics. The band's performances often moved between restraint and sudden intensity, creating a dynamic that became a major part of the grunge movement's identity.",
+          "In Utero followed in 1993 and offered a harsher, more direct sound than Nevermind. The album showed a band that was not interested in simply repeating its biggest commercial success. Songs such as Heart-Shaped Box and All Apologies demonstrated the contrast between Cobain's melodic gifts and the group's raw, sometimes uncomfortable arrangements. The record remains an important part of the band's story because it reflected both its artistic independence and the pressure that came with fame.",
+          "Nirvana's career was cut short by Cobain's death in 1994. Even though the band existed for a relatively brief period, its impact on rock was enormous. Nirvana helped bring alternative music into the mainstream and influenced generations of songwriters who valued honesty, dynamics, and individuality over polish. The music continues to connect with listeners because its mix of melody, noise, vulnerability, and power still feels immediate."
+        ],
+        fact: "Essential albums to explore: Nevermind, In Utero, and the earlier record Bleach."
+      },
+
+      metallica: {
+        name: "Metallica",
+        paragraphs: [
+          "Metallica formed in Los Angeles in 1981 and became one of the most influential heavy-metal bands in history. The core creative partnership of guitarist and vocalist James Hetfield and drummer Lars Ulrich helped establish the group's aggressive rhythm sound. Guitarist Kirk Hammett joined in 1983, followed by bassist Cliff Burton, whose musical knowledge and distinctive playing contributed to the band's early development.",
+          "Metallica's early records helped shape thrash metal, a style known for fast tempos, precise down-picking, intricate guitar parts, and an intense rhythmic attack. Albums such as Kill 'Em All, Ride the Lightning, and Master of Puppets showed a band pushing heavy music toward greater speed and complexity while still writing memorable musical themes. Master of Puppets in particular became a landmark record for metal fans and musicians.",
+          "The band's history also includes tragedy. Cliff Burton died in a tour-bus accident in 1986, and Jason Newsted later took over bass duties. Metallica continued recording and touring, gradually expanding its audience without abandoning the weight and precision that defined its early sound. The self-titled 1991 album, often called The Black Album, brought a more streamlined production and produced major songs including Enter Sandman and The Unforgiven.",
+          "That change helped Metallica reach listeners far beyond the original thrash-metal audience. The group proved that heavy guitars could dominate mainstream radio and enormous venues without losing their physical impact. Later releases explored different production styles and musical directions, while the band continued to revisit its catalog on stages around the world.",
+          "Metallica's influence stretches across metal, hard rock, and alternative music. Its songs are recognized for their powerful riffs, dramatic arrangements, and the tension between tight rhythmic playing and expansive guitar leads. Whether someone discovers the band through its fastest early material or its major radio hits, Metallica offers a deep catalog that rewards exploration."
+        ],
+        fact: "Essential albums to explore: Master of Puppets, Ride the Lightning, and Metallica (The Black Album)."
+      },
+
+      greenday: {
+        name: "Green Day",
+        paragraphs: [
+          "Green Day formed in the East Bay area of California in the late 1980s. The best-known lineup features vocalist and guitarist Billie Joe Armstrong, bassist Mike Dirnt, and drummer Tré Cool. The group grew out of the local punk scene, where small venues, independent labels, and energetic live performances helped young bands build loyal audiences without following mainstream music trends.",
+          "Early albums established Green Day as a melodic punk band with short, fast songs, sharp guitar hooks, and a sense of humor. Their 1994 release Dookie became a major breakthrough. Songs such as Basket Case, When I Come Around, and Longview brought punk-inspired music to a huge new audience. The record maintained the urgency of punk while delivering choruses that were easy to remember and sing along with.",
+          "Green Day continued experimenting with structure and subject matter as its career developed. Nimrod included the acoustic-leaning hit Good Riddance (Time of Your Life), showing that the group could step outside its familiar fast-guitar sound. The band's ability to alternate between energetic punk songs and more reflective material helped keep its songwriting fresh.",
+          "In 2004, American Idiot introduced a larger-scale approach, combining punk energy with connected themes and a more theatrical album structure. The record addressed disillusionment, media culture, and political frustration, and its songs became some of Green Day's best-known work. The album's success demonstrated that punk rock could support an ambitious, story-driven project while retaining the directness that made the band popular.",
+          "Green Day has continued releasing music and performing for audiences around the world. Its legacy lies partly in making punk accessible to millions of listeners without removing the style's rebellious spirit. The band's mix of fast tempos, power chords, sharp melodies, and emotionally direct lyrics remains a key part of modern rock radio."
+        ],
+        fact: "Essential albums to explore: Dookie, Nimrod, and American Idiot."
+      },
+
+      foofighters: {
+        name: "Foo Fighters",
+        paragraphs: [
+          "Foo Fighters began in the mid-1990s, created by Dave Grohl after the end of Nirvana. Grohl recorded the first Foo Fighters album largely by himself, playing most of the instruments, before building a touring band. The project developed into a full group known for powerful guitar arrangements, big choruses, and a sound that connects alternative rock with classic arena-rock energy.",
+          "The band's self-titled debut arrived in 1995 and established a style built around melodic songwriting and loud guitars. Grohl's experience as a drummer informed the music's driving rhythms, while his songwriting gave the songs a strong balance between intensity and accessibility. As the lineup developed, the Foo Fighters became a formidable live act as well as a successful recording band.",
+          "Albums such as The Colour and the Shape helped expand their audience. Songs including Everlong, Monkey Wrench, and My Hero became defining tracks of the band's early period. Everlong in particular is known for its layered guitars, urgent vocal delivery, and emotional intensity. The song illustrates how the band can combine a relatively direct structure with a sound that feels enormous.",
+          "Foo Fighters continued to evolve through records such as There Is Nothing Left to Lose, One by One, and Wasting Light. Across different production approaches, the group kept returning to strong melodies, muscular guitar tones, and songs designed to work just as well in a small room as in a stadium. Their albums often move between aggressive rockers and reflective songs without losing a consistent musical identity.",
+          "The band has faced major personal and professional changes over the years, including the death of drummer Taylor Hawkins in 2022. Foo Fighters have continued honoring their musical history while moving forward. Their catalog demonstrates the enduring appeal of guitar-driven rock built on memorable songwriting, committed performances, and a connection with audiences that feels direct rather than distant."
+        ],
+        fact: "Essential albums to explore: The Colour and the Shape, There Is Nothing Left to Lose, and Wasting Light."
+      }
+    };
+
+    const modal = document.getElementById("band-modal");
+    const modalTitle = document.getElementById("modal-title");
+    const modalBody = document.getElementById("modal-body");
+    const closeButton = document.getElementById("modal-close");
+    let lastFocusedElement = null;
+
+    function openBandModal(key, trigger) {
+      const band = bandInfo[key];
+      if (!band) return;
+
+      lastFocusedElement = trigger || document.activeElement;
+      modalTitle.textContent = band.name;
+      modalBody.replaceChildren();
+
+      band.paragraphs.forEach((paragraph) => {
+        const p = document.createElement("p");
+        p.textContent = paragraph;
+        modalBody.appendChild(p);
+      });
+
+      const fact = document.createElement("div");
+      fact.className = "modal-fact";
+      fact.textContent = band.fact;
+      modalBody.appendChild(fact);
+
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+      closeButton.focus();
+    }
+
+    function closeBandModal() {
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+      if (lastFocusedElement) lastFocusedElement.focus();
+    }
+
+    document.querySelectorAll(".learn-more").forEach((button) => {
+      button.addEventListener("click", () => {
+        openBandModal(button.dataset.band, button);
+      });
+    });
+
+    closeButton.addEventListener("click", closeBandModal);
+
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) closeBandModal();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && modal.classList.contains("open")) {
+        closeBandModal();
+      }
+    });
+
+    /* -------------------------------------------------------
+       LOAD REAL BAND IMAGES FROM WIKIPEDIA PAGE SUMMARIES
+       If an image is unavailable, show the band's name instead.
+    ------------------------------------------------------- */
+
+    async function loadBandImage(img) {
+      const page = img.dataset.wiki;
+      const fallback = img.parentElement.querySelector(".image-fallback");
+
+      try {
+        const response = await fetch(
+          "https://en.wikipedia.org/api/rest_v1/page/summary/" +
+          encodeURIComponent(page),
+          { headers: { "Accept": "application/json" } }
+        );
+
+        if (!response.ok) throw new Error("Image request failed");
+
+        const data = await response.json();
+        const imageUrl = data.thumbnail?.source || data.originalimage?.source;
+
+        if (!imageUrl) throw new Error("No image available");
+
+        img.onload = () => {
+          img.hidden = false;
+          fallback.hidden = true;
+        };
+
+        img.onerror = () => {
+          img.hidden = true;
+          fallback.hidden = false;
+        };
+
+        img.src = imageUrl;
+      } catch (error) {
+        img.hidden = true;
+        fallback.hidden = false;
+      }
+    }
+
+    document.querySelectorAll(".artist-image[data-wiki]").forEach(loadBandImage);
+
+    /* -------------------------------------------------------
+       CURRENT SONG METADATA
+       Uses the existing WHBR Cloudflare metadata Worker.
+       Album artwork is looked up using the iTunes Search API.
+    ------------------------------------------------------- */
+
+    const METADATA_URL =
+      "https://whbr-live-metadata.braedenbrown460.workers.dev";
+
+    const titleElement = document.getElementById("now-title");
+    const artistElement = document.getElementById("now-artist");
+    const artElement = document.getElementById("now-art");
+
+    let lastArtworkLookup = "";
+    let currentSongKey = "";
+
+    function getField(data, names) {
+      for (const name of names) {
+        if (typeof data?.[name] === "string" && data[name].trim()) {
+          return data[name].trim();
+        }
+      }
+      return "";
+    }
+
+    async function updateAlbumArtwork(artist, title, suppliedArtwork) {
+      if (suppliedArtwork && /^https?:\/\//i.test(suppliedArtwork)) {
+        artElement.src = suppliedArtwork;
+        return;
+      }
+
+      const lookupKey = artist + " - " + title;
+      if (lookupKey === lastArtworkLookup) return;
+      lastArtworkLookup = lookupKey;
+
+      try {
+        const term = encodeURIComponent(artist + " " + title);
+        const response = await fetch(
+          "https://itunes.apple.com/search?term=" + term +
+          "&entity=song&limit=5"
+        );
+
+        if (!response.ok) throw new Error("Artwork lookup failed");
+
+        const data = await response.json();
+        const match = (data.results || []).find((item) =>
+          item.artistName &&
+          item.trackName &&
+          item.artworkUrl100
+        );
+
+        if (match?.artworkUrl100) {
+          artElement.src = match.artworkUrl100.replace(
+            /\/\d+x\d+bb\./, "/300x300bb."
+          );
+        }
+      } catch (error) {
+        /* Keep the current/default artwork if lookup fails. */
+      }
+    }
+
+    async function updateNowPlaying() {
+      try {
+        const response = await fetch(METADATA_URL + "?_=" + Date.now(), {
+          cache: "no-store"
+        });
+
+        if (!response.ok) throw new Error("Metadata request failed");
+
+        const data = await response.json();
+
+        const artist = getField(data, [
+          "artist", "Artist", "artistName", "performer"
+        ]);
+
+        const title = getField(data, [
+          "title", "Title", "song", "track", "trackName"
+        ]);
+
+        const suppliedArtwork = getField(data, [
+          "artwork", "albumArt", "album_art", "image", "cover", "artworkUrl"
+        ]);
+
+        if (!artist && !title) return;
+
+        const safeArtist = artist || "WHBR Radio";
+        const safeTitle = title || "Real Rock Without the Ads";
+        const songKey = safeArtist + " - " + safeTitle;
+
+        titleElement.textContent = safeTitle;
+        artistElement.textContent = safeArtist;
+        document.title = safeTitle + " - " + safeArtist + " | WHBR Rock Zone";
+
+        if (songKey !== currentSongKey) {
+          currentSongKey = songKey;
+          await updateAlbumArtwork(safeArtist, safeTitle, suppliedArtwork);
+        } else if (suppliedArtwork) {
+          await updateAlbumArtwork(safeArtist, safeTitle, suppliedArtwork);
+        }
+      } catch (error) {
+        /* Leave the default or last successfully loaded metadata visible. */
+        console.warn("WHBR metadata could not be loaded:", error);
+      }
+    }
+
+    updateNowPlaying();
+    setInterval(updateNowPlaying, 10000);
+  </script>
+</body>
+</html>
+```
