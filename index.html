@@ -221,32 +221,50 @@
 
     /* CASTER.FM PLAY BUTTON CROP */
 
- .caster-button-crop {
+
+.caster-button-crop {
   position: relative;
-  right: auto;!important;
-  top: auto;!important;
+  right: auto !important;
+  top: auto !important;
   transform: none;
-  width:-170px;!important;
-  height: 70px;!important;
-  overflow: hidden;!important;
-  border-radius: 8px;!important;
-  background: #50;
+  width: 70px !important;
+  height: 70px !important;
+  overflow: hidden !important;
+  border-radius: 8px !important;
+  background: transparent;
   box-shadow: none;
   margin-top: 100px;
+  flex-shrink: 0;
 }
 
 .caster-button-crop .cstrEmbed {
   position: relative;
   top: -240px;
- left: -160px !important;
-  width: 100%;
-  min-width: 0;
+  left: -160px !important;
+  width: 300px !important;
+  min-width: 300px !important;
   height: 250px;
   min-height: 250px;
   overflow: visible;
   background: transparent;
   color: white;
 }
+
+/* Mobile only — desktop stays unchanged */
+@media (max-width: 600px) {
+  .caster-button-crop {
+    width: 90px !important;
+    height: 70px !important;
+    margin-top: 0;
+    flex-shrink: 0;
+  }
+
+  .caster-button-crop .cstrEmbed {
+    left: -145px !important;
+    top: -240px;
+  }
+}
+
 
     .caster-button-crop .cstrEmbed iframe {
       max-width: none !important;
