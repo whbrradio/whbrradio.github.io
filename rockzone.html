@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -613,7 +612,52 @@
       .now-art { width: 45px; height: 45px; flex-basis: 45px; }
       .now-title { font-size: 14px; }
       .now-artist { font-size: 11px; }
+    }
 
+    /* WHBR slide-out navigation */
+    .menu-toggle {
+      width: 44px;
+      height: 44px;
+      flex: 0 0 44px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 4px;
+      background: #111;
+      cursor: pointer;
+      padding: 9px;
+    }
+    .menu-toggle:hover, .menu-toggle:focus-visible { background: var(--red); outline: none; }
+    .menu-toggle span { display: block; width: 23px; height: 2px; background: #fff; border-radius: 2px; }
+    .menu-overlay {
+      position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,.7);
+      opacity: 0; visibility: hidden; transition: opacity .25s, visibility .25s;
+    }
+    .menu-overlay.open { opacity: 1; visibility: visible; }
+    .side-menu {
+      position: fixed; top: 0; left: 0; bottom: 0; z-index: 201;
+      width: min(320px, 85vw); padding: 25px 20px; background: #090909;
+      border-right: 3px solid var(--red); box-shadow: 15px 0 45px rgba(0,0,0,.45);
+      transform: translateX(-105%); transition: transform .28s ease; overflow-y: auto;
+    }
+    .side-menu.open { transform: translateX(0); }
+    .side-menu-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 23px; margin-bottom: 20px; border-bottom: 1px solid var(--line); }
+    .side-menu-brand { font-family: "Oswald", sans-serif; font-size: 28px; font-weight: 700; letter-spacing: 2px; }
+    .side-menu-brand span { color: var(--red-bright); }
+    .menu-close { width: 40px; height: 40px; border: 1px solid #333; border-radius: 4px; background: #171717; color: #fff; font-size: 27px; cursor: pointer; }
+    .menu-close:hover { background: var(--red); }
+    .side-menu-label { color: var(--red-bright); font-size: 10px; font-weight: 700; letter-spacing: 2px; margin: 0 0 12px; text-transform: uppercase; }
+    .side-menu a { display: block; padding: 14px 13px; margin-bottom: 7px; border: 1px solid transparent; border-radius: 3px; color: #eee; text-decoration: none; font-family: "Oswald", sans-serif; font-size: 17px; letter-spacing: .7px; text-transform: uppercase; transition: background .2s, border-color .2s; }
+    .side-menu a:hover, .side-menu a[aria-current="page"] { background: rgba(190,27,65,.15); border-color: var(--red); color: #fff; }
+    .side-menu a .menu-arrow { float: right; color: var(--red-bright); }
+    body.menu-open { overflow: hidden; }
+    @media (max-width: 560px) {
+      .menu-toggle { width: 40px; height: 40px; flex-basis: 40px; }
+      .topbar-inner { gap: 10px; }
+      .brand { flex: 1; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -627,8 +671,26 @@
 </head>
 
 <body>
+  <!-- WHBR slide-out navigation -->
+  <div class="menu-overlay" id="menu-overlay"></div>
+
+  <nav class="side-menu" id="whbr-side-menu" aria-label="Main navigation" aria-hidden="true">
+    <div class="side-menu-header">
+      <div class="side-menu-brand">WHBR<span> RADIO</span></div>
+      <button class="menu-close" id="menu-close" aria-label="Close navigation menu">×</button>
+    </div>
+    <p class="side-menu-label">Explore WHBR</p>
+    <a href="https://whbrradio.github.io/">Home <span class="menu-arrow">›</span></a>
+    <a href="https://whbrradio.github.io/recentlyplayed.html">Recently Played <span class="menu-arrow">›</span></a>
+    <a href="https://whbrradio.github.io/musicnews.html">Music News <span class="menu-arrow">›</span></a>
+    <a href="https://whbrradio.github.io/rockzone.html" aria-current="page">Rock Zone <span class="menu-arrow">›</span></a>
+  </nav>
+
   <header class="topbar">
     <div class="topbar-inner">
+      <button class="menu-toggle" id="menu-toggle" aria-label="Open navigation menu" aria-controls="whbr-side-menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
       <a class="brand" href="https://whbrradio.github.io/" aria-label="WHBR Radio homepage">
         <span class="brand-mark">WHBR</span>
         <span class="brand-copy">
@@ -1010,7 +1072,7 @@
     ------------------------------------------------------- */
 
     const METADATA_URL =
-      "https://whbr-live-metadata.braedenbrown460.workers.dev/api/nowplaying?t=";
+      "https://whbr-live-metadata.braedenbrown460.workers.dev";
 
     const titleElement = document.getElementById("now-title");
     const artistElement = document.getElementById("now-artist");
@@ -1110,7 +1172,40 @@
 
     updateNowPlaying();
     setInterval(updateNowPlaying, 10000);
+
+    /* WHBR slide-out navigation controls */
+    const menuToggle = document.getElementById("menu-toggle");
+    const sideMenu = document.getElementById("whbr-side-menu");
+    const menuOverlay = document.getElementById("menu-overlay");
+    const menuClose = document.getElementById("menu-close");
+
+    function openNavigation() {
+      sideMenu.classList.add("open");
+      menuOverlay.classList.add("open");
+      document.body.classList.add("menu-open");
+      sideMenu.setAttribute("aria-hidden", "false");
+      menuToggle.setAttribute("aria-expanded", "true");
+      menuClose.focus();
+    }
+
+    function closeNavigation() {
+      sideMenu.classList.remove("open");
+      menuOverlay.classList.remove("open");
+      document.body.classList.remove("menu-open");
+      sideMenu.setAttribute("aria-hidden", "true");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.focus();
+    }
+
+    menuToggle.addEventListener("click", openNavigation);
+    menuClose.addEventListener("click", closeNavigation);
+    menuOverlay.addEventListener("click", closeNavigation);
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && sideMenu.classList.contains("open")) {
+        closeNavigation();
+      }
+    });
   </script>
 </body>
 </html>
-```
