@@ -711,7 +711,6 @@
     </div>
     <p class="side-menu-label">Explore WHBR</p>
     <a href="https://whbrradio.github.io/">Home <span class="menu-arrow">›</span></a>
-    <a href="https://whbrradio.github.io/recentlyplayed.html">Recently Played <span class="menu-arrow">›</span></a>
     <a href="https://whbrradio.github.io/musicnews.html" aria-current="page">Music News <span class="menu-arrow">›</span></a>
     <a href="https://whbrradio.github.io/rockzone.html">Rock Zone <span class="menu-arrow">›</span></a>
   </nav>
@@ -860,35 +859,43 @@
     }
 
     function normalizeMetadata(payload) {
-      // Some metadata endpoints wrap the song in a nested object.
       let data = payload;
       if (typeof data === "string") {
         const raw = data.trim();
         try { data = JSON.parse(raw); }
         catch {
-          // Also accept a plain-text line formatted as "Artist - Title".
-          const match = raw.match(/^(.+?)\s+[-–—]\s+(.+)$/);
-          if (match) return { artist: match[1].trim(), title: match[2].trim(), artwork: "" };
-          return { artist: "", title: raw, artwork: "" };
+          const match = raw.match(/^(.+?)\s+[-–—:]\s+(.+)$/);
+          return match
+            ? { artist: match[1].trim(), title: match[2].trim(), artwork: "" }
+            : { artist: "", title: raw, artwork: "" };
         }
-      }
-      if (Array.isArray(data)) data = data[0] || {};
-      if (data && typeof data === "object") {
-        data = data.nowPlaying || data.now_playing || data.currentSong ||
-          data.current_song || data.song || data.track || data.metadata || data;
       }
       if (Array.isArray(data)) data = data[0] || {};
       if (!data || typeof data !== "object") return { artist: "", title: "", artwork: "" };
 
-      let artist = getField(data, ["artist", "Artist", "artistName", "performer", "artist_name"]);
-      let title = getField(data, ["title", "Title", "song", "track", "trackName", "songTitle", "track_title"]);
-      const combined = getField(data, ["nowPlaying", "now_playing", "current", "text", "streamTitle", "stream_title"]);
-      if ((!artist || !title) && combined) {
-        const match = combined.match(/^(.+?)\s+[-–—]\s+(.+)$/);
-        if (match) { artist = artist || match[1].trim(); title = title || match[2].trim(); }
+      // Unwrap common API/Worker response shapes, but only when the wrapper is an object.
+      for (const key of ["data", "result", "nowPlaying", "now_playing", "currentSong", "current_song", "song", "track", "metadata"]) {
+        if (data[key] && typeof data[key] === "object") {
+          data = Array.isArray(data[key]) ? (data[key][0] || {}) : data[key];
+          break;
+        }
       }
-      const artwork = getField(data, ["artwork", "albumArt", "album_art", "image", "cover", "artworkUrl", "artwork_url", "imageUrl"]);
-      return { artist, title, artwork };
+      const artist = getField(data, ["artist", "Artist", "artistName", "performer", "artist_name", "songArtist", "song_artist"]);
+      let title = getField(data, ["title", "Title", "song", "track", "trackName", "songTitle", "track_title", "songname", "song_name"]);
+      const combined = getField(data, ["nowPlaying", "now_playing", "current", "text", "streamTitle", "stream_title", "currentTrack", "current_track"]);
+      let finalArtist = artist;
+      if ((!finalArtist || !title) && combined) {
+        const match = combined.match(/^(.+?)\s+[-–—:]\s+(.+)$/);
+        if (match) { finalArtist = finalArtist || match[1].trim(); title = title || match[2].trim(); }
+        else if (!title) title = combined;
+      }
+      // Some workers publish the stream title in a single field.
+      if (!finalArtist && title) {
+        const match = title.match(/^(.+?)\s+[-–—]\s+(.+)$/);
+        if (match) { finalArtist = match[1].trim(); title = match[2].trim(); }
+      }
+      const artwork = getField(data, ["artwork", "albumArt", "album_art", "image", "cover", "artworkUrl", "artwork_url", "imageUrl", "image_url"]);
+      return { artist: finalArtist, title, artwork };
     }
 
     async function updateAlbumArtwork(artist, title, suppliedArtwork) {
@@ -963,7 +970,7 @@
           await updateAlbumArtwork(safeArtist, safeTitle, suppliedArtwork);
         }
       } catch (error) {
-        console.warn("WHBR Rock Zone metadata error:", error);
+        console.warn("WHBR Music News metadata error:", error);
         // Keep the last good song displayed. If nothing has loaded yet, show a clear fallback.
         if (!currentSongKey) {
           titleElement.textContent = "WHBR RADIO";
@@ -974,6 +981,37 @@
 
     updateNowPlaying();
     setInterval(updateNowPlaying, 10000);
+
+    /* Load topic-specific images for the news stories (not generic concert photos). */
+    async function setWikipediaImage(query, applyImage) {
+      try {
+        const url = "https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&prop=pageimages&piprop=thumbnail&pithumbsize=1200&titles=" + encodeURIComponent(query);
+        const response = await fetch(url, { cache: "force-cache" });
+        if (!response.ok) return;
+        const json = await response.json();
+        const pages = Object.values(json?.query?.pages || {});
+        const imageUrl = pages.find(page => page.thumbnail?.source)?.thumbnail?.source;
+        if (imageUrl) applyImage(imageUrl);
+      } catch (error) {
+        console.warn("WHBR story image lookup failed for", query, error);
+      }
+    }
+
+    const featureImage = document.querySelector(".news-feature-image");
+    if (featureImage) setWikipediaImage("The Rolling Stones", url => {
+      featureImage.style.backgroundImage = "linear-gradient(0deg,rgba(0,0,0,.25),rgba(0,0,0,.05)),url(\"" + url + "\")";
+    });
+    const storyImages = [
+      ["Nirvana (band)", ".news-nirvana"],
+      ["Metallica", ".news-metallica"],
+      ["The Pretty Reckless", ".news-prettyreckless"]
+    ];
+    storyImages.forEach(([query, selector]) => {
+      const cardImage = document.querySelector(selector);
+      if (cardImage) setWikipediaImage(query, url => {
+        cardImage.style.backgroundImage = "linear-gradient(0deg,rgba(0,0,0,.5),transparent 75%),url(\"" + url + "\")";
+      });
+    });
 
     /* WHBR slide-out navigation controls */
     const menuToggle = document.getElementById("menu-toggle");
