@@ -1034,6 +1034,7 @@
         const combined = `${artist} - ${title}`.toUpperCase();
 
         if (ignored.includes(combined) || title === "-") {
+          document.title = "WHBR Radio | Real Rock Without the Ads";
           titleElement.textContent = fallbackTitle;
           artistElement.textContent = fallbackArtist;
           albumArt.src = defaultAlbumArt;
@@ -1045,6 +1046,7 @@
 
         const songKey = `${artist} - ${title}`;
 
+        document.title = songKey;
         titleElement.textContent = title;
         artistElement.textContent = artist;
 
@@ -1057,6 +1059,7 @@
         console.error("WHBR metadata error:", error);
 
         if (!lastValidMetadata) {
+          document.title = "WHBR Radio | Real Rock Without the Ads";
           titleElement.textContent = fallbackTitle;
           artistElement.textContent = fallbackArtist;
         }
