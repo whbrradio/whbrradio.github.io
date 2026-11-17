@@ -7,6 +7,8 @@
   <meta name="theme-color" content="#e3222b">
   <meta name="description" content="WHBR Radio — Real Rock Without the Ads.">
   <title>WHBR Radio | Real Rock Without the Ads</title>
+  <link id="dynamic-favicon" rel="icon" href="whbr-logo.png">
+  <link id="dynamic-touch-icon" rel="apple-touch-icon" href="whbr-logo.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,6 +40,24 @@
       color: var(--text);
       font-family: Inter, Arial, sans-serif;
       -webkit-font-smoothing: antialiased;
+      isolation: isolate;
+    }
+
+    /* Blurred artwork backdrop — updated whenever the song changes. */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -35px;
+      z-index: -1;
+      pointer-events: none;
+      background-image: var(--album-backdrop, url("whbr-logo.png"));
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      filter: blur(30px) brightness(.24) saturate(1.25);
+      opacity: .62;
+      transform: scale(1.04);
+      transition: opacity .5s ease;
     }
 
     a { color: inherit; }
@@ -948,6 +968,22 @@
     const fallbackTitle = "WHBR ROANOKE";
     const fallbackArtist = "Always AD Free";
     const defaultAlbumArt = "whbr-logo.png";
+    const faviconElement = document.getElementById("dynamic-favicon");
+    const touchIconElement = document.getElementById("dynamic-touch-icon");
+
+    function setSongArtwork(artworkUrl) {
+      const imageUrl = artworkUrl || defaultAlbumArt;
+
+      // Browser tab / bookmark icon and Apple home-screen icon.
+      faviconElement.href = imageUrl;
+      touchIconElement.href = imageUrl;
+
+      // Blurred background artwork.
+      document.body.style.setProperty(
+        "--album-backdrop",
+        `url("${imageUrl.replace(/["\\\\]/g, "")}")`
+      );
+    }
 
     let lastArtworkSong = "";
     let lastValidMetadata = "";
@@ -984,6 +1020,7 @@
         albumArt.onerror = () => {
           albumArt.onerror = null;
           albumArt.src = defaultAlbumArt;
+          setSongArtwork(defaultAlbumArt);
           albumArt.style.opacity = "1";
         };
 
@@ -992,10 +1029,12 @@
         };
 
         albumArt.src = artwork || defaultAlbumArt;
+        setSongArtwork(artwork || defaultAlbumArt);
 
       } catch (error) {
         console.error("WHBR artwork error:", error);
         albumArt.src = defaultAlbumArt;
+        setSongArtwork(defaultAlbumArt);
         albumArt.style.opacity = "1";
       }
     }
@@ -1038,6 +1077,7 @@
           titleElement.textContent = fallbackTitle;
           artistElement.textContent = fallbackArtist;
           albumArt.src = defaultAlbumArt;
+          setSongArtwork(defaultAlbumArt);
           albumArt.style.opacity = "1";
           lastArtworkSong = "";
           lastValidMetadata = "";
