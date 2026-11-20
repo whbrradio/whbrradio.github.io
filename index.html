@@ -7,8 +7,8 @@
   <meta name="theme-color" content="#e3222b">
   <meta name="description" content="WHBR Radio — Real Rock Without the Ads.">
   <title>WHBR Radio | Real Rock Without the Ads</title>
-  <link id="dynamic-favicon" rel="icon" href="whbr-logo.png">
-  <link id="dynamic-touch-icon" rel="apple-touch-icon" href="whbr-logo.png">
+  <link id="dynamic-favicon" rel="icon" href="whbr-christmas-logo.png">
+  <link id="dynamic-touch-icon" rel="apple-touch-icon" href="whbr-christmas-logo.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,7 +50,7 @@
       inset: -35px;
       z-index: -1;
       pointer-events: none;
-      background-image: var(--album-backdrop, url("whbr-logo.png"));
+      background-image: var(--album-backdrop, url("whbr-christmas-logo.png"));
       background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
@@ -767,6 +767,152 @@
   visibility: visible;
 }
 
+
+/* SEASONAL THEME: November 20 through January 1 (Eastern calendar date) */
+.banner-brand {
+  display: block;
+  width: min(310px, 38vw);
+  max-height: 92px;
+  object-fit: contain;
+}
+.footer-brand {
+  display: block;
+  width: 155px;
+  max-height: 62px;
+  object-fit: contain;
+}
+.christmas-promise, .christmas-streaming-banner { display: none; }
+
+body.christmas-mode {
+  --red: #D71932;
+  --red-dark: #8E1022;
+  --black: #07130D;
+  --panel: #10291D;
+  --text: #FFF9EF;
+  --muted: #C5D6C8;
+  --line: rgba(255,255,255,.13);
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(25,105,58,.22), transparent 55%),
+    var(--black);
+}
+body.christmas-mode::before {
+  filter: blur(30px) brightness(.16) saturate(1.2);
+  opacity: .42;
+}
+body.christmas-mode .station-banner,
+body.christmas-mode footer {
+  background: linear-gradient(110deg, #07130D, #10291D 55%, #07130D);
+  border-color: rgba(220,35,55,.45);
+}
+body.christmas-mode .banner-inner {
+  background-image: radial-gradient(circle, rgba(255,255,255,.10) 1px, transparent 1.5px);
+  background-size: 22px 22px;
+}
+body.christmas-mode .promise-line {
+  background: linear-gradient(to bottom, #D71932 0 50%, #168447 50% 100%);
+  box-shadow: 0 0 14px rgba(25,160,75,.25);
+}
+body.christmas-mode .station-promise,
+body.christmas-mode .christmas-promise { display: block; }
+body.christmas-mode .regular-promise { display: none; }
+body.christmas-mode .christmas-streaming-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 20px;
+  padding: 15px 20px;
+  color: #fff;
+  text-align: center;
+  background: linear-gradient(100deg, #8E1022, #12683A 52%, #8E1022);
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 8px;
+  box-shadow: 0 8px 25px rgba(0,0,0,.25), 0 0 20px rgba(22,132,71,.16);
+}
+body.christmas-mode .christmas-streaming-banner strong {
+  display: block;
+  font-family: "Barlow Condensed", Impact, sans-serif;
+  font-size: clamp(22px, 3vw, 32px);
+  letter-spacing: 1.5px;
+}
+body.christmas-mode .christmas-streaming-banner small {
+  display: block;
+  margin-top: 3px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+.christmas-banner-icon { font-size: 25px; }
+body.christmas-mode .player {
+  background: linear-gradient(120deg, #142B20, #0B1710);
+  border-color: rgba(32,150,79,.38);
+  box-shadow: 0 12px 35px rgba(0,0,0,.35), 0 0 22px rgba(22,132,71,.10);
+}
+body.christmas-mode .live-badge {
+  background: linear-gradient(90deg, #B8122B, #D71932);
+}
+body.christmas-mode .section-kicker,
+body.christmas-mode .schedule-time,
+body.christmas-mode .time-period { color: #55C77D; }
+body.christmas-mode .heading-rule {
+  background: linear-gradient(90deg, #D71932, #168447);
+}
+body.christmas-mode .schedule-card {
+  background: linear-gradient(145deg, #153323, #0D2016);
+  border-color: rgba(55,160,91,.25);
+}
+body.christmas-mode .schedule-icon {
+  background: #35121A;
+  border-color: rgba(215,25,50,.45);
+}
+body.christmas-mode .schedule-card:hover { border-color: #55C77D; }
+body.christmas-mode .about-section { border-color: rgba(255,255,255,.14); }
+body.christmas-mode .menu-toggle {
+  background: #0B1710;
+  border-color: #168447;
+}
+body.christmas-mode .menu-toggle span { background: #E8F5E9; }
+body.christmas-mode .side-menu {
+  background: #0B1710;
+  border-color: #168447;
+}
+body.christmas-mode .menu-header { border-color: #168447; }
+body.christmas-mode .menu-header h2,
+body.christmas-mode .side-menu a:hover { color: #55C77D; }
+body.christmas-mode .menu-overlay { background: rgba(0,0,0,.72); }
+body.christmas-mode .footer-tagline { color: #F4EBDD; }
+
+/* Decorative snowfall is generated only during the Christmas theme. */
+#seasonal-snow {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9990;
+  pointer-events: none;
+  overflow: hidden;
+}
+body.christmas-mode #seasonal-snow { display: block; }
+.snowflake {
+  position: absolute;
+  top: -12px;
+  color: rgba(255,255,255,.78);
+  text-shadow: 0 0 8px rgba(255,255,255,.35);
+  animation: seasonal-fall linear infinite;
+}
+@keyframes seasonal-fall {
+  to { transform: translate3d(35px, 110vh, 0) rotate(360deg); }
+}
+@media (max-width: 600px) {
+  .banner-brand { width: min(175px, 37vw); max-height: 65px; }
+  .footer-brand { width: 120px; }
+  body.christmas-mode .christmas-streaming-banner { padding: 12px 10px; gap: 7px; }
+  .christmas-banner-icon { font-size: 18px; }
+  body.christmas-mode .christmas-streaming-banner small { font-size: 8px; letter-spacing: .7px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .snowflake { animation: none !important; display: none; }
+}
+
   </style>
 </head>
 
@@ -797,25 +943,32 @@
       <div class="station-promise">
         <span class="promise-line"></span>
         <div>
-          REAL ROCK<br>WITHOUT THE ADS
-          <small>CLASSIC ROCK · STREAMING 24/7</small>
+          <span class="regular-promise">REAL ROCK<br>WITHOUT THE ADS</span>
+          <span class="christmas-promise">STREAMING CHRISTMAS<br>24/7 — ALWAYS AD FREE</span>
+          <small class="regular-promise">CLASSIC ROCK · STREAMING 24/7</small>
+          <small class="christmas-promise">HOLIDAY MUSIC · ALL DAY, ALL NIGHT</small>
         </div>
       </div>
-      <div class="banner-brand">WHBR</div>
+      <img class="banner-brand" src="whbr-christmas-logo.png" alt="WHBR Christmas Radio">
     </div>
   </header>
 
   <main>
     <section class="player-area" aria-label="WHBR live player">
+      <div class="christmas-streaming-banner" role="status">
+        <span class="christmas-banner-icon" aria-hidden="true">🎄</span>
+        <span><strong>STREAMING CHRISTMAS 24/7</strong><small>ALWAYS AD FREE · ALL HOLIDAY MUSIC, ALL THE TIME</small></span>
+        <span class="christmas-banner-icon" aria-hidden="true">❄</span>
+      </div>
 
       <div class="player">
 
         <div class="station-art">
           <img
             id="album-art"
-            src="whbr-logo.png"
+            src="whbr-christmas-logo.png"
             alt="Current song album cover"
-            onerror="this.onerror=null;this.src='whbr-logo.png';"
+            onerror="this.onerror=null;this.src='whbr-christmas-logo.png';"
           >
         </div>
 
@@ -862,7 +1015,7 @@
 
     <div class="content">
 
-      <section class="schedule-section" aria-labelledby="schedule-heading">
+      <section class="schedule-section" id="events-section" aria-labelledby="schedule-heading">
         <span class="section-kicker">Turn it up</span>
         <h2 class="section-heading" id="schedule-heading">On The Air</h2>
         <div class="heading-rule"></div>
@@ -948,7 +1101,7 @@
   <footer>
     <div class="footer-inner">
       <div>
-        <div class="footer-brand"><span>WHBR</span> RADIO</div>
+        <img class="footer-brand" src="whbr-christmas-logo.png" alt="WHBR Christmas Radio">
         <div class="footer-copy">Streaming 24/7</div>
       </div>
       <div class="footer-tagline">Real Rock<br>Without the Ads</div>
@@ -959,6 +1112,56 @@
   <script src="https://cdn.cloud.caster.fm/widgets/embed.js"></script>
 
   <script>
+
+    /* AUTOMATIC CHRISTMAS THEME
+       Christmas mode runs November 20 through January 1, using Eastern dates.
+       The original events remain in the page and reappear in regular mode. */
+    (function applySeasonalTheme() {
+      const now = new Date();
+      const easternDate = new Intl.DateTimeFormat("en-US", {
+        timeZone: "America/New_York",
+        month: "numeric",
+        day: "numeric"
+      }).formatToParts(now);
+      const month = Number(easternDate.find(p => p.type === "month").value);
+      const day = Number(easternDate.find(p => p.type === "day").value);
+
+      // November 20–December 31, plus January 1.
+      const isChristmasSeason =
+        (month === 11 && day >= 20) ||
+        month === 12 ||
+        (month === 1 && day === 1);
+
+      document.body.classList.toggle("christmas-mode", isChristmasSeason);
+
+      const eventsSection = document.getElementById("events-section");
+      if (eventsSection) eventsSection.hidden = isChristmasSeason;
+
+      // Keep the document title seasonal when no song metadata is available.
+      document.title = isChristmasSeason
+        ? "WHBR Christmas | Streaming Christmas 24/7 — Ad Free"
+        : "WHBR Radio | Real Rock Without the Ads";
+
+      if (isChristmasSeason && !document.getElementById("seasonal-snow")) {
+        const snow = document.createElement("div");
+        snow.id = "seasonal-snow";
+        snow.setAttribute("aria-hidden", "true");
+        const flakes = ["❄", "✦", "❅"];
+        for (let i = 0; i < 24; i++) {
+          const flake = document.createElement("span");
+          flake.className = "snowflake";
+          flake.textContent = flakes[i % flakes.length];
+          flake.style.left = (Math.random() * 100) + "%";
+          flake.style.opacity = (0.35 + Math.random() * 0.55).toFixed(2);
+          flake.style.fontSize = (8 + Math.random() * 13) + "px";
+          flake.style.animationDuration = (9 + Math.random() * 15) + "s";
+          flake.style.animationDelay = (-Math.random() * 20) + "s";
+          snow.appendChild(flake);
+        }
+        document.body.appendChild(snow);
+      }
+    })();
+
     /* NOW PLAYING METADATA */
 
     const titleElement = document.getElementById("track-title");
@@ -967,7 +1170,7 @@
 
     const fallbackTitle = "WHBR ROANOKE";
     const fallbackArtist = "Always AD Free";
-    const defaultAlbumArt = "whbr-logo.png";
+    const defaultAlbumArt = "whbr-christmas-logo.png";
     const faviconElement = document.getElementById("dynamic-favicon");
     const touchIconElement = document.getElementById("dynamic-touch-icon");
 
@@ -1073,7 +1276,7 @@
         const combined = `${artist} - ${title}`.toUpperCase();
 
         if (ignored.includes(combined) || title === "-") {
-          document.title = "WHBR Radio | Real Rock Without the Ads";
+          document.title = document.body.classList.contains("christmas-mode") ? "WHBR Christmas | Streaming Christmas 24/7 — Ad Free" : "WHBR Radio | Real Rock Without the Ads";
           titleElement.textContent = fallbackTitle;
           artistElement.textContent = fallbackArtist;
           albumArt.src = defaultAlbumArt;
@@ -1099,7 +1302,7 @@
         console.error("WHBR metadata error:", error);
 
         if (!lastValidMetadata) {
-          document.title = "WHBR Radio | Real Rock Without the Ads";
+          document.title = document.body.classList.contains("christmas-mode") ? "WHBR Christmas | Streaming Christmas 24/7 — Ad Free" : "WHBR Radio | Real Rock Without the Ads";
           titleElement.textContent = fallbackTitle;
           artistElement.textContent = fallbackArtist;
         }
