@@ -1653,3 +1653,56 @@ setInterval(updateEventBadges, 15000);
 
 </body>
 </html>
+
+
+/* WHBR FINAL CASTER.FM OVERLAY PATCH
+   Keep the iTunes artwork aligned with the actual album tile on phones.
+   Mask only the description/status row; leave the song title and controls visible. */
+.caster-widget-window {
+  position: relative !important;
+  isolation: isolate !important;
+}
+
+.caster-widget-window .cstrEmbed,
+.caster-widget-window .cstrEmbed iframe {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.caster-info-mask {
+  display: block !important;
+  position: absolute !important;
+  z-index: 20 !important;
+  background: #1B1C1E !important;
+  pointer-events: none !important;
+}
+
+/* Desktop: the song title stays visible; cover the description beneath it. */
+@media (min-width: 601px) {
+  .caster-info-mask {
+    top: 47px !important;
+    left: 132px !important;
+    right: 8px !important;
+    height: 27px !important;
+  }
+}
+
+/* Mobile: Caster puts its album tile at the left edge, not in the center. */
+@media (max-width: 600px) {
+  .itunes-art-overlay {
+    top: 10px !important;
+    left: 10px !important;
+    right: auto !important;
+    transform: none !important;
+    width: 112px !important;
+    height: 112px !important;
+    z-index: 21 !important;
+  }
+
+  .caster-info-mask {
+    top: 158px !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 76px !important;
+  }
+}
