@@ -1706,3 +1706,16 @@ setInterval(updateEventBadges, 15000);
     height: 76px !important;
   }
 }
+
+
+/* WHBR PLAYER BACKGROUND BOX: add exactly 50px below the embed.
+   The embed height and its contents remain unchanged. */
+.caster-player {
+  padding-bottom: 60px !important; /* existing desktop padding: 10px + 50px */
+}
+
+@media (max-width: 600px) {
+  .caster-player {
+    padding-bottom: 58px !important; /* existing mobile padding: 8px + 50px */
+  }
+}
